@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio de diseño de producto digital — tecnología, personas y entorno.">
+  <meta name="color-scheme" content="light">
+
+  <!-- Open Graph básico -->
+  <meta property="og:title"       content="Portfolio — Diseño de producto digital">
+  <meta property="og:description" content="Proyectos centrados en accesibilidad, sostenibilidad y diseño responsable.">
+  <meta property="og:type"        content="website">
+
+  <!-- Tipografía (Google Fonts — self-host en producción para mayor privacidad) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+
+  <title>Portfolio — Diseño de producto digital</title>
+  <script type="module" src="./main.js"></script>
+</head>
+<body>
+
+  <!-- Enlace de salto para accesibilidad de teclado -->
+  <a href="#contenido-principal" class="visually-hidden">Saltar al contenido principal</a>
+
+  <site-nav></site-nav>
+
+  <main id="contenido-principal">
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <p class="hero__eyebrow">Diseño de producto digital</p>
+        <h1 class="hero__title" id="hero-title">
+          Tecnología, personas<br>y <em>entorno</em>
+        </h1>
+        <p class="hero__desc">
+          Proyectos centrados en accesibilidad, sostenibilidad
+          y la relación entre quienes diseñan y quienes usan.
+        </p>
+      </div>
+    </section>
+
+    <!-- Proyectos -->
+    <section class="projects-section" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="projects-section__header">
+          <h2 class="projects-section__title" id="projects-title">Trabajo seleccionado</h2>
+          <tag-filter tags="[]" aria-label="Filtrar por categoría"></tag-filter>
+        </div>
+
+        <div
+          id="project-grid"
+          class="project-grid"
+          role="list"
+          aria-label="Listado de proyectos"
+          aria-live="polite"
+          aria-busy="true"
+        ></div>
+      </div>
+    </section>
+
+  </main>
+
+  <site-footer></site-footer>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+/* index.css — estilos de página, no de componentes */
+
+/* Hero */
+.hero {
+  padding-block: var(--space-24) var(--space-16);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero__eyebrow {
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  color: var(--color-ink);
+  max-width: 18ch;
+  line-height: 1.1;
+}
+
+.hero__title em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.hero__desc {
+  margin-top: var(--space-6);
+  font-size: var(--text-lg);
+  color: var(--color-ink-muted);
+  max-width: 52ch;
+  line-height: 1.7;
+}
+
+/* Sección de proyectos */
+.projects-section {
+  padding-block: var(--space-16);
+}
+
+.projects-section__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+}
+
+.projects-section__title {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-ink-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Grid de proyectos */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
+  gap: var(--space-6);
+}
+
+/* Estados del grid */
+.projects-loading,
+.projects-empty,
+.projects-error {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: var(--space-16);
+  color: var(--color-ink-muted);
+  font-size: var(--text-sm);
+}
+
+.projects-error {
+  color: #c0392b;
+}

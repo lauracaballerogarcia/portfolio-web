@@ -1,0 +1,14 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "Portfolio de diseño de producto digital",
+  "scripts": {
+    "dev": "parcel src/pages/index.html src/pages/proyecto/index.html",
+    "build": "parcel build src/pages/index.html src/pages/proyecto/index.html",
+    "clean": "rm -rf dist .parcel-cache"
+  },
+  "devDependencies": {
+    "parcel": "^2.13.3"
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead"
+}

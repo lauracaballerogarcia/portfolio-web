@@ -1,0 +1,46 @@
+[
+  {
+    "id": "01",
+    "slug": "sistema-navegacion-inclusivo",
+    "title": "Sistema de navegación inclusivo",
+    "summary": "Rediseño del sistema de orientación de un hospital público con foco en accesibilidad cognitiva y diversidad funcional.",
+    "tags": ["Accesibilidad", "Sistemas"],
+    "year": "2024",
+    "cover": "/images/proyecto-01.jpg",
+    "featured": true,
+    "role": "Diseño de producto",
+    "client": "Hospital público",
+    "context": "El sistema de señalización existente generaba desorientación en usuarios con dificultades cognitivas, personas mayores y pacientes en situaciones de estrés. El reto era diseñar un sistema que funcionara para todos sin señalar la diferencia.",
+    "process": "Partimos de sesiones de observación y entrevistas con usuarios, personal sanitario y voluntarios. Mapeamos los recorridos más frecuentes e identificamos los puntos de mayor fricción. El diseño se validó en prototipos físicos antes de la implementación.",
+    "outcome": "El nuevo sistema redujo las consultas de orientación al personal en un 40% durante el primer mes. Los indicadores de accesibilidad cognitiva mejoraron significativamente en las auditorías posteriores."
+  },
+  {
+    "id": "02",
+    "slug": "huella-minima",
+    "title": "Huella mínima",
+    "summary": "Exploración de patrones de diseño de interfaz que reducen el consumo energético sin comprometer la experiencia de uso.",
+    "tags": ["Sostenibilidad", "UI"],
+    "year": "2024",
+    "cover": "/images/proyecto-02.jpg",
+    "featured": true,
+    "role": "Investigación y diseño",
+    "context": "Las interfaces digitales tienen un impacto energético real. Este proyecto investigó qué decisiones de diseño — tipografía, color, animaciones, peso de assets — tienen mayor incidencia en el consumo y cómo comunicarlas a equipos de producto.",
+    "process": "Analizamos el consumo de batería en dispositivos móviles comparando variantes de diseño con distintos fondos, tipos de fuente y niveles de animación. Los resultados se tradujeron en un conjunto de patrones documentados.",
+    "outcome": "El conjunto de patrones fue adoptado por dos equipos de producto como guía de referencia. La variante de interfaz de menor consumo reducía el gasto energético hasta un 22% en pantallas OLED."
+  },
+  {
+    "id": "03",
+    "slug": "escucha-activa",
+    "title": "Escucha activa",
+    "summary": "Herramienta de participación ciudadana para procesos de co-diseño urbano en entornos de baja conectividad.",
+    "tags": ["Diseño responsable", "Sistemas"],
+    "year": "2023",
+    "cover": "/images/proyecto-03.jpg",
+    "featured": false,
+    "role": "Diseño de producto e investigación",
+    "client": "Ayuntamiento",
+    "context": "Los procesos de participación ciudadana digital excluyen sistemáticamente a quienes tienen menor acceso tecnológico. El encargo era diseñar una herramienta que funcionara en condiciones de conectividad limitada y con usuarios con poca experiencia digital.",
+    "process": "Realizamos talleres de co-diseño con vecinos de distintos perfiles. La herramienta se diseñó con un enfoque offline-first y una interfaz reducida a los gestos esenciales, validada en sesiones presenciales.",
+    "outcome": "La herramienta se utilizó en tres procesos de participación con más de 400 vecinos. El porcentaje de participantes mayores de 65 años fue el doble que en procesos anteriores basados en formularios web convencionales."
+  }
+]
