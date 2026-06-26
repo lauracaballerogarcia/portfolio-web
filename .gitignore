@@ -1,5 +1,21 @@
-node_modules/
-dist/
-.parcel-cache/
-.DS_Store
-*.local
+# System and editor files
+**/.DS_Store
+Thumbs.db
+*.log
+
+# Node.js dependencies
+/node_modules/
+
+# Parcel cache
+/.parcel-cache/
+
+# Production / build folder
+/dist/
+
+# Local environment configuration
+.env
+
+# Temporary or backup files
+*.bak
+*.tmp
+*.swp

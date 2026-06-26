@@ -1,9 +1,12 @@
 /* site-footer.css */
 
 .site-footer {
-  margin-top: var(--space-24);
-  border-top: 1px solid var(--color-border);
-  padding-block: var(--space-12);
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-self: end;
+  align-self: flex-end;
+  font-size: var(--font-size-m);
 }
 
 .site-footer__inner {
@@ -11,7 +14,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-4);
 }
 
 .site-footer__copy,
@@ -20,22 +22,38 @@
   color: var(--color-ink-muted);
 }
 
+/* Footer nav items */
+
+.site-footer__nav{
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
 .site-footer__links {
   display: flex;
-  gap: var(--space-6);
+  gap: var(--spacing-4);
 }
 
-.site-footer__links a {
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
-  text-decoration: none;
-  transition: color var(--duration) var(--ease-out);
+/* UP link.css */
+
+.site-footer__up {
+  font-size: var(--font-size-xl);
+  display: inline-flex;
+ 
 }
 
-.site-footer__links a:hover {
-  color: var(--color-accent);
-}
+.site-footer__up::before {
+  content: "";
+  display: inline-block;
+  width: var(--size-icon-large);
+  height: var(--size-icon-large);
+  align-self: center;
+  margin-right: var(--spacing-2);
+  color: var(--color-neutral-950);
 
-.site-footer__note a {
-  color: var(--color-accent);
+  background-image: url("../../assets/icons/arrow-elbow-left-up.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
 }

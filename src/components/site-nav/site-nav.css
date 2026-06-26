@@ -3,69 +3,36 @@
 .site-nav {
   position: sticky;
   top: 0;
-  z-index: 100;
-  background-color: var(--color-ground);
-  border-bottom: 1px solid var(--color-border);
+  left: 0;
+  width: 100%;
+  height: var(--size-header-height);
+  z-index: 999;
+  background-color: var(--color--background-primary);
   backdrop-filter: blur(8px);
+  font-size: var(--font-size-l);
 }
 
 .site-nav__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4rem;
-}
-
-/* Logo */
-.site-nav__logo {
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  text-decoration: none;
-  color: var(--color-ink);
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.site-nav__logo span {
-  color: var(--color-accent);
-  font-size: 0.75em;
+  height: var(--size-header-height);
 }
 
 /* Lista de enlaces */
+
 .site-nav__list {
   display: flex;
-  align-items: center;
-  gap: var(--space-8);
+  gap: var(--spacing-6);
 }
 
 .site-nav__link {
-  font-size: var(--text-sm);
-  font-weight: 500;
   text-decoration: none;
-  color: var(--color-ink-muted);
-  letter-spacing: 0.02em;
-  padding-block: var(--space-2);
   border-bottom: 2px solid transparent;
   transition: color var(--duration) var(--ease-out),
               border-color var(--duration) var(--ease-out);
 }
 
-.site-nav__link:hover,
-.site-nav__link[aria-current="page"] {
-  color: var(--color-ink);
-  border-bottom-color: var(--color-accent);
-}
-
-/* Botón móvil — oculto en escritorio */
-.site-nav__toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--space-2);
-  color: var(--color-ink);
-}
 
 /* ============================================================
    RESPONSIVE

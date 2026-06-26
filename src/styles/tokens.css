@@ -1,54 +1,143 @@
 /* ============================================================
-   TOKENS — fuente única de verdad para color, tipo y espacio
+   FONTS
+   ============================================================ */
+
+  @font-face {
+    font-family: 'Geist';
+    src: url('../assets/fonts/geist/Geist-VariableFont_wght.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: 'Geist';
+    src: url('../assets/fonts/geist/Geist-Italic-VariableFont_wght.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('../assets/fonts/geist-mono/GeistMono-VariableFont_wght.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Geist Mono';
+    src: url('../assets/fonts/geist-mono/GeistMono-Italic-VariableFont_wght.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Sentient';
+    src: url('../assets/fonts/sentient/Sentient-Variable.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Sentient';
+    src: url('../assets/fonts/sentient/Sentient-VariableItalic.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+  }
+
+/* ============================================================
+   TOKENS
    ============================================================ */
 
 :root {
-  /* Paleta */
-  --color-ground:    #F2F0EB;   /* fondo principal, papel sin blanquear */
-  --color-surface:   #FFFFFF;   /* tarjetas y superficies elevadas     */
-  --color-ink:       #1A1916;   /* texto principal                     */
-  --color-ink-muted: #6B6860;   /* texto secundario, metadatos         */
-  --color-accent:    #1D5C3A;   /* verde bosque — acción y énfasis     */
-  --color-accent-lt: #EAF2EC;   /* fondo suave sobre accent            */
-  --color-border:    #DEDAD3;   /* líneas y separadores                */
 
-  /* Tipografía */
-  --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
+  /* ============================================================
+   PRIMITIVE TOKENS
+   ============================================================ */
+  
+  /* Colors */
+  --color-neutral-0: white;
+  --color-neutral-100: #EBEBEB;
+  --color-neutral-200: #DEDEDE;
+  --color-neutral-600: #737373;
+  --color-neutral-950: #121212;
 
-  /* Escala tipográfica (clamp para fluid type) */
-  --text-xs:   0.75rem;
-  --text-sm:   0.875rem;
-  --text-base: 1rem;
-  --text-lg:   1.125rem;
-  --text-xl:   clamp(1.25rem, 2vw, 1.5rem);
-  --text-2xl:  clamp(1.75rem, 3.5vw, 2.5rem);
-  --text-3xl:  clamp(2.5rem,  6vw,  4.5rem);
+ /* Spacing */
+  --spacing-1:  0.25rem;   /* 4px */
+  --spacing-2:  0.5rem;    /* 8px */
+  --spacing-3:  0.75rem;   /* 12px */
+  --spacing-4:  1rem;      /* 16px */
+  --spacing-6:  1.5rem;    /* 24px */
+  --spacing-8:  2rem;      /* 32px */
+  --spacing-9:  2.25rem;   /* 36px */
+  --spacing-10: 2.5rem;    /* 40px */
+  --spacing-12: 3rem;      /* 48px */
+  --spacing-16: 4rem;      /* 64px */
+  --spacing-24: 6rem;      /* 96px */
 
-  /* Espaciado */
-  --space-1:  0.25rem;
-  --space-2:  0.5rem;
-  --space-3:  0.75rem;
-  --space-4:  1rem;
-  --space-6:  1.5rem;
-  --space-8:  2rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-24: 6rem;
+  /* Fonts */
+  --font-family-serif:  'Sentient', Georgia, serif;
+  --font-family-sans:     'Geist', system-ui, sans-serif;
+  --font-family-mono:     'Geist Mono', monospace;
+
+  /* Font sizes — primitivos */
+  --font-size-s: 0.875rem;   /* 14px – Small, Chips */
+  --font-size-m: 1rem;       /* 16px – Body Regular, Button */
+  --font-size-l: 1.25rem;    /* 20px – H2, Body Medium */
+  --font-size-xl: 1.5rem;    /* 24px – Body Large */
+  --font-size-xxl: 3.5rem;   /* 56px – H1 */
+
+
+
+  /* ============================================================
+   SEMANTIC TOKENS
+   ============================================================ */
+
+  /* COLORS
+  ========================== */
+
+  /* Background */
+  --color-background-primary: var(--color-neutral-0);
+
+  /* Text */
+  --color-text-primary: var(--color-neutral-950);
+  --color-text-secondary: var(--color-neutral-600);
+  --color-text-tertiary: var(--color-neutral-0);
+
+   /* NUMBERS
+  ========================== */
+
+  /* Interactive */
+
+  /* Border radius */
+  --border-radius:    var(--spacing-1);
+  --border-radius-lg: var(--spacing-2);
 
   /* Layout */
-  --max-width:      72rem;
-  --column-gap:     var(--space-6);
-  --border-radius:  4px;
-  --border-radius-lg: 8px;
+  --container-margin: var(--spacing-12);
+  --column-gap:       var(--spacing-6);
 
   /* Transiciones */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --duration: 220ms;
+
+
+  /* Sizes */
+  --size-icon-small: 1rem;
+  --size-icon-medium: 1.5rem;
+  --size-icon-large: 2rem;
+
+  --size-header-height: 4rem;
+
 }
 
 /* ============================================================
-   RESET MÍNIMO
+   RESET
    ============================================================ */
 
 *, *::before, *::after {
@@ -73,12 +162,11 @@ html {
 }
 
 body {
-  font-family:      var(--font-body);
-  font-size:        var(--text-base);
-  line-height:      1.6;
-  color:            var(--color-ink);
-  background-color: var(--color-ground);
-  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-family-sans);
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+  font-size: 1rem; 
+  line-height: 1.2;
 }
 
 img, video {
@@ -89,21 +177,31 @@ img, video {
 
 a {
   color: inherit;
+  text-decoration: none;
   text-decoration-skip-ink: auto;
 }
 
 ul, ol { list-style: none; }
 
 /* ============================================================
-   UTILIDADES GLOBALES
+   GlOBAL LAYOUT
    ============================================================ */
+
+.container-full {
+  width: 100%;
+}
 
 .container {
   width: 100%;
-  max-width: var(--max-width);
-  margin-inline: auto;
-  padding-inline: var(--space-6);
+  max-width: 1440px;
+  margin: 0 var(--container-margin);
 }
+
+
+
+/* ============================================================
+   ACCESSIBILITY
+   ============================================================ */
 
 .visually-hidden {
   position: absolute;
@@ -122,17 +220,17 @@ ul, ol { list-style: none; }
 }
 
 /* ============================================================
-   TIPOGRAFÍA BASE
+   FONT STYLES
    ============================================================ */
 
 h1, h2, h3, h4 {
-  font-family: var(--font-display);
-  line-height: 1.15;
+  font-family: var(--font-family-serif);
+  line-height: 1.2;
   font-weight: 400;
 }
 
-h1 { font-size: var(--text-3xl); }
-h2 { font-size: var(--text-2xl); }
-h3 { font-size: var(--text-xl); }
+h1 { font-size: var(--font-size-xxl); }
+h2 { font-size: var(--font-size-xl); }
+h3 { font-size: var(--font-size-l); }
 
-p { max-width: 68ch; }
+/* p { max-width: 68ch; } */

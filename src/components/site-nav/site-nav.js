@@ -14,7 +14,7 @@ class SiteNav extends HTMLElement {
       <header class="site-nav" role="banner">
         <div class="container site-nav__inner">
           <a href="/" class="site-nav__logo" aria-label="Inicio — Portfolio">
-            <span aria-hidden="true">◆</span> Tu nombre
+            Laura Caballero García – Digital Product Designer
           </a>
 
           <button
@@ -28,9 +28,8 @@ class SiteNav extends HTMLElement {
 
           <nav id="nav-menu" class="site-nav__menu" aria-label="Navegación principal">
             <ul class="site-nav__list" role="list">
-              <li><a href="/"          class="site-nav__link">Trabajo</a></li>
-              <li><a href="/sobre-mi"  class="site-nav__link">Sobre mí</a></li>
-              <li><a href="/contacto" class="site-nav__link">Contacto</a></li>
+              <li><a href="/about"            class="site-nav__link">About</a></li>
+              <li><a href="/contact"          class="site-nav__link">Contact</a></li>
             </ul>
           </nav>
         </div>
