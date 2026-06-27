@@ -3,23 +3,34 @@
 .site-footer {
   width: 100%;
   display: flex;
-  flex-flow: row wrap;
   justify-self: end;
   align-self: flex-end;
   font-size: var(--font-size-m);
+  padding: var(--spacing-6) 0;
 }
 
+
 .site-footer__inner {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
 }
 
+/* Footer nav info */
+
+.site-footer__info {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--spacing-4);
+}
+
 .site-footer__copy,
 .site-footer__note {
   font-size: var(--text-sm);
   color: var(--color-ink-muted);
+  display: inline-block;
 }
 
 /* Footer nav items */

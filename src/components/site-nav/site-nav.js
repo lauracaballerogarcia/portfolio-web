@@ -12,7 +12,7 @@ class SiteNav extends HTMLElement {
   render() {
     this.innerHTML = `
       <header class="site-nav" role="banner">
-        <div class="container site-nav__inner">
+        <div class="container-full site-nav__inner">
           <a href="/" class="site-nav__logo" aria-label="Inicio — Portfolio">
             Laura Caballero García – Digital Product Designer
           </a>

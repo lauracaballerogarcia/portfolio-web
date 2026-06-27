@@ -24,40 +24,72 @@ import './index.css';
 
 /** Renderiza la cuadrícula de proyectos según el estado actual */
 function renderProjects(state) {
-  const grid = document.querySelector('#project-grid');
-  if (!grid) return;
+  const list = document.querySelector('#featured-projects');
+  if (!list) return;
 
   const visible = filterByTag(state.projects, state.activeTag);
 
+  list.setAttribute('aria-busy', state.loading ? 'true' : 'false');
+
   if (state.loading) {
-    grid.innerHTML = `<p class="projects-loading">Cargando proyectos…</p>`;
+    list.innerHTML = `<li class="projects-status">Cargando proyectos…</li>`;
     return;
   }
 
   if (state.error) {
-    grid.innerHTML = `<p class="projects-error" role="alert">
-      No se pudieron cargar los proyectos. Inténtalo de nuevo.
-    </p>`;
+    list.innerHTML = `<li class="projects-status" role="alert">No se pudieron cargar los proyectos.</li>`;
     return;
   }
 
   if (visible.length === 0) {
-    grid.innerHTML = `<p class="projects-empty">
-      No hay proyectos con este filtro.
-    </p>`;
+    list.innerHTML = `<li class="projects-status">No hay proyectos.</li>`;
     return;
   }
 
-  grid.innerHTML = visible.map(project => `
-    <project-card
-      title="${project.title}"
-      summary="${project.summary}"
-      tags="${project.tags.join(',')}"
-      year="${project.year}"
-      slug="${project.slug}"
-      cover="${project.cover ?? ''}"
-    ></project-card>
-  `).join('');
+  list.innerHTML = visible.map((project, i) => {
+    const isFeatured = i === 0;
+    const chipText   = isFeatured ? 'See case study' : 'See work';
+    const sizes      = isFeatured
+      ? 'calc(100vw - 2rem)'
+      : '(max-width: 768px) calc(100vw - 2rem), calc(50vw - 1.5rem)';
+
+    return `
+      <li class="${isFeatured ? 'card--1col' : 'card--2col'}">
+        <a href="/project/${project.slug}/" aria-label="View ${project.title} project: ${project.claim ?? project.summary}">
+          <figure>
+            <picture>
+              <source
+                type="image/webp"
+                srcset="${project.cover}?width=400 400w,
+                        ${project.cover}?width=768 768w,
+                        ${project.cover}?width=1024 1024w,
+                        ${project.cover}?width=1440 1440w"
+                sizes="${sizes}">
+              <img
+                src="${project.cover}"
+                srcset="${project.cover}?width=400 400w,
+                        ${project.cover}?width=768 768w,
+                        ${project.cover}?width=1024 1024w,
+                        ${project.cover}?width=1440 1440w"
+                sizes="${sizes}"
+                width="2880"
+                height="1800"
+                ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
+                decoding="async"
+                alt="">
+            </picture>
+            <div class="chip" aria-hidden="true">
+              <span class="chip-text">${chipText}</span>
+            </div>
+          </figure>
+          <div class="card-info">
+            <h2>${project.title}</h2>
+            <p>${project.claim ?? project.summary}</p>
+          </div>
+        </a>
+      </li>
+    `;
+  }).join('');
 }
 
 /** Inicializa el filtro de tags */

@@ -1,81 +1,141 @@
-/* index.css — estilos de página, no de componentes */
+/* ── Lista ───────────────────────────────────────── */
 
-/* Hero */
-.hero {
-  padding-block: var(--space-24) var(--space-16);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.hero__eyebrow {
-  font-size: var(--text-sm);
-  color: var(--color-accent);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: var(--space-4);
-}
-
-.hero__title {
-  font-family: var(--font-display);
-  font-size: var(--text-3xl);
-  color: var(--color-ink);
-  max-width: 18ch;
-  line-height: 1.1;
-}
-
-.hero__title em {
-  font-style: italic;
-  color: var(--color-accent);
-}
-
-.hero__desc {
-  margin-top: var(--space-6);
-  font-size: var(--text-lg);
-  color: var(--color-ink-muted);
-  max-width: 52ch;
-  line-height: 1.7;
-}
-
-/* Sección de proyectos */
-.projects-section {
-  padding-block: var(--space-16);
-}
-
-.projects-section__header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-6);
-  margin-bottom: var(--space-8);
-}
-
-.projects-section__title {
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--color-ink-muted);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-/* Grid de proyectos */
-.project-grid {
+.featured-grid {
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr));
-  gap: var(--space-6);
+  grid-template-columns: 1fr 1fr;
+  column-gap: var(--grid-column-gap);
+  row-gap: var(--grid-row-gap);
+  margin: auto; 
 }
 
-/* Estados del grid */
-.projects-loading,
-.projects-empty,
-.projects-error {
+.featured-grid li:first-child {
   grid-column: 1 / -1;
-  text-align: center;
-  padding: var(--space-16);
-  color: var(--color-ink-muted);
-  font-size: var(--text-sm);
 }
 
-.projects-error {
-  color: #c0392b;
+.featured-grid li:not(:first-child) {
+  grid-column: span 1;
+}
+
+
+/* ── Cards ───────────────────────────────────────── */
+
+.featured-grid li a {
+  cursor: pointer;
+}
+
+
+/* ── Figure ──────────────────────────────────────── */
+
+.featured-grid figure {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 27.5rem;
+  background-color: var(--color-neutral-100);
+}
+
+.featured-grid li:first-child figure {
+  min-height: 41.5rem;
+}
+
+.featured-grid li a:hover figure {
+  border-radius: var(--card-border-radius);
+}
+
+
+
+/* ── Image ──────────────────────────────────────── */
+
+.featured-grid figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 400ms ease;
+}
+
+.featured-grid li a:hover figure img {
+  transform: scale(1.02);
+}
+
+/* ── Chip ────────────────────────────────────────── */
+
+.chip {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+
+  background-color: var(--color-neutral-0);
+  padding: var(--spacing-2);
+  border-radius: var(--chip-border-radius);
+
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.featured-grid li a:hover .chip {
+  gap: var(--spacing-1); 
+  padding: 0.5rem 1rem 0.5rem 1.25rem;
+}
+
+.chip::after {
+    content: "";
+
+    display: inline-block;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+
+    width: var(--size-icon-medium);
+    height: var(--size-icon-medium);
+
+    background-image: url("../../src/assets/icons/arrow-up-right.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+ .featured-grid a:hover .chip::after {
+    transform: rotate(45deg);
+  } 
+
+
+  /* Chip Text */
+
+.chip-text {
+  max-width: 0;
+  opacity: 0;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.featured-grid a:hover .chip-text {
+    max-width: 20ch; 
+    opacity: 1;
+    margin-left: var(--spacing-1);
+    display: inline-flex;
+    align-items: center;
+  }
+
+
+
+/* ── Texto ───────────────────────────────────────── */
+
+.card-info {
+  padding-top: 0.75rem;
+  padding-bottom: 2rem;
+}
+
+.featured-grid h2 {
+  margin-top: var(--spacing-4);
+}
+
+.featured-grid p {
+  color: var(--color-text-secondary);
 }

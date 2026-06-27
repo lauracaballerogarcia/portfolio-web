@@ -7,20 +7,20 @@ class SiteFooter extends HTMLElement {
     const year = new Date().getFullYear();
     this.innerHTML = `
       <footer class="site-footer" role="contentinfo">
-        <div class="container site-footer__inner">
-          <div>
+        <div class="container-full site-footer__inner">
+          <div class="site-footer__info">
             <p class="site-footer__copy">
               Copyright® ${year}
-            </p>
+            </p class="site-footer__copy">
             <p> | </p>
             <p><a href="mailto:lauracaballer19@gmail.com">lauracaballer19@gmail.com</a></p>
-
-            <p class="site-footer__note">
-                Alojado en
-                <a href="https://pages.cloudflare.com" rel="noopener noreferrer" target="_blank">Cloudflare Pages</a>
-                — green hosting
-              </p>
           </div>
+
+          <p class="site-footer__note">
+              Alojado en
+              <a href="https://pages.cloudflare.com" rel="noopener noreferrer" target="_blank">Cloudflare Pages</a>
+              — green hosting
+          </p>
           
           <nav class="site-footer__nav" role="navigation" aria-label="Footer">
             <ul class="site-footer__links" role="list">

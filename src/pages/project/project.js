@@ -1,5 +1,5 @@
 /**
- * detalle.js — Página de detalle de proyecto
+ * project.js — Página de detalle de proyecto
  *
  * Lee el slug desde la URL, carga el JSON de proyectos,
  * encuentra el proyecto correspondiente y rellena el DOM.
@@ -14,7 +14,7 @@ import '../../components/site-footer/site-footer.js';
 import '../../styles/tokens.css';
 import '../../components/site-nav/site-nav.css';
 import '../../components/site-footer/site-footer.css';
-import './detalle.css';
+import './project.css';
 
 // ─── Utilidades DOM ──────────────────────────────────────────
 
@@ -25,19 +25,55 @@ function setText(id, value) {
   if (el && value) el.textContent = value;
 }
 
-function show(id)   { const el = $(id); if (el) el.hidden = false; }
-function hide(id)   { const el = $(id); if (el) el.hidden = true;  }
+function show(id) { const el = $(id); if (el) el.hidden = false; }
+function hide(id) { const el = $(id); if (el) el.hidden = true;  }
 
 // ─── Leer slug desde la URL ──────────────────────────────────
-//
-// URL esperada: /proyecto/nombre-del-proyecto/
-// window.location.pathname → "/proyecto/nombre-del-proyecto/"
 
 function getSlugFromURL() {
   const parts = window.location.pathname
-    .replace(/^\/|\/$/g, '')   // quita slashes del inicio y fin
-    .split('/');               // ["proyecto", "nombre-del-proyecto"]
+    .replace(/^\/|\/$/g, '')
+    .split('/');
   return parts[1] ?? null;
+}
+
+// ─── Índice de navegación interna ────────────────────────────
+
+function renderIndex() {
+  const indexNav = document.querySelector('.project-index');
+  if (!indexNav) return;
+
+  const sections = [
+    { id: 'overview',   label: 'Overview'          },
+    { id: 'problem',    label: 'Problem'            },
+    { id: 'solution',   label: 'Solution'           },
+    { id: 'process',    label: 'Research / Process' },
+    { id: 'outcome',    label: 'Outcome'            },
+    { id: 'reflection', label: 'Reflection'         },
+  ];
+
+  indexNav.innerHTML = `
+    <ol class="project-index__list">
+      ${sections.map(s => `
+        <li class="project-index__item">
+          <a href="#${s.id}" class="project-index__link">${s.label}</a>
+        </li>
+      `).join('')}
+    </ol>
+  `;
+
+  // Marca el enlace activo al hacer scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      const link = indexNav.querySelector(`a[href="#${entry.target.id}"]`);
+      if (link) link.classList.toggle('is-active', entry.isIntersecting);
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
 }
 
 // ─── Renderizado ─────────────────────────────────────────────
@@ -52,13 +88,24 @@ function renderProject(project, allProjects) {
   document.querySelector('meta[property="og:description"]')
     ?.setAttribute('content', project.summary);
 
-  // Cabecera
-  setText('project-breadcrumb-title', project.title);
+  // Imagen hero — fondo de pantalla completa
+  const hero = document.querySelector('.project-hero');
+  if (hero && project.cover) {
+    const img = document.createElement('img');
+    img.src      = project.cover;
+    img.alt      = '';
+    img.loading  = 'eager';
+    img.decoding = 'async';
+    img.classList.add('project-hero__img');
+    hero.appendChild(img);
+  }
+
+  // Título y metadatos
   setText('project-title',   project.title);
   setText('project-summary', project.summary);
   setText('project-year',    project.year);
 
-  // Tags en cabecera
+  // Tags
   const tagsEl = $('project-tags');
   if (tagsEl) {
     tagsEl.innerHTML = project.tags
@@ -66,23 +113,13 @@ function renderProject(project, allProjects) {
       .join('');
   }
 
-  // Imagen de portada — creada dinámicamente para evitar src vacío en el HTML
-  const figure = $('project-cover-figure');
-  if (figure && project.cover) {
-    const img = document.createElement('img');
-    img.src     = project.cover;
-    img.alt     = `Imagen de portada: ${project.title}`;
-    img.loading = 'eager';
-    img.decoding = 'async';
-    figure.appendChild(img);
-  } else {
-    hide('project-cover');
-  }
-
   // Cuerpo — campos opcionales del JSON
-  setText('project-context', project.context ?? '');
-  setText('project-process', project.process ?? '');
-  setText('project-outcome', project.outcome ?? '');
+  setText('project-context',    project.context    ?? '');
+  setText('project-problem',    project.problem    ?? '');
+  setText('project-solution',   project.solution   ?? '');
+  setText('project-process',    project.process    ?? '');
+  setText('project-outcome',    project.outcome    ?? '');
+  setText('project-reflection', project.reflection ?? '');
 
   // Sidebar de metadatos
   setText('meta-year', project.year);
@@ -97,19 +134,22 @@ function renderProject(project, allProjects) {
     show('meta-client-item');
   }
 
+  // Índice de navegación
+  renderIndex();
+
   // Navegación prev / next
-  const index = allProjects.findIndex(p => p.slug === project.slug);
-  const prev  = allProjects[index - 1];
-  const next  = allProjects[index + 1];
+  const currentIndex = allProjects.findIndex(p => p.slug === project.slug);
+  const prev = allProjects[currentIndex - 1];
+  const next = allProjects[currentIndex + 1];
 
   if (prev) {
     const el = $('project-nav-prev');
-    if (el) { el.href = `/proyecto/${prev.slug}/`; el.hidden = false; }
+    if (el) { el.href = `/project/${prev.slug}/`; el.hidden = false; }
     setText('project-nav-prev-title', prev.title);
   }
   if (next) {
     const el = $('project-nav-next');
-    if (el) { el.href = `/proyecto/${next.slug}/`; el.hidden = false; }
+    if (el) { el.href = `/project/${next.slug}/`; el.hidden = false; }
     setText('project-nav-next-title', next.title);
   }
 
