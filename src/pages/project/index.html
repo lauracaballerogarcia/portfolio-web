@@ -1,138 +1,98 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="color-scheme" content="light">
-
-  <!-- Meta dinámica — actualizada por detalle.js -->
   <meta name="description" content="">
-  <meta property="og:title"       content="">
+  <meta property="og:title" content="">
   <meta property="og:description" content="">
-  <meta property="og:type"        content="article">
+  <meta property="og:type" content="article">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
-
-  <title>Proyecto — Portfolio</title>
+  <title>Project — Portfolio</title>
   <script type="module" src="./project.js"></script>
 </head>
-<body>
+<body id="top">
 
-  <a href="#contenido-principal" class="visually-hidden">Saltar al contenido principal</a>
+  <a href="#main-content" class="visually-hidden">Skip to main content</a>
 
   <site-nav></site-nav>
 
-  <main id="contenido-principal">
+  <main id="main-content">
 
-    <!-- Estado de carga -->
-    <div id="project-loading" class="project-loading" aria-live="polite" aria-busy="true">
+    <!-- Loading -->
+    <div id="project-loading" aria-live="polite" aria-busy="true">
       <div class="container">
-        <p>Cargando proyecto…</p>
+        <p>Loading...</p>
       </div>
     </div>
 
-    <!-- Estado de error -->
-    <div id="project-error" class="project-error" hidden>
+    <!-- Error -->
+    <div id="project-error" hidden>
       <div class="container">
-        <p role="alert">No se encontró el proyecto. <a href="/">Volver al inicio</a></p>
+        <p role="alert">Project not found. <a href="/">Back to home</a></p>
       </div>
     </div>
 
-    <!-- Contenido del proyecto — rellenado por JS -->
+    <!-- CONTENT -->
     <div id="project-content" hidden>
 
-      <!-- Cabecera del proyecto -->
-      <header class="project-header">
-        <div class="container">
-          <nav class="project-breadcrumb" aria-label="Ruta de navegación">
-            <a href="/">Trabajo</a>
-            <span aria-hidden="true">→</span>
-            <span id="project-breadcrumb-title"></span>
-          </nav>
+      <!-- Project Hero -->
+      <div class="project-hero"></div>
 
-          <div class="project-header__meta">
-            <div id="project-tags" class="project-header__tags" aria-label="Categorías"></div>
-            <span id="project-year" class="project-header__year"></span>
+      <!-- Layout principal -->
+      <div class="project-layout container">
+
+        <!-- Sidebar: tile, client, tags, index -->
+        <div class="project-sidebar">
+          <div class="project-sidebar__sticky">
+            <h1 id="project-title" class="project-sidebar__title"></h1>
+            <p id="project-client" class="project-sidebar__client"></p>
+            <div id="project-tags" class="project-sidebar__tags"></div>
+            <nav class="project-index" aria-label="Project index"></nav>
           </div>
-
-          <h1 id="project-title" class="project-header__title"></h1>
-          <p  id="project-summary" class="project-header__summary"></p>
         </div>
-      </header>
 
-      <!-- Imagen de portada -->
-      <div id="project-cover" class="project-cover">
-        <div class="container">
-          <figure class="project-cover__figure" id="project-cover-figure"></figure>
+        <!-- Main content: summary + metadata + case study -->
+        <div class="project-main">
+
+          <!-- summary -->
+          <p id="project-summary" class="project-main__summary"></p>
+
+          <!-- metadata -->
+          <dl class="project-meta">
+            <div class="project-meta__item">
+              <dt>Timeline</dt>
+              <dd id="project-timeline"></dd>
+            </div>
+            <div class="project-meta__item">
+              <dt>Roles</dt>
+              <dd id="project-role"></dd>
+            </div>
+            <div class="project-meta__item">
+              <dt>Team</dt>
+              <dd><ul id="project-team"></ul></dd>
+            </div>
+          </dl>
+
+          <!-- case study -->
+          <article id="project-body" class="project-body cs-grid"></article>
         </div>
       </div>
 
-      <!-- Cuerpo del proyecto -->
-      <article class="project-body">
-        <div class="container project-body__layout">
-
-          <!-- Columna de contenido principal -->
-          <div class="project-body__main">
-            <section aria-labelledby="section-context">
-              <h2 id="section-context">Contexto</h2>
-              <p id="project-context"></p>
-            </section>
-
-            <section aria-labelledby="section-process">
-              <h2 id="section-process">Proceso</h2>
-              <p id="project-process"></p>
-            </section>
-
-            <section aria-labelledby="section-outcome">
-              <h2 id="section-outcome">Resultado</h2>
-              <p id="project-outcome"></p>
-            </section>
-          </div>
-
-          <!-- Columna lateral con metadatos -->
-          <aside class="project-body__aside" aria-label="Detalles del proyecto">
-            <dl class="project-meta-list">
-              <div class="project-meta-list__item">
-                <dt>Año</dt>
-                <dd id="meta-year"></dd>
-              </div>
-              <div class="project-meta-list__item">
-                <dt>Categorías</dt>
-                <dd id="meta-tags"></dd>
-              </div>
-              <div id="meta-role-item" class="project-meta-list__item" hidden>
-                <dt>Rol</dt>
-                <dd id="meta-role"></dd>
-              </div>
-              <div id="meta-client-item" class="project-meta-list__item" hidden>
-                <dt>Cliente</dt>
-                <dd id="meta-client"></dd>
-              </div>
-            </dl>
-          </aside>
-
-        </div>
-      </article>
-
-      <!-- Navegación entre proyectos -->
-      <nav class="project-nav" aria-label="Proyectos anterior y siguiente">
-        <div class="container project-nav__inner">
-          <a id="project-nav-prev" href="#" class="project-nav__link project-nav__link--prev" hidden>
-            <span class="project-nav__dir" aria-hidden="true">←</span>
-            <span class="project-nav__label">Proyecto anterior</span>
-            <span id="project-nav-prev-title" class="project-nav__title"></span>
-          </a>
-          <a id="project-nav-next" href="#" class="project-nav__link project-nav__link--next" hidden>
-            <span class="project-nav__label">Proyecto siguiente</span>
-            <span id="project-nav-next-title" class="project-nav__title"></span>
-            <span class="project-nav__dir" aria-hidden="true">→</span>
-          </a>
-        </div>
+      <!-- Navegación prev / next -->
+      <nav class="project-nav container" aria-label="More projects">
+        <a id="project-nav-prev" href="#" hidden>
+          <span aria-hidden="true">←</span>
+          <span class="project-nav__label">Previous</span>
+          <span id="project-nav-prev-title" class="project-nav__title"></span>
+        </a>
+        <a id="project-nav-next" href="#" hidden>
+          <span class="project-nav__label">Next</span>
+          <span id="project-nav-next-title" class="project-nav__title"></span>
+          <span aria-hidden="true">→</span>
+        </a>
       </nav>
-
-    </div><!-- /project-content -->
+    </div>
 
   </main>
 

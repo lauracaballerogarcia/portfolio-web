@@ -2,11 +2,10 @@
  * project.js — Página de detalle de proyecto
  *
  * Lee el slug desde la URL, carga el JSON de proyectos,
- * encuentra el proyecto correspondiente y rellena el DOM.
- * Sin framework. La lógica de datos viene de /data/projects.js.
+ * carga el Markdown del case study y rellena el DOM.
  */
 
-import { fetchProjects } from '../../data/projects.js';
+import { fetchProjects, fetchProjectContent } from '../../data/projects.js';
 
 import '../../components/site-nav/site-nav.js';
 import '../../components/site-footer/site-footer.js';
@@ -16,7 +15,7 @@ import '../../components/site-nav/site-nav.css';
 import '../../components/site-footer/site-footer.css';
 import './project.css';
 
-// ─── Utilidades DOM ──────────────────────────────────────────
+// ─── Utilidades DOM ────────────────────────────────
 
 function $(id) { return document.getElementById(id); }
 
@@ -28,7 +27,7 @@ function setText(id, value) {
 function show(id) { const el = $(id); if (el) el.hidden = false; }
 function hide(id) { const el = $(id); if (el) el.hidden = true;  }
 
-// ─── Leer slug desde la URL ──────────────────────────────────
+// ─── Slug desde URL ────────────────────────────────
 
 function getSlugFromURL() {
   const parts = window.location.pathname
@@ -37,32 +36,31 @@ function getSlugFromURL() {
   return parts[1] ?? null;
 }
 
-// ─── Índice de navegación interna ────────────────────────────
+// ─── Índice de navegación interna ──────────────────
 
 function renderIndex() {
   const indexNav = document.querySelector('.project-index');
   if (!indexNav) return;
 
   const sections = [
-    { id: 'overview',   label: 'Overview'          },
-    { id: 'problem',    label: 'Problem'            },
-    { id: 'solution',   label: 'Solution'           },
-    { id: 'process',    label: 'Research / Process' },
-    { id: 'outcome',    label: 'Outcome'            },
-    { id: 'reflection', label: 'Reflection'         },
+    { id: 'overview',    label: 'Overview'   },
+    { id: 'problem',     label: 'Problem'    },
+    { id: 'solution',    label: 'Solution'   },
+    { id: 'research',    label: 'Research'   },
+    { id: 'next-steps',  label: 'Next steps' },
+    { id: 'outcome',     label: 'Outcome'    },
   ];
 
   indexNav.innerHTML = `
-    <ol class="project-index__list">
+    <ul class="project-index__list">
       ${sections.map(s => `
         <li class="project-index__item">
           <a href="#${s.id}" class="project-index__link">${s.label}</a>
         </li>
       `).join('')}
-    </ol>
+    </ul>
   `;
 
-  // Marca el enlace activo al hacer scroll
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const link = indexNav.querySelector(`a[href="#${entry.target.id}"]`);
@@ -76,19 +74,19 @@ function renderIndex() {
   });
 }
 
-// ─── Renderizado ─────────────────────────────────────────────
+// ─── Renderizado ───────────────────────────────────
 
-function renderProject(project, allProjects) {
+async function renderProject(project, allProjects) {
   // Meta del documento
   document.title = `${project.title} — Portfolio`;
   document.querySelector('meta[name="description"]')
-    ?.setAttribute('content', project.summary);
+    ?.setAttribute('content', project.summary ?? '');
   document.querySelector('meta[property="og:title"]')
     ?.setAttribute('content', project.title);
   document.querySelector('meta[property="og:description"]')
-    ?.setAttribute('content', project.summary);
+    ?.setAttribute('content', project.summary ?? '');
 
-  // Imagen hero — fondo de pantalla completa
+  // Hero
   const hero = document.querySelector('.project-hero');
   if (hero && project.cover) {
     const img = document.createElement('img');
@@ -100,12 +98,10 @@ function renderProject(project, allProjects) {
     hero.appendChild(img);
   }
 
-  // Título y metadatos
-  setText('project-title',   project.title);
-  setText('project-summary', project.summary);
-  setText('project-year',    project.year);
+  // Sidebar — título, cliente, tags
+  setText('project-title',  project.title);
+  setText('project-client', project.client ?? project.role ?? '');
 
-  // Tags
   const tagsEl = $('project-tags');
   if (tagsEl) {
     tagsEl.innerHTML = project.tags
@@ -113,28 +109,30 @@ function renderProject(project, allProjects) {
       .join('');
   }
 
-  // Cuerpo — campos opcionales del JSON
-  setText('project-context',    project.context    ?? '');
-  setText('project-problem',    project.problem    ?? '');
-  setText('project-solution',   project.solution   ?? '');
-  setText('project-process',    project.process    ?? '');
-  setText('project-outcome',    project.outcome    ?? '');
-  setText('project-reflection', project.reflection ?? '');
+  // Summary
+  setText('project-summary', project.claim ?? project.summary ?? '');
 
-  // Sidebar de metadatos
-  setText('meta-year', project.year);
-  setText('meta-tags', project.tags.join(', '));
+  // Metadatos
+  setText('project-timeline', project.timeline ?? '');
+  setText('project-role',     project.role ?? '');
 
-  if (project.role) {
-    setText('meta-role', project.role);
-    show('meta-role-item');
-  }
-  if (project.client) {
-    setText('meta-client', project.client);
-    show('meta-client-item');
+  if (project.team) {
+    const teamEl = $('project-team');
+    if (teamEl) {
+      teamEl.innerHTML = project.team
+        .map(m => `<li>${m}</li>`)
+        .join('');
+    }
   }
 
-  // Índice de navegación
+  // Contenido del case study (Markdown)
+  const body = $('project-body');
+  if (body) {
+    const html = await fetchProjectContent(project.slug);
+    body.innerHTML = html;
+  }
+
+  // Índice de navegación interna
   renderIndex();
 
   // Navegación prev / next
@@ -153,7 +151,6 @@ function renderProject(project, allProjects) {
     setText('project-nav-next-title', next.title);
   }
 
-  // Mostrar contenido, ocultar loading
   hide('project-loading');
   show('project-content');
 }
@@ -163,7 +160,7 @@ function renderError() {
   show('project-error');
 }
 
-// ─── Bootstrap ───────────────────────────────────────────────
+// ─── Bootstrap ──────────────────────────────────────
 
 async function init() {
   const slug = getSlugFromURL();
@@ -176,7 +173,7 @@ async function init() {
 
     if (!project) { renderError(); return; }
 
-    renderProject(project, projects);
+    await renderProject(project, projects);
   } catch (err) {
     console.error('Error cargando el proyecto:', err);
     renderError();

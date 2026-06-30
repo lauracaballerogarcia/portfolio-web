@@ -6,7 +6,6 @@
   grid-template-columns: 1fr 1fr;
   column-gap: var(--grid-column-gap);
   row-gap: var(--grid-row-gap);
-  margin: auto; 
 }
 
 .featured-grid li:first-child {

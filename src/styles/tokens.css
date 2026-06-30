@@ -115,6 +115,10 @@
   --color-text-secondary: var(--color-neutral-600);
   --color-text-tertiary: var(--color-neutral-0);
 
+
+  /* Chips */
+  --color-chip-primary-background-default: var(--color-neutral-100); 
+
    /* NUMBERS
   ========================== */
 
@@ -211,11 +215,9 @@ ul, ol { list-style: none; }
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   max-width: calc(1440px+var(--container-margin));
   padding: 0 var(--container-margin);
+  margin-top: var(--size-header-height)
 }
 
   #top {
@@ -252,7 +254,7 @@ h1, h2, h3, h4 {
   font-family: var(--font-family-sans);
   line-height: 1.2;
   font-weight: 400;
-  margin-bottom: var(--spacing-2);
+  /* margin-bottom: var(--spacing-2); */
 }
 
 h3, h4 {
