@@ -88,7 +88,7 @@ async function renderProject(project, allProjects) {
 
   // Hero
   const hero = document.querySelector('.project-hero');
-  if (hero && project.cover) {
+  if (hero && project.hero) {
     const img = document.createElement('img');
     img.src      = project.cover;
     img.alt      = '';
@@ -114,7 +114,25 @@ async function renderProject(project, allProjects) {
 
   // Metadatos
   setText('project-timeline', project.timeline ?? '');
-  setText('project-role',     project.role ?? '');
+  setText('project-role', project.roles?.join(', ') ?? '');
+
+  if (project.roles) {
+    const rolesEl = $('project-role');
+    if (rolesEl) {
+      rolesEl.innerHTML = project.roles
+        .map(r => `<li>${r}</li>`)
+        .join('');
+    }
+  }
+
+  if (project.tools) {
+    const toolsEl = $('project-tools');
+    if (toolsEl) {
+      toolsEl.innerHTML = project.tools
+        .map(t => `<li>${t}</li>`)
+        .join('');
+    }
+  }
 
   if (project.team) {
     const teamEl = $('project-team');
