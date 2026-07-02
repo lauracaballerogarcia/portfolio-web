@@ -12,8 +12,8 @@
   "scripts": {
     "start": "npm-run-all clean parcel:dev",
     "build": "npm-run-all clean parcel:build",
-    "parcel:dev": "parcel src/pages/index.html src/pages/project/index.html",
-    "parcel:build": "parcel build src/pages/index.html src/pages/project/index.html",
+    "parcel:dev": "parcel src/pages/index.html src/pages/project/index.html src/pages/about/index.html",
+    "parcel:build": "parcel build src/pages/index.html src/pages/project/index.html src/pages/about/index.html",
     "clean": "rimraf dist .parcel-cache"
   },
   "devDependencies": {
