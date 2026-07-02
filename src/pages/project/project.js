@@ -43,12 +43,12 @@ function renderIndex() {
   if (!indexNav) return;
 
   const sections = [
-    { id: 'overview',    label: 'Overview'   },
-    { id: 'problem',     label: 'Problem'    },
-    { id: 'solution',    label: 'Solution'   },
-    { id: 'research',    label: 'Research'   },
-    { id: 'next-steps',  label: 'Next steps' },
-    { id: 'outcome',     label: 'Outcome'    },
+    { id: 'overview',   label: 'Overview'   },
+    { id: 'problem',    label: 'Problem'    },
+    { id: 'solution',   label: 'Solution'   },
+    { id: 'research',   label: 'Research'   },
+    { id: 'outcome',    label: 'Outcome'    },
+    { id: 'reflection', label: 'Reflection' },
   ];
 
   indexNav.innerHTML = `
@@ -126,14 +126,19 @@ async function renderProject(project, allProjects) {
   }
 
   // Contenido del case study (Markdown)
-  const body = $('project-body');
-  if (body) {
+const body = $('project-body');
+if (body) {
+  try {
     const html = await fetchProjectContent(project.slug);
+    console.log('HTML generado:', html);
     body.innerHTML = html;
+  } catch (err) {
+    console.error('Error en fetchProjectContent:', err);
   }
+}
 
-  // Índice de navegación interna
-  renderIndex();
+// Índice — después de asignar los IDs
+renderIndex();
 
   // Navegación prev / next
   const currentIndex = allProjects.findIndex(p => p.slug === project.slug);

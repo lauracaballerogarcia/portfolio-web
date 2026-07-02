@@ -12,6 +12,14 @@ const contentMap = {
 
 const renderer = new marked.Renderer();
 
+renderer.heading = ({ text, depth }) => {
+  const id = text.toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+  return `<h${depth} id="${id}">${text}</h${depth}>`;
+};
+
 renderer.image = (href, title, alt) => {
   const mod = title ?? 'default';
   return `
@@ -28,7 +36,11 @@ renderer.blockquote = (quote) => `
   <blockquote class="cs-quote">${quote}</blockquote>
 `;
 
-marked.use({ renderer });
+marked.use({ 
+  renderer,
+  headerIds: true,
+  mangle: false
+});
 
 // ─── Funciones de datos ───────────────────────────
 
