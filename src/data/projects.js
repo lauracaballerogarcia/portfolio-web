@@ -1,12 +1,5 @@
 import projectsData from './projects.json';
 import { marked } from 'marked';
-import sendaMd from 'bundle-text:./content/senda.md';
-
-// ─── Mapa de contenidos ───────────────────────────
-
-const contentMap = {
-  'senda': sendaMd,
-};
 
 // ─── Renderer personalizado ───────────────────────
 
@@ -49,9 +42,10 @@ export async function fetchProjects() {
 }
 
 export async function fetchProjectContent(slug) {
-  const md = contentMap[slug];
-  if (!md) throw new Error(`No se encontró el contenido: ${slug}`);
-  return marked.parse(md);
+  const res = await fetch(`/data/content/${slug}.md`);
+  if (!res.ok) throw new Error(`No se encontró el contenido: ${slug}`);
+  const text = await res.text();
+  return marked.parse(text);
 }
 
 export function filterByTag(projects, tag) {

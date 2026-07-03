@@ -90,7 +90,7 @@ async function renderProject(project, allProjects) {
   const hero = document.querySelector('.project-hero');
   if (hero && project.hero) {
     const img = document.createElement('img');
-    img.src      = project.cover;
+    img.src      = project.hero;
     img.alt      = '';
     img.loading  = 'eager';
     img.decoding = 'async';

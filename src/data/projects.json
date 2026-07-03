@@ -7,7 +7,7 @@
     "summary": "Senda is a digital payment solution designed for people over 70 who need to make online transactions securely and easily.",
     "tags": ["UX", "UI", "Visual Identity"],
     "year": "2024",
-    "hero": "/images/senda-hero.jpg",
+    "hero": "/assets/images/senda-hero.jpg", 
     "feature": true,
     "type": "case study",
     "timeline": "Sep 2024 – Jan 2025",
