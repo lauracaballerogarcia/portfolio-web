@@ -18,8 +18,8 @@
   },
   {
     "id": "02",
-    "slug": "huella-minima",
-    "title": "Huella mínima",
+    "slug": "hallo",
+    "title": "Hallo",
     "summary": "Exploración de patrones de diseño de interfaz que reducen el consumo energético sin comprometer la experiencia de uso.",
     "tags": ["Sostenibilidad", "UI"],
     "year": "2024",
@@ -32,8 +32,8 @@
   },
   {
     "id": "03",
-    "slug": "escucha-activa",
-    "title": "Escucha activa",
+    "slug": "bloq",
+    "title": "Bloq",
     "summary": "Herramienta de participación ciudadana para procesos de co-diseño urbano en entornos de baja conectividad.",
     "tags": ["Diseño responsable", "Sistemas"],
     "year": "2023",

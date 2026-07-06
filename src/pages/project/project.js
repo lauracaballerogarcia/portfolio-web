@@ -42,14 +42,15 @@ function renderIndex() {
   const indexNav = document.querySelector('.project-index');
   if (!indexNav) return;
 
-  const sections = [
-    { id: 'overview',   label: 'Overview'   },
-    { id: 'problem',    label: 'Problem'    },
-    { id: 'solution',   label: 'Solution'   },
-    { id: 'research',   label: 'Research'   },
-    { id: 'outcome',    label: 'Outcome'    },
-    { id: 'reflection', label: 'Reflection' },
-  ];
+  // Lee los h2 del body generado por el Markdown
+  const headings = document.querySelectorAll('#project-body h2');
+  if (!headings.length) return;
+
+  // Construye las secciones dinámicamente
+  const sections = Array.from(headings).map(h => ({
+    id:    h.id,
+    label: h.textContent,
+  }));
 
   indexNav.innerHTML = `
     <ul class="project-index__list">
@@ -61,6 +62,20 @@ function renderIndex() {
     </ul>
   `;
 
+  // Scroll suave con offset del header al hacer click
+  indexNav.querySelectorAll('.project-index__link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById(link.getAttribute('href').slice(1));
+      if (!target) return;
+      const headerEl = document.querySelector('.site-nav');
+      const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
+      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // Marca el enlace activo al hacer scroll
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       const link = indexNav.querySelector(`a[href="#${entry.target.id}"]`);
@@ -68,10 +83,7 @@ function renderIndex() {
     });
   }, { rootMargin: '-30% 0px -60% 0px' });
 
-  sections.forEach(s => {
-    const el = document.getElementById(s.id);
-    if (el) observer.observe(el);
-  });
+  headings.forEach(h => observer.observe(h));
 }
 
 // ─── Renderizado ───────────────────────────────────

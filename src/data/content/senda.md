@@ -15,16 +15,16 @@ Regain the participation of a key group and generate direct value for institutio
 ## Research
 
 
-## Methodology
+### Methodology
 
 To address this problem, we had to gain a deep understanding of older adults’ fears, the barriers they face with technology, and how they experience the digital divide. This involved collecting qualitative data through in-person interviews conducted with older adults, enabling us to gather first-hand insights into their behaviours, motivations, and pain points.
 ![Proceso de investigación](../images/senda-04.jpg "full")
 
-## Insights
+### Insights
 The findings revealed a need to simplify complex processes, along with fears of scams, dependence on family members, digital exclusion, and a loss of opportunities and well-being.
 ![Proceso de investigación](../images/senda-04.jpg "full")
 
-## Strategic shift
+### Strategic shift
 To address this problem, we had to gain a deep understanding of older adults’ fears, the barriers they face with technology, and how they experience the digital divide. This involved collecting qualitative data through in-person interviews conducted with older adults, enabling us to gather first-hand insights into their behaviours, motivations, and pain points.
 
 
@@ -96,7 +96,12 @@ The next step was mapping the happy path for senior users making a payment. We b
 
 ## Outcome
 
-Texto del resultado...
+### Final UI
+
+### Final prototype
+
+
+
 
 ## Reflection
 

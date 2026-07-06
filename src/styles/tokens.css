@@ -68,7 +68,6 @@
   --color-neutral-950: #121212;
 
   --color-green-100: #DDFEA6; 
-
   --color-blue-100: #D1F1FE; 
 
  /* Spacing */
@@ -88,7 +87,8 @@
   --border-radius-1:  0.25rem;   /* 4px */
   --border-radius-2:  0.5rem;    /* 8px */
   --border-radius-4:  1rem;      /* 16px */
-  --border-radius-full: 9999px;   /* Full round */
+  --border-radius-8:  2rem;      /* 32px */
+  --border-radius-full: 9999px;  /* Full round */
 
   /* Fonts */
   --font-family-serif:  'Sentient', Georgia, serif;
@@ -128,7 +128,7 @@
   ========================== */
 
   /* Border radius */
-  --card-border-radius: var(--border-radius-4); 
+  --card-border-radius: var(--border-radius-8); 
   --chip-border-radius: var(--border-radius-full);
 
   /* Interactive */

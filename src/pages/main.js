@@ -60,17 +60,17 @@ function renderProjects(state) {
             <picture>
               <source
                 type="image/webp"
-                srcset="${project.cover}?width=400 400w,
-                        ${project.cover}?width=768 768w,
-                        ${project.cover}?width=1024 1024w,
-                        ${project.cover}?width=1440 1440w"
+                srcset="${project.hero}?width=400 400w,
+                        ${project.hero}?width=768 768w,
+                        ${project.hero}?width=1024 1024w,
+                        ${project.hero}?width=1440 1440w"
                 sizes="${sizes}">
               <img
-                src="${project.cover}"
-                srcset="${project.cover}?width=400 400w,
-                        ${project.cover}?width=768 768w,
-                        ${project.cover}?width=1024 1024w,
-                        ${project.cover}?width=1440 1440w"
+                src="${project.hero}"
+                srcset="${project.hero}?width=400 400w,
+                        ${project.hero}?width=768 768w,
+                        ${project.hero}?width=1024 1024w,
+                        ${project.hero}?width=1440 1440w"
                 sizes="${sizes}"
                 width="2880"
                 height="1800"
