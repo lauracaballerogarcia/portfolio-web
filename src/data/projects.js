@@ -1,5 +1,12 @@
 import projectsData from './projects.json';
 import { marked } from 'marked';
+import sendaMd from 'bundle-text:./content/senda.md';
+
+// ─── Mapa de contenidos ───────────────────────────
+
+const contentMap = {
+  'senda': sendaMd,
+};
 
 // ─── Renderer personalizado ───────────────────────
 
@@ -19,21 +26,21 @@ renderer.image = (href, title, alt) => {
     <figure class="cs-figure cs-figure--${mod}">
       <picture>
         <source type="image/webp" srcset="${href}">
-        <img src="${href}" alt="${alt}" loading="lazy" decoding="async">
+        <img
+          src="${href}"
+          alt="${alt}"
+          loading="lazy"
+          decoding="async">
       </picture>
     </figure>
   `;
 };
 
-renderer.blockquote = (quote) => `
-  <blockquote class="cs-quote">${quote}</blockquote>
+renderer.blockquote = ({ text }) => `
+  <blockquote class="cs-quote">${text}</blockquote>
 `;
 
-marked.use({ 
-  renderer,
-  headerIds: true,
-  mangle: false
-});
+marked.use({ renderer });
 
 // ─── Funciones de datos ───────────────────────────
 
@@ -42,10 +49,9 @@ export async function fetchProjects() {
 }
 
 export async function fetchProjectContent(slug) {
-  const res = await fetch(`/data/content/${slug}.md`);
-  if (!res.ok) throw new Error(`No se encontró el contenido: ${slug}`);
-  const text = await res.text();
-  return marked.parse(text);
+  const md = contentMap[slug];
+  if (!md) throw new Error(`No se encontró el contenido: ${slug}`);
+  return marked.parse(md);
 }
 
 export function filterByTag(projects, tag) {

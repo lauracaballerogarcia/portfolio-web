@@ -9,8 +9,7 @@ Texto del overview...
 Texto del brief...
 
 ## Problem
-
-Texto del problema...
+People over the age of 70 need to make online payments securely because they do not trust entering their bank card details online and do not have simple alternatives that make them feel safe and confident.
 
 ![Interfaz de la app](../images/senda-02.jpg "half")
 ![Pago en tienda](../images/senda-03.jpg "half")

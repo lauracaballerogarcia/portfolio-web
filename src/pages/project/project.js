@@ -100,7 +100,7 @@ async function renderProject(project, allProjects) {
 
   // Sidebar — título, cliente, tags
   setText('project-title',  project.title);
-  setText('project-client', project.client ?? project.role ?? '');
+  setText('project-client', project.client ?? '');
 
   const tagsEl = $('project-tags');
   if (tagsEl) {
@@ -110,11 +110,10 @@ async function renderProject(project, allProjects) {
   }
 
   // Summary
-  setText('project-summary', project.claim ?? project.summary ?? '');
+  setText('project-summary', project.summary ?? '');
 
   // Metadatos
   setText('project-timeline', project.timeline ?? '');
-  setText('project-role', project.roles?.join(', ') ?? '');
 
   if (project.roles) {
     const rolesEl = $('project-role');
@@ -144,19 +143,26 @@ async function renderProject(project, allProjects) {
   }
 
   // Contenido del case study (Markdown)
-const body = $('project-body');
-if (body) {
-  try {
-    const html = await fetchProjectContent(project.slug);
-    console.log('HTML generado:', html);
-    body.innerHTML = html;
-  } catch (err) {
-    console.error('Error en fetchProjectContent:', err);
-  }
-}
+  const body = $('project-body');
+  if (body) {
+    try {
+      const html = await fetchProjectContent(project.slug);
+      body.innerHTML = html;
 
-// Índice — después de asignar los IDs
-renderIndex();
+      // Añade IDs a los h2 después de insertar el HTML
+      body.querySelectorAll('h2').forEach(h => {
+        h.id = h.textContent.toLowerCase()
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .trim();
+      });
+    } catch (err) {
+      console.error('Error en fetchProjectContent:', err);
+    }
+  }
+
+  // Índice — después de asignar los IDs
+  renderIndex();
 
   // Navegación prev / next
   const currentIndex = allProjects.findIndex(p => p.slug === project.slug);
@@ -166,12 +172,12 @@ renderIndex();
   if (prev) {
     const el = $('project-nav-prev');
     if (el) { el.href = `/project/${prev.slug}/`; el.hidden = false; }
-    setText('project-nav-prev-title', prev.title);
+    setText('project-nav-prev-title', prev.title ?? '');
   }
   if (next) {
     const el = $('project-nav-next');
     if (el) { el.href = `/project/${next.slug}/`; el.hidden = false; }
-    setText('project-nav-next-title', next.title);
+    setText('project-nav-next-title', next.title ?? '');
   }
 
   hide('project-loading');

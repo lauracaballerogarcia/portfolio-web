@@ -130,13 +130,14 @@
 /* ── Metadatos ───────────────────────────────────── */
 
 .project-meta {
-  display: flex;
-  gap: var(--spacing-12);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--grid-column-gap);
   margin-bottom: var(--spacing-16);
 }
 
 .project-meta__item dt {
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-xs);
   font-family: var(--font-family-mono);
   text-transform: uppercase;
   color: var(--color-text-secondary);
@@ -144,7 +145,7 @@
 }
 
 .project-meta__item dd {
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-xs);
 }
 
 .project-meta__item ul {
@@ -159,7 +160,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: var(--grid-column-gap);
-  row-gap: var(--spacing-12);
+  row-gap: var(--spacing-6);
 }
 
 .cs-grid h2,
@@ -172,21 +173,41 @@
 }
 
 .project-body h2 {
-  font-size: var(--font-size-l);
+  font-size: var(--font-size-xl);
   padding-top: var(--spacing-6);
   border-top: 1px solid var(--color-neutral-200);
 }
 
 .project-body h3 {
   font-size: var(--font-size-m);
-  font-family: var(--font-family-mono);
-  color: var(--color-text-secondary);
+  /* font-family: var(--font-family-mono); */
 }
 
 .project-body p {
   font-size: var(--font-size-m);
-  line-height: 1.7;
+  color: var(--color-text-secondary); 
+  line-height: 1.6;
   max-width: 68ch;
+}
+
+.project-body ol {
+  padding-left: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  list-style: decimal;
+}
+
+.project-body ul {
+  padding-left: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  list-style: disc;
+}
+
+.project-body li {
+  font-size: var(--font-size-m);
 }
 
 /* ── Figuras ─────────────────────────────────────── */
@@ -210,6 +231,63 @@
 .cs-figure--portrait {
   grid-column: span 1;
   aspect-ratio: 3 / 4;
+}
+
+/* ── Evaluation cards ────────────────────────────── */
+
+.eval-grid {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--grid-column-gap);
+}
+
+.eval-card {
+  flex: 1 1 11.25rem; /* min-width: 180px */
+  max-width: calc(25% - var(--spacing-4));
+  min-height: 17.5rem; /* 280px */
+  padding: var(--spacing-6);
+  border-radius: var(--border-radius-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--grid-column-gap);
+}
+
+.eval-card--win {
+  background-color: var(--color-green-100);
+}
+
+.eval-card--pain {
+  background-color: var(--color-blue-100);
+}
+
+.eval-card__icon {
+  font-size: 1.25rem;
+}
+
+.eval-card p {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-s);
+  max-width: 100%;
+  /* line-height: 1.2; */
+}
+
+.eval-card::before {
+  content: '';
+  display: block;
+  width: var(--size-icon-medium);
+  height: var(--size-icon-medium);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.eval-card--win::before {
+  background-image: url('../../assets/icons/smiley.svg');
+}
+
+.eval-card--pain::before {
+  background-image: url('../../assets/icons/smiley-sad.svg');
 }
 
 
@@ -244,13 +322,13 @@
 }
 
 .project-nav__label {
-  font-size: var(--font-size-s);
+  font-size: var(--font-size-xs);
   font-family: var(--font-family-mono);
   color: var(--color-text-secondary);
 }
 
 .project-nav__title {
-  font-size: var(--font-size-m);
+  font-size: var(--font-size-s);
   transition: color var(--duration) var(--ease-out);
 }
 
