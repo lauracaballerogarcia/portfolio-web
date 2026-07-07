@@ -1,0 +1,22 @@
+{
+  "jpeg": {
+    "quality": 75,
+    "progressive": true,
+    "mozjpeg": true, 
+    "chromaSubsampling": "4:4:4"
+
+  },
+  "webp": {
+    "quality": 70,
+    "effort": 6,
+    "nearLossless": true
+  },
+  "avif": {
+    "quality": 60,
+    "effort": 6
+  },
+  "png": {
+    "quality": 70,
+    "palette": true
+  }
+}

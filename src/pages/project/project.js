@@ -76,14 +76,30 @@ function renderIndex() {
   });
 
   // Marca el enlace activo al hacer scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      const link = indexNav.querySelector(`a[href="#${entry.target.id}"]`);
-      if (link) link.classList.toggle('is-active', entry.isIntersecting);
-    });
-  }, { rootMargin: '-30% 0px -60% 0px' });
+  const links = indexNav.querySelectorAll('.project-index__link');
 
-  headings.forEach(h => observer.observe(h));
+  function updateActiveLink() {
+    const headerEl = document.querySelector('.site-nav');
+    const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
+    const scrollY = window.scrollY + headerHeight + 32;
+
+    let current = null;
+
+    headings.forEach(h => {
+      const top = h.getBoundingClientRect().top + window.scrollY;
+      if (top <= scrollY) {
+        current = h.id;
+      }
+    });
+
+    links.forEach(link => {
+      const isActive = link.getAttribute('href') === `#${current}`;
+      link.classList.toggle('is-active', isActive);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
 }
 
 // ─── Renderizado ───────────────────────────────────
