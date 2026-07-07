@@ -18,8 +18,8 @@
   },
   {
     "id": "02",
-    "slug": "hallo",
-    "title": "Hallo",
+    "slug": "bloq",
+    "title": "Bloq",
     "summary": "Exploración de patrones de diseño de interfaz que reducen el consumo energético sin comprometer la experiencia de uso.",
     "tags": ["Sostenibilidad", "UI"],
     "year": "2024",
@@ -32,8 +32,8 @@
   },
   {
     "id": "03",
-    "slug": "bloq",
-    "title": "Bloq",
+    "slug": "hallo",
+    "title": "Hallo",
     "summary": "Herramienta de participación ciudadana para procesos de co-diseño urbano en entornos de baja conectividad.",
     "tags": ["Diseño responsable", "Sistemas"],
     "year": "2023",

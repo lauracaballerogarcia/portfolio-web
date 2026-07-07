@@ -162,6 +162,12 @@
   column-gap: var(--grid-column-gap);
   row-gap: var(--spacing-6);
 }
+.cs-grid section {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--grid-column-gap);
+}
 
 .cs-grid h2,
 .cs-grid h3,

@@ -43,12 +43,12 @@ function renderIndex() {
   if (!indexNav) return;
 
   // Lee los h2 del body generado por el Markdown
-  const headings = document.querySelectorAll('#project-body h2');
+  const headings = Array.from(document.querySelectorAll('#project-body h2'));
   if (!headings.length) return;
 
-  // Construye las secciones dinámicamente
-  const sections = Array.from(headings).map(h => ({
-    id:    h.id,
+  // Construye las secciones dinámicamente desde los h2
+  const sections = headings.map(h => ({
+    id:    h.closest('section')?.id ?? h.id,
     label: h.textContent,
   }));
 
@@ -66,11 +66,13 @@ function renderIndex() {
   indexNav.querySelectorAll('.project-index__link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
-      const target = document.getElementById(link.getAttribute('href').slice(1));
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
       if (!target) return;
       const headerEl = document.querySelector('.site-nav');
       const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
-      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - rem;
       window.scrollTo({ top, behavior: 'smooth' });
     });
   });
@@ -86,15 +88,15 @@ function renderIndex() {
     let current = null;
 
     headings.forEach(h => {
-      const top = h.getBoundingClientRect().top + window.scrollY;
-      if (top <= scrollY) {
-        current = h.id;
-      }
+      const section = h.closest('section');
+      const top = section
+        ? section.getBoundingClientRect().top + window.scrollY
+        : h.getBoundingClientRect().top + window.scrollY;
+      if (top <= scrollY) current = section?.id ?? h.id;
     });
 
     links.forEach(link => {
-      const isActive = link.getAttribute('href') === `#${current}`;
-      link.classList.toggle('is-active', isActive);
+      link.classList.toggle('is-active', link.getAttribute('href') === `#${current}`);
     });
   }
 
@@ -177,13 +179,100 @@ async function renderProject(project, allProjects) {
       const html = await fetchProjectContent(project.slug);
       body.innerHTML = html;
 
-      // Añade IDs a los h2 después de insertar el HTML
+      // Añade IDs a los h2
       body.querySelectorAll('h2').forEach(h => {
         h.id = h.textContent.toLowerCase()
           .replace(/[^\w\s-]/g, '')
           .replace(/\s+/g, '-')
           .trim();
       });
+
+      // Envuelve cada h2 y su contenido en una section
+      const h2s = Array.from(body.querySelectorAll('h2'));
+
+      h2s.forEach((h2, i) => {
+        const section = document.createElement('section');
+        section.id = h2.id;
+        h2.removeAttribute('id'); // el id pasa a la section
+
+        const next = h2s[i + 1];
+        const siblings = [];
+        let el = h2.nextElementSibling;
+
+        while (el && el !== next) {
+          siblings.push(el);function renderIndex() {
+  const indexNav = document.querySelector('.project-index');
+  if (!indexNav) return;
+
+  // Lee los h2 del body generado por el Markdown
+  const headings = Array.from(document.querySelectorAll('#project-body h2'));
+  if (!headings.length) return;
+
+  // Construye las secciones dinámicamente desde los h2
+  const sections = headings.map(h => ({
+    id:    h.closest('section')?.id ?? h.id,
+    label: h.textContent,
+  }));
+
+  indexNav.innerHTML = `
+    <ul class="project-index__list">
+      ${sections.map(s => `
+        <li class="project-index__item">
+          <a href="#${s.id}" class="project-index__link">${s.label}</a>
+        </li>
+      `).join('')}
+    </ul>
+  `;
+
+  // Scroll suave con offset del header al hacer click
+  indexNav.querySelectorAll('.project-index__link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const id = link.getAttribute('href').slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+      const headerEl = document.querySelector('.site-nav');
+      const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - rem;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+
+  // Marca el enlace activo al hacer scroll
+  const links = indexNav.querySelectorAll('.project-index__link');
+
+  function updateActiveLink() {
+    const headerEl = document.querySelector('.site-nav');
+    const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
+    const scrollY = window.scrollY + headerHeight + 32;
+
+    let current = null;
+
+    headings.forEach(h => {
+      const section = h.closest('section');
+      const top = section
+        ? section.getBoundingClientRect().top + window.scrollY
+        : h.getBoundingClientRect().top + window.scrollY;
+      if (top <= scrollY) current = section?.id ?? h.id;
+    });
+
+    links.forEach(link => {
+      link.classList.toggle('is-active', link.getAttribute('href') === `#${current}`);
+    });
+  }
+
+  window.addEventListener('scroll', updateActiveLink, { passive: true });
+  updateActiveLink();
+}
+          el = el.nextElementSibling;
+        }
+
+        h2.before(section);
+        section.appendChild(h2);
+        siblings.forEach(s => section.appendChild(s));
+      });
+
     } catch (err) {
       console.error('Error en fetchProjectContent:', err);
     }

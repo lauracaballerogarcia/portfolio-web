@@ -28,8 +28,6 @@ The findings revealed a need to simplify complex processes, along with fears of 
 To address this problem, we had to gain a deep understanding of older adults’ fears, the barriers they face with technology, and how they experience the digital divide. This involved collecting qualitative data through in-person interviews conducted with older adults, enabling us to gather first-hand insights into their behaviours, motivations, and pain points.
 
 
-
-
 ## Problem
 
 People over the age of 70 need to make online payments securely because they do not trust entering their bank card details online and do not have simple alternatives that make them feel safe and confident.
