@@ -71,7 +71,7 @@
   min-width: 2.5rem;
   min-height: 2.5rem;
 
-  background-color: var(--color-neutral-0);
+  background-color: var(--color-text-primary-inverse);
   padding: var(--spacing-2);
   border-radius: var(--chip-border-radius);
 
@@ -136,5 +136,5 @@
 }
 
 .featured-grid p {
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
 }

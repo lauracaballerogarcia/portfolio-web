@@ -65,6 +65,7 @@
   --color-neutral-100: #EBEBEB;
   --color-neutral-200: #DEDEDE;
   --color-neutral-600: #737373;
+  --color-neutral-700: #535353; 
   --color-neutral-950: #121212;
 
   --color-green-100: #DDFEA6; 
@@ -117,8 +118,9 @@
 
   /* Text */
   --color-text-primary: var(--color-neutral-950);
-  --color-text-secondary: var(--color-neutral-600);
-  --color-text-tertiary: var(--color-neutral-0);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-tertiary: var(--color-neutral-600); 
+  --color-text-primary-inverse: var(--color-neutral-0);
 
 
   /* Chips */
@@ -256,6 +258,7 @@ ul, ol { list-style: none; }
    FONT STYLES
    ============================================================ */
 
+/* Headings */
 h1, h2, h3, h4 {
   font-family: var(--font-family-sans);
   line-height: 1.2;
@@ -273,4 +276,17 @@ h3 { font-size: var(--font-size-m); }
 h4 { font-size: var(--font-size-m); }
 /* p { max-width: 68ch; } */
 
+
+p {
+  font-weight: 400;
+}
+
+/* Body */
+
+/* Lables */
 button, .chip { font-size: var(--font-size-xs); line-height: 1 }
+/* .overline {
+  font-family: var(--overline-font-family);
+  font-size:   var(--overline-font-size);
+  color:       var(--overline-color);
+} */

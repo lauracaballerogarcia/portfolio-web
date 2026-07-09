@@ -56,7 +56,7 @@
 }
 
 .project-sidebar__client {
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
 }
 
 .project-sidebar__tags {
@@ -116,7 +116,7 @@
 
 .project-index__link {
   font-size: var(--font-size-s);
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
   text-decoration: none;
   transition: color var(--duration) var(--ease-out);
 }
@@ -140,7 +140,7 @@
   font-size: var(--font-size-xs);
   font-family: var(--font-family-mono);
   text-transform: uppercase;
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
   margin-bottom: var(--spacing-2);
 }
 
@@ -191,7 +191,7 @@
 
 .project-body p {
   font-size: var(--font-size-m);
-  color: var(--color-text-secondary); 
+  color: var(--color-text-tertiary); 
   line-height: 1.6;
   max-width: 68ch;
 }
@@ -330,7 +330,7 @@
 .project-nav__label {
   font-size: var(--font-size-xs);
   font-family: var(--font-family-mono);
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
 }
 
 .project-nav__title {
@@ -339,6 +339,6 @@
 }
 
 .project-nav a:hover .project-nav__title {
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
 }
 

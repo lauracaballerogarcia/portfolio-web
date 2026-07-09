@@ -78,17 +78,22 @@
 
 /* ── CV Grid ─────────────────────────────────────── */
 
-.about-cv {
+.about-cv.container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-8);
   padding-top: var(--spacing-12);
   border-top: 1px solid var(--color-neutral-200);
+  margin-top: var(--spacing-2);
 }
 
-.about-cv__col h2 {
+/* .about-cv__col h2 {
   font-size: var(--font-size-m);
   font-weight: 500;
+  margin-bottom: var(--spacing-6);
+} */
+
+.about-cv h3 {
   margin-bottom: var(--spacing-6);
 }
 
@@ -106,23 +111,21 @@
 
 .about-cv__list strong {
   font-size: var(--font-size-s);
-  font-weight: 500;
+  font-weight: 400; 
+  margin-bottom: var(--spacing-1);
 }
 
 .about-cv__list span {
   font-size: var(--font-size-s);
   color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-2);
 }
 
-.about-cv__list a {
-  color: var(--color-text-primary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.about-cv__date {
-  font-size: var(--font-size-s);
-  color: var(--color-text-secondary);
+.about-cv__list span.about-cv__date {
+  font-family: var(--font-family-mono);
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
 }
 
 /* ── Responsive ──────────────────────────────────── */
