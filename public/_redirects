@@ -1,2 +1,2 @@
-/project/* /project/index.html 200
-/about/* /about/index.html 200
+/project/:slug /project/index.html 200
+/about /about/index.html 200
