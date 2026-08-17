@@ -28,7 +28,7 @@ class SiteNav extends HTMLElement {
 
           <nav id="nav-menu" class="site-nav__menu" aria-label="Navegación principal">
             <ul class="site-nav__list" role="list">
-              <li><a href="/about"            class="site-nav__link">About</a></li>
+              <li><a href="/about/"            class="site-nav__link">About</a></li>
             </ul>
           </nav>
         </div>
