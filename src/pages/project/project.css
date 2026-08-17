@@ -23,18 +23,31 @@
 
 /* ── Layout — grid de 12 columnas ────────────────── */
 
-.project-layout {
+/* .project-layout {
   position: relative;
   z-index: 1;
   background-color: var(--color-background-primary);
   margin-top: calc(80vh - var(--size-header-height));
-  /* margin-bottom: calc(-1 * (80vh - var(--size-header-height))); */
+  /* margin-bottom: calc(-1 * (80vh - var(--size-header-height)));
 
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: var(--grid-column-gap);
   padding-block: var(--spacing-16);
-  
+} */
+
+.project-layout {
+  position: relative;
+  z-index: 1;
+  background-color: var(--color-background-primary);
+  padding-inline: var(--container-margin-inline);
+  padding-top: var(--container-margin-block);
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--grid-column-gap);
+  padding-block: var(--spacing-16);
 }
 
 .project-layout.container{
