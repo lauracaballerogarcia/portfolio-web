@@ -11,8 +11,7 @@
   ],
   "scripts": {
     "start": "npm-run-all clean parcel:dev",
-    "build": "parcel build src/pages/index.html src/pages/project/index.html src/pages/about/index.html && cp public/_redirects dist/_redirects",
-    "parcel:dev": "parcel src/pages/index.html src/pages/project/index.html src/pages/about/index.html",
+    "build": "rimraf dist .parcel-cache && parcel build src/pages/index.html src/pages/project/index.html src/pages/about/index.html && cp public/_redirects dist/_redirects",     "parcel:dev": "parcel src/pages/index.html src/pages/project/index.html src/pages/about/index.html",
     "parcel:build": "parcel build src/pages/index.html src/pages/project/index.html src/pages/about/index.html",
     "clean": "rimraf dist .parcel-cache"
   },
