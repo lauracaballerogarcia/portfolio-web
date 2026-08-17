@@ -15,14 +15,15 @@ import { initHome }    from './index.js';
 import { initProject } from './project/project.js';
 import { initAbout }   from './about/about.js';
 
+import projectHTML from 'bundle-text:./project/project.html';
+import aboutHTML   from 'bundle-text:./about/about.html';
+
 const path = window.location.pathname;
 const main = document.querySelector('main');
 
 // ─── Carga el HTML de la página y ejecuta su módulo ──────────
 
-async function loadPage(htmlPath, initFn) {
-  const res = await fetch(htmlPath);
-  const html = await res.text();
+function loadPage(html, initFn) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   main.innerHTML = doc.querySelector('main').innerHTML;
@@ -34,11 +35,11 @@ async function loadPage(htmlPath, initFn) {
 if (path.startsWith('/project/')) {
   // La página de proyecto gestiona su propio ancho internamente
   main.classList.remove('container');
-  loadPage('/project/project.html', initProject);
+  loadPage(projectHTML, initProject);
 
 } else if (path.startsWith('/about')) {
   main.classList.add('container');
-  loadPage('/about/about.html', initAbout);
+  loadPage(aboutHTML, initAbout);
 
 } else {
   // Página de inicio
