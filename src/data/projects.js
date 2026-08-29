@@ -20,7 +20,7 @@ renderer.heading = ({ text, depth }) => {
   return `<h${depth} id="${id}">${text}</h${depth}>`;
 };
 
-renderer.image = (href, title, alt) => {
+renderer.image = ({ href, title, text }) => {
   const mod = title ?? 'default';
   return `
     <figure class="cs-figure cs-figure--${mod}">
@@ -28,7 +28,7 @@ renderer.image = (href, title, alt) => {
         <source type="image/webp" srcset="${href}">
         <img
           src="${href}"
-          alt="${alt}"
+          alt="${text}"
           loading="lazy"
           decoding="async">
       </picture>

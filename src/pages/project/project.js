@@ -6,6 +6,7 @@
  */
 
 import { fetchProjects, fetchProjectContent } from '../../data/projects.js';
+import { initFigureLightbox } from './figure-lightbox.js';
 
 // Estilos
 import '../../styles/tokens.css';
@@ -25,6 +26,13 @@ function setText(id, value) {
 function show(id) { const el = $(id); if (el) el.hidden = false; }
 function hide(id) { const el = $(id); if (el) el.hidden = true;  }
 
+function slugify(text) {
+  return text.toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .trim();
+}
+
 // ─── Slug desde URL ────────────────────────────────
 
 function getSlugFromURL() {
@@ -34,25 +42,42 @@ function getSlugFromURL() {
   return parts[1] ?? null;
 }
 
+// ─── Ceja (eyebrow) que precede a cada h2 ──────────
+//
+// El renderer de marked (ver markdown-eyebrow-renderer.js) marca con
+// class="eyebrow" cualquier párrafo en mayúsculas que preceda a un h2
+// — p. ej. "Research" antes de "## We assumed the problem...". No es
+// <strong>: la ceja es una etiqueta de categoría, no énfasis textual,
+// así que aquí solo comprobamos la clase, nada de estructura.
+
+function getEyebrowFor(h2) {
+  const prev = h2.previousElementSibling;
+  return prev?.classList.contains('eyebrow') ? prev : null;
+}
+
 // ─── Índice de navegación interna ──────────────────
 
 function renderIndex() {
   const indexNav = document.querySelector('.project-index');
   if (!indexNav) return;
 
-  // Lee los h2 del body generado por el Markdown
-  const headings = Array.from(document.querySelectorAll('#project-body h2'));
-  if (!headings.length) return;
+  const sections = Array.from(document.querySelectorAll('#project-body > section'));
+  if (!sections.length) return;
 
-  // Construye las secciones dinámicamente desde los h2
-  const sections = headings.map(h => ({
-    id:    h.closest('section')?.id ?? h.id,
-    label: h.textContent,
-  }));
+  // El label del índice viene de la ceja de cada sección; si por lo
+  // que sea una sección no tiene ceja, cae de vuelta al texto del h2.
+  const items = sections.map(section => {
+    const eyebrow = section.querySelector(':scope > .project-eyebrow');
+    const heading = section.querySelector(':scope > h2');
+    return {
+      id:    section.id,
+      label: (eyebrow ?? heading)?.textContent.trim() ?? '',
+    };
+  });
 
   indexNav.innerHTML = `
     <ul class="project-index__list">
-      ${sections.map(s => `
+      ${items.map(s => `
         <li class="project-index__item">
           <a href="#${s.id}" class="project-index__link">${s.label}</a>
         </li>
@@ -60,13 +85,16 @@ function renderIndex() {
     </ul>
   `;
 
-  // Scroll suave con offset del header al hacer click
+  // Scroll suave con offset del header al hacer click.
   indexNav.querySelectorAll('.project-index__link').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       const id = link.getAttribute('href').slice(1);
       const section = document.getElementById(id);
-      const target = section?.querySelector('h2') ?? section;
+      // El destino del scroll es la ceja, no el h2 — si apuntamos al
+      // h2, la ceja (que va justo encima) queda tapada por el header
+      // fijo. Si la sección no tiene ceja, cae de vuelta al h2.
+      const target = section?.querySelector(':scope > .project-eyebrow') ?? section?.querySelector(':scope > h2') ?? section;
       if (!target) return;
       const headerEl = document.querySelector('.site-nav');
       const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
@@ -76,19 +104,31 @@ function renderIndex() {
     });
   });
 
-  // Marca el enlace activo al hacer scroll
-  const links = indexNav.querySelectorAll('.project-index__link');
+  // Marca el enlace activo al hacer scroll (se sigue midiendo por la
+  // posición del h2, ya que la ceja vive justo encima de él).
+  const links    = indexNav.querySelectorAll('.project-index__link');
+  const headings = sections
+    .map(section => section.querySelector(':scope > h2'))
+    .filter(Boolean);
 
   function updateActiveLink() {
     const headerEl = document.querySelector('.site-nav');
     const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
-    const scrollY = window.scrollY + headerHeight + 32;
+
+    // FIX: antes la línea de referencia estaba pegada justo debajo del
+    // header (+32px), así que una sección no pasaba a "activa" hasta
+    // que su titular casi tocaba el header — con la sección siguiente
+    // ya bien visible en pantalla, el nav seguía señalando la anterior.
+    // Se mueve la línea a ~35% del alto de la ventana: el cambio ocurre
+    // en cuanto la nueva sección ya es la protagonista visible, no
+    // cuando la anterior casi ha desaparecido del todo.
+    const triggerLine = window.scrollY + headerHeight + window.innerHeight * 0.35;
 
     let current = null;
 
     headings.forEach(h => {
       const top = h.getBoundingClientRect().top + window.scrollY;
-      if (top <= scrollY) current = h.closest('section')?.id ?? h.id;
+      if (top <= triggerLine) current = h.closest('section')?.id ?? h.id;
     });
 
     links.forEach(link => {
@@ -98,6 +138,42 @@ function renderIndex() {
 
   window.addEventListener('scroll', updateActiveLink, { passive: true });
   updateActiveLink();
+}
+
+
+// ─── Carrusel de insights ──────────────────────────
+
+function initInsightsCarousel(root = document) {
+  const track = root.querySelector('.insights__track');
+  const prevButton = root.querySelector('[data-scroll="prev"]');
+  const nextButton = root.querySelector('[data-scroll="next"]');
+
+  console.log('initInsightsCarousel', { track, prevButton, nextButton });
+
+  if (!track || !prevButton || !nextButton) return;
+
+  const getStep = () => {
+    const card = track.querySelector('.insight-card');
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    return card ? card.getBoundingClientRect().width + gap : track.clientWidth;
+  };
+
+  const updateArrowState = () => {
+    const { scrollLeft, scrollWidth, clientWidth } = track;
+    prevButton.disabled = scrollLeft <= 0;
+    nextButton.disabled = scrollLeft + clientWidth >= scrollWidth - 1;
+  };
+
+  prevButton.addEventListener('click', () => {
+    track.scrollBy({ left: -getStep(), behavior: 'smooth' });
+  });
+
+  nextButton.addEventListener('click', () => {
+    track.scrollBy({ left: getStep(), behavior: 'smooth' });
+  });
+
+  track.addEventListener('scroll', updateArrowState, { passive: true });
+  updateArrowState();
 }
 
 // ─── Renderizado ───────────────────────────────────
@@ -175,32 +251,59 @@ async function renderProject(project, allProjects) {
       const html = await fetchProjectContent(project.slug);
       body.innerHTML = html;
 
-      // Añade IDs a los h2 después de insertar el HTML
-      body.querySelectorAll('h2').forEach(h => {
-        h.id = h.textContent.toLowerCase()
-          .replace(/[^\w\s-]/g, '')
-          .replace(/\s+/g, '-')
-          .trim();
-      });
+      initInsightsCarousel(body);
+      initFigureLightbox(body);
 
-      // Envuelve cada h2 y su contenido en una section
+      // "Overview" no tiene su propio bloque visible en el case study
+      // (ese contenido ya vive en el hero/sidebar), pero sí queremos
+      // que aparezca como primer item del índice y que lleve de vuelta
+      // arriba del todo. Se añade como sección oculta visualmente:
+      // sigue siendo un ancla real y aporta el label al nav, pero no
+      // se ve ni ocupa espacio en el layout.
+      const overviewSection = document.createElement('section');
+      overviewSection.id = 'overview';
+
+      const overviewEyebrow = document.createElement('p');
+      overviewEyebrow.className = 'project-eyebrow visually-hidden';
+      overviewEyebrow.textContent = 'Overview';
+
+      overviewSection.appendChild(overviewEyebrow);
+      body.prepend(overviewSection);
+
+      // Envuelve cada h2 (y su ceja, si tiene) junto con su contenido en
+      // una <section>. El id de la sección sale de la ceja cuando existe
+      // — es la etiqueta corta pensada para navegación — y si no, del
+      // propio titular como respaldo.
       const h2s = Array.from(body.querySelectorAll('h2'));
 
       h2s.forEach((h2, i) => {
-        const section = document.createElement('section');
-        section.id = h2.id;
-        h2.removeAttribute('id');
+        const eyebrowEl = getEyebrowFor(h2);
+        const label = (eyebrowEl ?? h2).textContent.trim();
 
+        const section = document.createElement('section');
+        section.id = slugify(label);
+
+        // El recorrido hacia el siguiente h2 debe frenar ANTES de la
+        // ceja de esa siguiente sección — si no, el bucle la arrastra
+        // hacia la sección actual como si fuera un párrafo más, y
+        // getEyebrowFor() ya no la encuentra cuando le toca su turno.
         const next = h2s[i + 1];
+        const nextBoundary = next ? (getEyebrowFor(next) ?? next) : null;
+
         const siblings = [];
         let el = h2.nextElementSibling;
-
-        while (el && el !== next) {
+        while (el && el !== nextBoundary) {
           siblings.push(el);
           el = el.nextElementSibling;
         }
 
-        h2.before(section);
+        const anchor = eyebrowEl ?? h2;
+        anchor.before(section);
+
+        if (eyebrowEl) {
+          eyebrowEl.classList.add('project-eyebrow');
+          section.appendChild(eyebrowEl);
+        }
         section.appendChild(h2);
         siblings.forEach(s => section.appendChild(s));
       });
@@ -210,7 +313,7 @@ async function renderProject(project, allProjects) {
     }
   }
 
-  // Índice — después de asignar los IDs
+  // Índice — después de envolver las secciones
   renderIndex();
 
   // Navegación prev / next

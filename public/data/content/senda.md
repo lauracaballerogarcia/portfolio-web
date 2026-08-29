@@ -1,12 +1,14 @@
 ## Overview
 
-Texto del overview...
-
 ![Componentes de identidad visual](../images/senda-01.jpg "full")
 
 ### The brief
 
 Texto del brief...
+
+
+## Older adults are losing access to the leisure activities that keep them active and connected.
+
 
 ## Problem
 People over the age of 70 need to make online payments securely because they do not trust entering their bank card details online and do not have simple alternatives that make them feel safe and confident.
