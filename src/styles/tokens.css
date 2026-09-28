@@ -60,7 +60,9 @@
    PRIMITIVE TOKENS
    ============================================================ */
   
-  /* Colors */
+  /* COLORS */
+
+  /* Neutral */
   --color-neutral-0: white;
   --color-neutral-50: #F7F7F7;
   --color-neutral-100: #EBEBEB;
@@ -69,14 +71,19 @@
   --color-neutral-700: #535353; 
   --color-neutral-950: #121212;
 
+  /* UI */
+
   --color-green-100: #DDFEA6; 
+
+  --color-blue-50: #E7F8FF;
   --color-blue-100: #D1F1FE; 
 
- /* Spacing */
+ /* SPACING */
   --spacing-1:  0.25rem;   /* 4px */
   --spacing-2:  0.5rem;    /* 8px */
   --spacing-3:  0.75rem;   /* 12px */
   --spacing-4:  1rem;      /* 16px */
+  --spacing-5:  1.25rem;   /* 20px */
   --spacing-6:  1.5rem;    /* 24px */
   --spacing-8:  2rem;      /* 32px */
   --spacing-9:  2.25rem;   /* 36px */
@@ -119,6 +126,9 @@
   --color-background-primary: var(--color-neutral-0);
   --color-background-secondary: var(--color-neutral-50);
 
+  /* Outline */
+  --color-outline-primary: var(--color-neutral-200);
+
   /* Text */
   --color-text-primary: var(--color-neutral-950);
   --color-text-secondary: var(--color-neutral-700);
@@ -143,6 +153,9 @@
   --container-margin-block: var(--spacing-6);
   --grid-column-gap:  var(--spacing-6);
   --grid-row-gap:     var(--spacing-6);
+
+  /* Spacing */
+  --spacing-paragraph-case-study:  var(--spacing-5);   /* 20px */
 
   /* Transiciones */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -269,16 +282,11 @@ h1, h2, h3, h4 {
   margin-bottom: var(--spacing-2);
 }
 
-h4 {
-  font-family: var(--font-family-mono);
-}
-
 h1 { font-size: var(--font-size-3xl); }
 h2 { font-size: var(--font-size-l); }
 h3 { font-size: var(--font-size-m); }
 h4 { font-size: var(--font-size-m); }
 /* p { max-width: 68ch; } */
-
 
 p {
   font-weight: 400;

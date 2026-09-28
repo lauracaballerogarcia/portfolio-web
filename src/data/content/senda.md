@@ -33,8 +33,7 @@ However, before moving into solution design, we needed to validate this assumpti
 ### Understanding where digital processes break down
 
 To address this, we needed a deep understanding of older adults' fears, the barriers they face with technology, and how they experience the digital divide. This involved collecting qualitative data through **in-person interviews** with older adults, which allowed us to gather first-hand insights into their behaviours, motivations, and pain points.
-
-![Proceso de investigación](../images/senda-04.jpg "full")
+![Figure 02: Selected quotes from the interview process](/assets/images/senda-02-research-quotes.svg "full")
 
 ### Insights
 The findings revealed several key insights, including fear of scams, reliance on family members, digital exclusion, and the loss of opportunities and well-being.
@@ -103,16 +102,12 @@ The findings revealed several key insights, including fear of scams, reliance on
 
 Together, these observations pointed towards a broader need: making complex digital processes feel simpler, safer, and more manageable.
 
-![Proceso de investigación](../images/senda-research-quotes.svg "full")
-
-
 
 <p class="eyebrow">Problem</p>
 
 ## It was never about finding activities — it was about feeling safe enough to pay for them
 The insights showed that the real challenge wasn't finding or signing up for leisure activities, but feeling secure while paying online for them. Users knew where to look for activities that interested them, but the digital payment step was a major setback. 
-
-![Componentes de identidad visual](/assets/images/senda-research-quotes.svg "full")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-03-strategic-shift.svg "full")
 
 This led us to reframe the original hypothesis into the real problem to solve:
 
@@ -129,24 +124,24 @@ From this reframed problem, we devised guided solutions, simplified steps, and a
 
 Senda offers an alternative approach to online payments through a digital wallet that can be topped up via the app — by requesting a transfer from a family member or caregiver — or in person at a trusted local store regularly visited by the user. This enables older adults to pay for their own leisure activities without exposing their main bank account or navigating complex banking environments.
 
-
-![Proceso de investigación](../images/senda-04.jpg "full")
-
-
-![Interfaz de la app](../images/senda-02.jpg "half")
-![Pago en tienda](../images/senda-03.jpg "half")
-
 ### Every interaction was designed to reduce uncertainty
 Based on our research insights, we defined three core design principles that guided every design decision, ensuring the final experience was tailored to users' needs:
 > Empathetic  – Nimble – Reliable
 
-### We focused the MVP on the moments where confidence matters most
+
+### We focused the <abbr title="Minimum Viable Product">MVP</abbr> on the moments where confidence matters most
 
 #### Key features
-Before designing the user flows, we identified three key features that would shape the user experience: hybrid top-ups, secure payments, and trusted support. These served as the foundation for the app's overall functionality.
+Before designing the user flows, we identified three key features that would shape the user experience: secure payments, hybrid top-ups, and trusted support. These served as the foundation for the app's overall functionality.
+
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-key-features.svg "full")
 
 #### User Roles
-We defined two user roles: the Senior, who uses the app to make payments, and the Administrator, a trusted family member or caregiver responsible for managing and topping up the senior's balance. For the MVP, we prioritized the Senior experience, as it represented the app's primary user journey.
+We defined two user roles: the Senior, who uses the app to make payments, and the Administrator, a trusted family member or caregiver responsible for managing and topping up the senior's balance. For the <abbr title="Minimum Viable Product">MVP</abbr>, we prioritized the Senior experience, as it represented the app's primary user journey.
+
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-user-role-primary.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-user-role-secondary.svg "half")
+
 
 #### Initial mapping
 The next step was mapping the happy path for senior users making a payment. We started with the wallet top-up, as it represented users' first interaction with the payment experience and the stage where friction or uncertainty was most likely to occur. It was essential that this initial flow clearly communicated security and built users' confidence from the outset.
@@ -160,17 +155,19 @@ The next step was mapping the happy path for senior users making a payment. We s
 
 ### Test Objectives
 1. Evaluate the usability of the main features
-    1.  1. Request balance from an administrator (user)
-    1.  2. Top up balance at a physical location (user)
-    1.  3. Top up another person’s balance (admin)
 2. Identify what users would do if they needed help with any process.
 3. Identify which areas users interpret as clickable (e.g., the cards in the list of physical locations or the wallet in the request flow).
 4. Identify whether users would like Senda to provide GPS-like guidance to help them locate the selected physical points.
 
 ### User Testing with maze
-Testing was conducted remotely via Maze. The study involved two participant groups: 11 users (people over 70 with difficulties making online payments) and 14 admins (caregivers who assist elderly users with digital tasks).
+Testing was conducted remotely via Maze. The study involved two participant groups*: 11 users (people over 70 with difficulties making online payments) and 14 admins (caregivers who assist elderly users with digital tasks).
 
-While the 25-person sample served as a solid exploratory foundation, a statistically representative sample would require 385 participants (5% margin of error, 95% confidence level) to draw conclusive findings at scale.
+<div class="cs-note" role="note">
+  <p class="cs-note__label">Note:</p>
+  <p>*While the 25-person sample served as a solid exploratory foundation, a statistically representative sample would require 385 participants (5% margin of error, 95% confidence level) to draw conclusive findings at scale.<p>
+</div>
+
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-testing-maze.svg "full")
 
 Heatmaps revealed where users tapped during usability testing, helping us assess whether they could easily identify the intended path. They also exposed interaction patterns and areas of confusion, such as misclicks and instances where users selected the wrong element.
 
@@ -193,7 +190,7 @@ Heatmaps revealed where users tapped during usability testing, helping us assess
 
 
 ### Iteration & refinement
-Based on these insights, we identified several improvements before moving into the final MVP UI:
+Based on these insights, we identified several improvements before moving into the final <abbr title="Minimum Viable Product">MVP</abbr> UI:
 
 1. Redesigning the physical recharge flow to reduce misclicks and improve interaction clarity.
 2. Strengthening UI visuals so tappable elements were more obvious.
