@@ -23,7 +23,7 @@
     "summary": "Exploración de patrones de diseño de interfaz que reducen el consumo energético sin comprometer la experiencia de uso.",
     "tags": ["Sostenibilidad", "UI"],
     "year": "2024",
-    "cover": "/images/proyecto-02.jpg",
+    "cover": "/assets/images/bloq-01-cover.jpg",
     "featured": true,
     "role": "Investigación y diseño",
     "context": "Las interfaces digitales tienen un impacto energético real. Este proyecto investigó qué decisiones de diseño — tipografía, color, animaciones, peso de assets — tienen mayor incidencia en el consumo y cómo comunicarlas a equipos de producto.",

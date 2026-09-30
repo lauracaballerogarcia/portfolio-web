@@ -1,10 +1,9 @@
-### Scope of work
-
-![Componentes de identidad visual](../images/senda-01.jpg "full")
-
 <p class="eyebrow">Context</p>
 
 ## Older adults are losing access to the leisure activities that keep them active and connected.
+
+<!-- **Scope of work** -->
+![Figure 02: Selected quotes from the interview process](/assets/images/senda-overview-timeline.svg "full")
 
 **The brief**
 
@@ -146,6 +145,7 @@ We defined two user roles: the Senior, who uses the app to make payments, and th
 #### Initial mapping
 The next step was mapping the happy path for senior users making a payment. We started with the wallet top-up, as it represented users' first interaction with the payment experience and the stage where friction or uncertainty was most likely to occur. It was essential that this initial flow clearly communicated security and built users' confidence from the outset.
 
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-sitemap.svg "full")
 
 
 
@@ -164,7 +164,7 @@ Testing was conducted remotely via Maze. The study involved two participant grou
 
 <div class="cs-note" role="note">
   <p class="cs-note__label">Note:</p>
-  <p>*While the 25-person sample served as a solid exploratory foundation, a statistically representative sample would require 385 participants (5% margin of error, 95% confidence level) to draw conclusive findings at scale.<p>
+  <p>*While the 25-person sample served as a solid exploratory foundation, a statistically representative sample would require 385 participants (5% margin of error, 95% confidence level) to draw conclusive findings at scale.</p>
 </div>
 
 ![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-testing-maze.svg "full")
@@ -181,7 +181,7 @@ Heatmaps revealed where users tapped during usability testing, helping us assess
     <p>Users have difficulties when topping up at physical locations.</p>
   </div>
   <div class="eval-card eval-card--pain">
-    <p>Users have difficulties when topping up at physical locations.</p>
+    <p>Users had difficulties finding nearby physical locations.</p>
   </div>
   <div class="eval-card eval-card--pain">
     <p>Administrators have experienced difficulties when approving a top-up request.</p>
@@ -206,7 +206,22 @@ Based on these insights, we identified several improvements before moving into t
 
 ### Final UI
 
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-final-ui-physical-top-up.svg "full")
+
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-final-ui-visual-identity.svg "full")
+
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/videos/senda-outcome-final-ui-wallets.mp4 "full")
+
 ### Final prototype
+
+#### Request top-up with cash flow
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
+
+
+#### Request balance to admin flow
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
 
 ### Next steps
 1. Introduce a brief, task-oriented onboarding.
@@ -226,15 +241,13 @@ Based on these insights, we identified several improvements before moving into t
 2. Increasing initiative in online processes: By removing confusion and simplifying steps, users become less afraid of making mistakes and are more willing to engage with technology.
 3. Promoting well-being and inclusion: We enable access to a wide range of activities and experiences for a key user group.
 
-*Note: As part of an academic project, the solution was not validated after launch. In a real-world scenario, success would be measured through metrics such as task completion rate, time on task, user confidence and satisfaction, and increased adoption of digital payments among older adults.
+<div class="cs-note" role="note">
+  <p class="cs-note__label">Note:</p>
+  <p>As part of an academic project, the solution was not validated after launch. In a real-world scenario, success would be measured through metrics such as task completion rate, time on task, user confidence and satisfaction, and increased adoption of digital payments among older adults.</p>
+</div>
 
 
 ### Takeaways
 1. Tool choice and test structure impact data quality.
-The choice of Maze and the way tasks and questions were structured had a direct impact on the usability test results. Adding an extra interface layer introduced additional cognitive load, making it harder to isolate issues in the product itself. In hindsight, a moderated in-person usability test would have provided clearer behavioural insights and a more natural testing environment.
-
 2. Copywriting directly shapes user understanding and flow.
-Microcopy played a key role in how users interpreted actions and navigated the interface. Even small wording choices influenced comprehension and decision-making, with unclear or technical language often leading to confusion during key tasks. Clear, concise copy proved essential to reduce friction, especially for less digitally experienced users.
-
 3. Confirmation screens build confidence and reduce errors.
-Confirmation states were crucial in reinforcing user confidence throughout the experience. By clearly signalling that an action had been completed, they reduced uncertainty and prevented unnecessary repetition or hesitation. This was especially important for users with lower digital confidence, making flows feel more reliable and predictable.

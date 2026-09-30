@@ -22,6 +22,21 @@ renderer.heading = ({ text, depth }) => {
 
 renderer.image = ({ href, title, text }) => {
   const mod = title ?? 'default';
+
+  // Vídeo en bucle sin barra de reproducción
+  if (/\.(mp4|webm)$/i.test(href)) {
+    const type = href.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4';
+    return `
+      <figure class="cs-figure cs-figure--${mod} cs-figure--video">
+        <div class="cs-figure__video">
+          <video autoplay muted loop playsinline aria-label="${text}">
+            <source src="${href}" type="${type}">
+          </video>
+        </div>
+      </figure>
+    `;
+  }
+
   return `
     <figure class="cs-figure cs-figure--${mod}">
       <picture>

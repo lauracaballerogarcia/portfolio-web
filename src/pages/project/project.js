@@ -61,7 +61,12 @@ function renderIndex() {
   const indexNav = document.querySelector('.project-index');
   if (!indexNav) return;
 
-  const sections = Array.from(document.querySelectorAll('#project-body > section'));
+ // Overview vive fuera del case study (en .project-main, antes del
+  // article), pero es la primera entrada del índice. querySelectorAll
+  // devuelve los elementos en orden de documento, así que va primero.
+  const sections = Array.from(
+    document.querySelectorAll('#overview, #project-body > section')
+  );
   if (!sections.length) return;
 
   // El label del índice viene de la ceja de cada sección; si por lo
@@ -176,6 +181,44 @@ function initInsightsCarousel(root = document) {
   updateArrowState();
 }
 
+// ─── Vídeos en bucle ───────────────────────────────
+
+function initLoopVideos(root = document) {
+  const videos = root.querySelectorAll('.cs-figure__video video');
+  if (!videos.length) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  videos.forEach((video) => {
+    const wrapper = video.parentElement;
+    if (wrapper.querySelector('.cs-figure__toggle')) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'cs-figure__toggle';
+
+    const sync = () => {
+      const paused = video.paused;
+      button.dataset.state = paused ? 'paused' : 'playing';
+      button.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
+    };
+
+    button.addEventListener('click', () => {
+      if (video.paused) video.play().catch(() => {});
+      else video.pause();
+    });
+
+    video.addEventListener('play', sync);
+    video.addEventListener('pause', sync);
+
+    // Con movimiento reducido, el vídeo no arranca solo
+    if (reduceMotion.matches) video.pause();
+
+    wrapper.appendChild(button);
+    sync();
+  });
+}
+
 // ─── Renderizado ───────────────────────────────────
 
 async function renderProject(project, allProjects) {
@@ -253,22 +296,20 @@ async function renderProject(project, allProjects) {
 
       initInsightsCarousel(body);
       initFigureLightbox(body);
+      initLoopVideos(body);
 
-      // "Overview" no tiene su propio bloque visible en el case study
-      // (ese contenido ya vive en el hero/sidebar), pero sí queremos
-      // que aparezca como primer item del índice y que lleve de vuelta
-      // arriba del todo. Se añade como sección oculta visualmente:
-      // sigue siendo un ancla real y aporta el label al nav, pero no
-      // se ve ni ocupa espacio en el layout.
-      const overviewSection = document.createElement('section');
-      overviewSection.id = 'overview';
+   
 
-      const overviewEyebrow = document.createElement('p');
-      overviewEyebrow.className = 'project-eyebrow visually-hidden';
-      overviewEyebrow.textContent = 'Overview';
 
-      overviewSection.appendChild(overviewEyebrow);
-      body.prepend(overviewSection);
+      // const overviewSection = document.createElement('section');
+      // overviewSection.id = 'overview';
+
+      // const overviewEyebrow = document.createElement('p');
+      // overviewEyebrow.className = 'project-eyebrow visually-hidden';
+      // overviewEyebrow.textContent = 'Overview';
+
+      // overviewSection.appendChild(overviewEyebrow);
+      // body.prepend(overviewSection);
 
       // Envuelve cada h2 (y su ceja, si tiene) junto con su contenido en
       // una <section>. El id de la sección sale de la ceja cuando existe
@@ -312,6 +353,8 @@ async function renderProject(project, allProjects) {
       console.error('Error en fetchProjectContent:', err);
     }
   }
+
+
 
   // Índice — después de envolver las secciones
   renderIndex();
