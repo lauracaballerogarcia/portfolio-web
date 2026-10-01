@@ -15,6 +15,9 @@ import { initHome }    from './index.js';
 import { initProject } from './project/project.js';
 import { initAbout }   from './about/about.js';
 
+import { initArchive } from './archive/archive.js';
+import archiveHTML     from 'bundle-text:./archive/archive.html';
+
 import projectHTML from 'bundle-text:./project/project.html';
 import aboutHTML   from 'bundle-text:./about/about.html';
 
@@ -36,6 +39,10 @@ if (path.startsWith('/project/')) {
   // La página de proyecto gestiona su propio ancho internamente
   main.classList.remove('container');
   loadPage(projectHTML, initProject);
+
+  } else if (path.startsWith('/archive')) {
+  main.classList.add('container');
+  loadPage(archiveHTML, initArchive);
 
 } else if (path.startsWith('/about')) {
   main.classList.add('container');

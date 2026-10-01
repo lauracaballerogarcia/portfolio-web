@@ -44,7 +44,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">90%</p>
-          <!-- SVG decorativo aquí, con aria-hidden="true" -->
+          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-90.svg" alt="">
         </div>
         <p class="insight-card__description">
           Think that technology is not for them and feel that the world is moving too fast.
@@ -56,7 +56,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">82%</p>
-          <!-- SVG decorativo aquí, con aria-hidden="true" -->
+          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-82.svg" alt="">
         </div>
         <p class="insight-card__description">
           Feel insecure and exposed when making online payments due to the numerous scams.
@@ -68,7 +68,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">76%</p>
-          <!-- SVG decorativo aquí, con aria-hidden="true" -->
+          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-76.svg" alt="">
         </div>
         <p class="insight-card__description">
           Depend on family members or third parties to carry out complex digital actions.
@@ -80,7 +80,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">78%</p>
-          <!-- SVG decorativo aquí, con aria-hidden="true" -->
+          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-78.svg" alt="">
         </div>
         <p class="insight-card__description">
           Lose out on social well-being opportunities by being unable to afford certain online procedures.
@@ -197,6 +197,10 @@ Based on these insights, we identified several improvements before moving into t
 3. Introducing an optional "Get directions" button to support real-world navigation.
 4. Adding an assistance flow so users could quickly access help when uncertain.
 
+
+#### Final MVP User Flow
+
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-testing-final-flow-1.svg "full")
 
 
 <p class="eyebrow">Outcome</p>
