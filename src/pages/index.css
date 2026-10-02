@@ -73,7 +73,7 @@
 
   background-color: var(--color-text-primary-inverse);
   padding: var(--spacing-2);
-  border-radius: var(--chip-border-radius);
+  border-radius: var(--radius-chip-border);
 
   overflow: hidden;
   transition: all 0.3s ease;

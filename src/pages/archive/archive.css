@@ -13,41 +13,46 @@
   margin-block: 4rem 3rem;
 }
 
-.archive-filters,
-.archive-views {
+.archive-filters {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.archive-views {
+  display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 
-/* ── Filter chips ────────────────────────────────── */
+/* ── Button primary ──────────────────────────────── */
+/* Mismas dimensiones que .project-tag del Case Study  */
 
-.filter-chip {
+.button-primary {
   font: inherit;
-  font-size: 1.125rem;
-  line-height: 1;
-  padding: 0.75rem 1rem;
+  padding: var(--spacing-2) var(--spacing-3);
   border: none;
-  border-radius: var(--radius-button, 0.75rem);
-  background-color: var(--color-neutral-100);
-  color: var(--color-text-primary);
+  border-radius: var(--radius-button-primary);
+  background-color: var(--color-button-primary-background-default);
+  color: var(--color-button-primary-text-default);
   cursor: pointer;
   transition: background-color 200ms ease, color 200ms ease;
 }
 
-.filter-chip:hover {
-  background-color: var(--color-neutral-200);
+.button-primary:hover {
+  background-color: var(--color-button-primary-background-hover);
 }
 
-.filter-chip[aria-pressed="true"] {
-  background-color: var(--color-neutral-950);
-  color: var(--color-neutral-0);
+.button-primary[aria-pressed="true"] {
+  background-color: var(--color-button-primary-background-active);
+  color: var(--color-button-primary-text-active);
 }
 
-.filter-chip--all {
-  margin-right: 2rem; /* separa All del resto de tags */
+/* Separa All del resto de tags */
+.archive-filters__all {
+  margin-right: var(--spacing-6);
 }
 
 
@@ -122,7 +127,6 @@
   display: flex;
   align-items: center;
   margin: 0;
-  font-size: 1.5rem;
   font-weight: normal;
 }
 
@@ -293,7 +297,7 @@
     width: 100%;
   }
 
-  .filter-chip--all {
-    margin-right: 0.75rem;
+  .archive-filters__all {
+    margin-right: 0;
   }
 }

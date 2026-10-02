@@ -34,14 +34,14 @@ function renderFilters(tags) {
   if (!container) return;
 
   container.innerHTML = [
-    `<button type="button" class="filter-chip filter-chip--all" data-tag="all" aria-pressed="true">All</button>`,
+    `<button type="button" class="button-primary archive-filters__all" data-tag="all" aria-pressed="true">All</button>`,
     ...tags.map(tag =>
-      `<button type="button" class="filter-chip" data-tag="${tag}" aria-pressed="false">${tag}</button>`
+      `<button type="button" class="button-primary" data-tag="${tag}" aria-pressed="false">${tag}</button>`
     ),
   ].join('');
 
   container.addEventListener('click', (e) => {
-    const btn = e.target.closest('.filter-chip');
+    const btn = e.target.closest('.button-primary');
     if (!btn) return;
 
     const { tag } = btn.dataset;
@@ -56,7 +56,7 @@ function renderFilters(tags) {
 }
 
 function syncFilterButtons() {
-  document.querySelectorAll('#archive-filters .filter-chip').forEach(btn => {
+  document.querySelectorAll('#archive-filters .button-primary').forEach(btn => {
     const { tag } = btn.dataset;
     const pressed = tag === 'all'
       ? state.activeTags.size === 0
