@@ -213,8 +213,13 @@
   margin: 0;
   aspect-ratio: 11 / 7;
   overflow: hidden;
-  border-radius: var(--card-border-radius, 1rem);
+  border-radius: 0;
   background-color: var(--color-neutral-100);
+  transition: border-radius var(--duration) var(--ease-out);
+}
+
+.archive-card:hover figure {
+  border-radius: var(--radius-card-border);
 }
 
 .archive-card img {
@@ -231,7 +236,6 @@
 
 .archive-card h2 {
   margin: 1rem 0 0.25rem;
-  font-size: 1.5rem;
   font-weight: normal;
 }
 

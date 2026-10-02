@@ -6,7 +6,7 @@
  */
 
 import store from '../state/store.js';
-import { fetchProjects, filterByTag, getUniqueTags } from '../data/projects.js';
+import { fetchProjects, filterByTag, getUniqueTags, hasCaseStudy } from '../data/projects.js';
 
 // Componentes
 import '../components/site-nav/site-nav.js';
@@ -48,14 +48,17 @@ function renderProjects(state) {
 
   list.innerHTML = visible.map((project, i) => {
     const isFeatured = i === 0;
-    const chipText   = isFeatured ? 'See case study' : 'See work';
+    const available = hasCaseStudy(project.slug);
+    const chipText  = !available ? 'Coming soon!'
+                    : isFeatured ? 'See case study'
+                    : 'See work';
     const sizes      = isFeatured
       ? 'calc(100vw - 2rem)'
       : '(max-width: 768px) calc(100vw - 2rem), calc(50vw - 1.5rem)';
 
     return `
       <li class="${isFeatured ? 'card--1col' : 'card--2col'}">
-        <a href="/project/${project.slug}/" aria-label="View ${project.title} project: ${project.claim ?? project.summary}">
+        <a href="/project/${project.slug}/" aria-label="View ${project.title} project: ${project.claim ?? project.summary}${available ? '' : ' (case study coming soon)'}">
           <figure>
             <picture>
               <source
@@ -78,8 +81,8 @@ function renderProjects(state) {
                 decoding="async"
                 alt="">
             </picture>
-            <div class="chip" aria-hidden="true">
-              <span class="chip-text">${chipText}</span>
+            <div class="chip${available ? '' : ' chip--coming-soon'}" aria-hidden="true">              
+            <span class="chip-text">${chipText}</span>
             </div>
           </figure>
           <div class="card-info">

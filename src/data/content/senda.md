@@ -3,7 +3,7 @@
 ## Older adults are losing access to the leisure activities that keep them active and connected.
 
 <!-- **Scope of work** -->
-![Figure 02: Selected quotes from the interview process](/assets/images/senda-overview-timeline.svg "full")
+![Figure 02: Selected quotes from the interview process](/assets/images/senda/senda-overview-timeline.svg "full")
 
 **The brief**
 
@@ -32,7 +32,7 @@ However, before moving into solution design, we needed to validate this assumpti
 ### Understanding where digital processes break down
 
 To address this, we needed a deep understanding of older adults' fears, the barriers they face with technology, and how they experience the digital divide. This involved collecting qualitative data through **in-person interviews** with older adults, which allowed us to gather first-hand insights into their behaviours, motivations, and pain points.
-![Figure 02: Selected quotes from the interview process](/assets/images/senda-02-research-quotes.svg "full")
+![Figure 02: Selected quotes from the interview process](/assets/images/senda/senda-02-research-quotes.svg "full")
 
 ### Insights
 The findings revealed several key insights, including fear of scams, reliance on family members, digital exclusion, and the loss of opportunities and well-being.
@@ -44,7 +44,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">90%</p>
-          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-90.svg" alt="">
+          <img class="insight-card__icon" src="/assets/images/senda/senda-research-percentage-90.svg" alt="">
         </div>
         <p class="insight-card__description">
           Think that technology is not for them and feel that the world is moving too fast.
@@ -56,7 +56,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">82%</p>
-          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-82.svg" alt="">
+          <img class="insight-card__icon" src="/assets/images/senda/senda-research-percentage-82.svg" alt="">
         </div>
         <p class="insight-card__description">
           Feel insecure and exposed when making online payments due to the numerous scams.
@@ -68,7 +68,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">76%</p>
-          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-76.svg" alt="">
+          <img class="insight-card__icon" src="/assets/images/senda/senda-research-percentage-76.svg" alt="">
         </div>
         <p class="insight-card__description">
           Depend on family members or third parties to carry out complex digital actions.
@@ -80,7 +80,7 @@ The findings revealed several key insights, including fear of scams, reliance on
       <div class="insight-card__content">
         <div class="insight-card__stat">
           <p class="insight-card__percentage">78%</p>
-          <img class="insight-card__icon" src="/assets/images/senda-research-percentage-78.svg" alt="">
+          <img class="insight-card__icon" src="/assets/images/senda/senda-research-percentage-78.svg" alt="">
         </div>
         <p class="insight-card__description">
           Lose out on social well-being opportunities by being unable to afford certain online procedures.
@@ -106,7 +106,7 @@ Together, these observations pointed towards a broader need: making complex digi
 
 ## It was never about finding activities — it was about feeling safe enough to pay for them
 The insights showed that the real challenge wasn't finding or signing up for leisure activities, but feeling secure while paying online for them. Users knew where to look for activities that interested them, but the digital payment step was a major setback. 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-03-strategic-shift.svg "full")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-03-strategic-shift.svg "full")
 
 This led us to reframe the original hypothesis into the real problem to solve:
 
@@ -133,19 +133,19 @@ Based on our research insights, we defined three core design principles that gui
 #### Key features
 Before designing the user flows, we identified three key features that would shape the user experience: secure payments, hybrid top-ups, and trusted support. These served as the foundation for the app's overall functionality.
 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-key-features.svg "full")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-solution-key-features.svg "full")
 
 #### User Roles
 We defined two user roles: the Senior, who uses the app to make payments, and the Administrator, a trusted family member or caregiver responsible for managing and topping up the senior's balance. For the <abbr title="Minimum Viable Product">MVP</abbr>, we prioritized the Senior experience, as it represented the app's primary user journey.
 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-user-role-primary.svg "half")
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-user-role-secondary.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-solution-user-role-primary.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-solution-user-role-secondary.svg "half")
 
 
 #### Initial mapping
 The next step was mapping the happy path for senior users making a payment. We started with the wallet top-up, as it represented users' first interaction with the payment experience and the stage where friction or uncertainty was most likely to occur. It was essential that this initial flow clearly communicated security and built users' confidence from the outset.
 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-solution-sitemap.svg "full")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-solution-sitemap.svg "full")
 
 
 
@@ -210,22 +210,22 @@ Based on these insights, we identified several improvements before moving into t
 
 ### Final UI
 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-final-ui-physical-top-up.svg "full")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-final-ui-physical-top-up.svg "full")
 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-final-ui-visual-identity.svg "full")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-final-ui-visual-identity.svg "full")
 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/videos/senda-outcome-final-ui-wallets.mp4 "full")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/videos/senda/senda-outcome-final-ui-wallets.mp4 "full")
 
 ### Final prototype
 
 #### Request top-up with cash flow
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-prototype-flow-request-top-up.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-prototype-flow-request-top-up.svg "half")
 
 
 #### Request balance to admin flow
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda-outcome-prototype-flow-request-top-up.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-prototype-flow-request-top-up.svg "half")
+![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-prototype-flow-request-top-up.svg "half")
 
 ### Next steps
 1. Introduce a brief, task-oriented onboarding.

@@ -1,11 +1,17 @@
 import projectsData from './projects.json';
 import { marked } from 'marked';
+
 import sendaMd from 'bundle-text:./content/senda.md';
+import parcCentralMd from 'bundle-text:./content/parc-central.md';
+import xanaMd from 'bundle-text:./content/xana.md';
+
 
 // ─── Mapa de contenidos ───────────────────────────
 
 const contentMap = {
   'senda': sendaMd,
+  'parc-central': parcCentralMd, 
+  'xana': xanaMd
 };
 
 // ─── Renderer personalizado ───────────────────────
@@ -77,4 +83,8 @@ export function filterByTag(projects, tag) {
 export function getUniqueTags(projects) {
   const all = projects.flatMap(p => p.tags);
   return [...new Set(all)].sort();
+}
+
+export function hasCaseStudy(slug) {
+  return slug in contentMap;
 }

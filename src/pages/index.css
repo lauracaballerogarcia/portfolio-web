@@ -39,7 +39,7 @@
 }
 
 .featured-grid li a:hover figure {
-  border-radius: var(--card-border-radius);
+  border-radius: var(--radius-card-border);
 }
 
 
@@ -103,6 +103,22 @@
  .featured-grid a:hover .chip::after {
     transform: rotate(45deg);
   } 
+
+  /* Coming soon: sin flecha y con el texto siempre visible */
+  .chip--coming-soon {
+    padding: 0.5rem 1rem 0.5rem 1.25rem;
+  }
+
+  .chip--coming-soon::after {
+    display: none;
+  }
+
+  .chip--coming-soon .chip-text {
+    max-width: 20ch;
+    opacity: 1;
+    margin-left: 0.25rem;
+    margin-right: 0.5rem;
+  }
 
 
   /* Chip Text */

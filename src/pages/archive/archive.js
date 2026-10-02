@@ -5,7 +5,7 @@
  * y preview de la hero image siguiendo al cursor en la vista lista.
  */
 
-import { fetchProjects, getUniqueTags } from '../../data/projects.js';
+import { fetchProjects, getUniqueTags, hasCaseStudy } from '../../data/projects.js';
 import './archive.css';
 
 const DEFAULT_VIEW = 'list';
@@ -98,17 +98,21 @@ function listItem(p) {
 }
 
 function gridItem(p) {
+  const available = hasCaseStudy(p.slug);
+  const chipText  = available ? 'See work' : 'Coming soon!';
+
   return `
     <li>
       <a class="archive-card" href="/project/${p.slug}/">
         <figure>
           <img src="${p.hero}" alt="" loading="lazy" decoding="async">
-          <span class="chip" aria-hidden="true">
-            <span class="chip-text">See work</span>
+            <span class="chip${available ? '' : ' chip--coming-soon'}" aria-hidden="true">
+            <span class="chip-text">${chipText}</span>
           </span>
         </figure>
         <h2>${p.title}</h2>
         <p>${p.tags.join(', ')}</p>
+        ${available ? '' : '<span class="visually-hidden">Case study coming soon</span>'}
       </a>
     </li>
   `;
