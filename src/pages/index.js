@@ -6,7 +6,7 @@
  */
 
 import store from '../state/store.js';
-import { fetchProjects, filterByTag, getUniqueTags, hasCaseStudy } from '../data/projects.js';
+import { fetchProjects, filterByTag, getUniqueTags, hasCaseStudy, getThumbnail } from '../data/projects.js';
 
 // Componentes
 import '../components/site-nav/site-nav.js';
@@ -49,6 +49,7 @@ function renderProjects(state) {
   list.innerHTML = visible.map((project, i) => {
     const isFeatured = i === 0;
     const available = hasCaseStudy(project.slug);
+    const thumb = getThumbnail(project);
     const chipText  = !available ? 'Coming soon!'
                     : isFeatured ? 'See case study'
                     : 'See work';
@@ -60,20 +61,20 @@ function renderProjects(state) {
       <li class="${isFeatured ? 'card--1col' : 'card--2col'}">
         <a href="/project/${project.slug}/" aria-label="View ${project.title} project: ${project.claim ?? project.summary}${available ? '' : ' (case study coming soon)'}">
           <figure>
-            <picture>
+                        <picture>
               <source
                 type="image/webp"
-                srcset="${project.hero}?width=400 400w,
-                        ${project.hero}?width=768 768w,
-                        ${project.hero}?width=1024 1024w,
-                        ${project.hero}?width=1440 1440w"
+                srcset="${thumb}?width=400 400w,
+                        ${thumb}?width=768 768w,
+                        ${thumb}?width=1024 1024w,
+                        ${thumb}?width=1440 1440w"
                 sizes="${sizes}">
               <img
-                src="${project.hero}"
-                srcset="${project.hero}?width=400 400w,
-                        ${project.hero}?width=768 768w,
-                        ${project.hero}?width=1024 1024w,
-                        ${project.hero}?width=1440 1440w"
+                src="${thumb}"
+                srcset="${thumb}?width=400 400w,
+                        ${thumb}?width=768 768w,
+                        ${thumb}?width=1024 1024w,
+                        ${thumb}?width=1440 1440w"
                 sizes="${sizes}"
                 width="2880"
                 height="1800"

@@ -88,3 +88,7 @@ export function getUniqueTags(projects) {
 export function hasCaseStudy(slug) {
   return slug in contentMap;
 }
+
+export function getThumbnail(project) {
+  return project.thumbnail ?? project.hero;
+}

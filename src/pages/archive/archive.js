@@ -5,7 +5,7 @@
  * y preview de la hero image siguiendo al cursor en la vista lista.
  */
 
-import { fetchProjects, getUniqueTags, hasCaseStudy } from '../../data/projects.js';
+import { fetchProjects, getUniqueTags, hasCaseStudy, getThumbnail } from '../../data/projects.js';
 import './archive.css';
 
 const DEFAULT_VIEW = 'list';
@@ -88,7 +88,7 @@ function initViewToggle() {
 function listItem(p) {
   return `
     <li>
-      <a class="archive-row" href="/project/${p.slug}/" data-hero="${p.hero}">
+        <a class="archive-row" href="/project/${p.slug}/" data-thumbnail="${getThumbnail(p)}">
         <h2>${p.title}</h2>
         <p>${p.claim ?? p.summary}</p>
         <time datetime="${p.year}">${p.year}</time>
@@ -105,7 +105,7 @@ function gridItem(p) {
     <li>
       <a class="archive-card" href="/project/${p.slug}/">
         <figure>
-          <img src="${p.hero}" alt="" loading="lazy" decoding="async">
+          <img src="${getThumbnail(p)}" alt="" loading="lazy" decoding="async">
             <span class="chip${available ? '' : ' chip--coming-soon'}" aria-hidden="true">
             <span class="chip-text">${chipText}</span>
           </span>
@@ -160,8 +160,8 @@ function initCursorPreview() {
     const row = e.target.closest('.archive-row');
     if (!row) return;
 
-    if (previewImg.getAttribute('src') !== row.dataset.hero) {
-      previewImg.src = row.dataset.hero;
+    if (previewImg.getAttribute('src') !== row.dataset.thumbnail) {
+      previewImg.src = row.dataset.thumbnail;
     }
     previewEl.classList.add('is-visible');
   });
