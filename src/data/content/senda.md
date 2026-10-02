@@ -212,7 +212,7 @@ Based on these insights, we identified several improvements before moving into t
 
 ![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-final-ui-physical-top-up.svg "full")
 
-![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-final-ui-visual-identity.svg "full")
+<!-- ![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/images/senda/senda-outcome-final-ui-visual-identity.svg "full") -->
 
 ![Figure 03: Self-created scheme of the MVP scope before and after.](/assets/videos/senda/senda-outcome-final-ui-wallets.mp4 "full")
 
