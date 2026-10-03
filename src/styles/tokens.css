@@ -159,7 +159,7 @@
   /* Layout */
   --container-margin-inline: var(--spacing-10);
   --container-margin-block: var(--spacing-6);
-  --grid-column-gap:  var(--spacing-6);
+  --grid-column-gap:  var(--spacing-4);
   --grid-row-gap:     var(--spacing-6);
 
   /* Spacing */

@@ -28,8 +28,8 @@ class SiteNav extends HTMLElement {
 
           <nav id="nav-menu" class="site-nav__menu" aria-label="Navegación principal">
             <ul class="site-nav__list" role="list">
-              <li><a href="/archive/"            class="site-nav__link">Archive</a></li>
-              <li><a href="/about/"            class="site-nav__link">About</a></li>
+              <li><a class="site-nav__link" href="/archive/" data-label="Archive">Archive</a></li>
+              <li><a class="site-nav__link" href="/about/" data-label="About">About</a></li>
             </ul>
           </nav>
         </div>

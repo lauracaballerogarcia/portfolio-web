@@ -21,18 +21,65 @@
   height: var(--size-header-height);
 }
 
-/* Lista de enlaces */
+
+/* ── Lista de enlaces ────────────────────────────── */
 
 .site-nav__list {
   display: flex;
-  gap: var(--spacing-6);
+  align-items: center;
+  gap: var(--spacing-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
+/* ── Enlaces ─────────────────────────────────────── */
+
+/* Default: secundario, sin fondo, regular */
 .site-nav__link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--border-radius-2);
+  font-weight: var(--font-weight-regular, 400);
+  color: var(--color-text-secondary);
+  background-color: transparent;
   text-decoration: none;
-  border-bottom: 2px solid transparent;
-  transition: color var(--duration) var(--ease-out),
-              border-color var(--duration) var(--ease-out);
+  transition:
+    color var(--duration) var(--ease-out),
+    background-color var(--duration) var(--ease-out);
+}
+
+/* Reserva el ancho del peso medium para que el activo no desplace el resto */
+.site-nav__link::after {
+  content: attr(data-label);
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  font-weight: var(--font-weight-medium, 500);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Hover: primario, con fondo, regular */
+.site-nav__link:hover {
+  color: var(--color-text-primary);
+  background-color: var(--color-background-secondary);
+}
+
+/* Active: primario, sin fondo, medium (también al pasar el ratón) */
+.site-nav__link[aria-current="page"],
+.site-nav__link[aria-current="page"]:hover {
+  color: var(--color-text-primary);
+  background-color: transparent;
+  font-weight: var(--font-weight-medium, 500);
+}
+
+/* Foco de teclado visible */
+.site-nav__link:focus-visible {
+  outline: 2px solid var(--color-text-primary);
+  outline-offset: 2px;
 }
 
 
