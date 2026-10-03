@@ -58,7 +58,7 @@ function renderProjects(state) {
       : '(max-width: 768px) calc(100vw - 2rem), calc(50vw - 1.5rem)';
 
     return `
-      <li class="${isFeatured ? 'card--1col' : 'card--2col'}">
+        <li class="${isFeatured ? 'card--1col' : 'card--2col'}${available ? '' : ' card--coming-soon'}">
         <a href="/project/${project.slug}/" aria-label="View ${project.title} project: ${project.claim ?? project.summary}${available ? '' : ' (case study coming soon)'}">
           <figure>
                         <picture>
@@ -112,8 +112,10 @@ async function init() {
 
   try {
     const projects = await fetchProjects();
-    store.setState({ projects, loading: false });
-    initTagFilter(projects);
+    const featured = projects.filter(p => p.featured === true);
+
+    store.setState({ projects: featured, loading: false });
+    initTagFilter(featured);
   } catch (err) {
     console.error(err);
     store.setState({ loading: false, error: err.message });

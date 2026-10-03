@@ -8,11 +8,13 @@
 import { fetchProjects, fetchProjectContent } from '../../data/projects.js';
 import { initFigureLightbox } from './figure-lightbox.js';
 
+
 // Estilos
 import '../../styles/tokens.css';
 import '../../components/site-nav/site-nav.css';
 import '../../components/site-footer/site-footer.css';
 import './project.css';
+
 
 // ─── Utilidades DOM ────────────────────────────────
 
@@ -179,6 +181,80 @@ function initInsightsCarousel(root = document) {
 
   track.addEventListener('scroll', updateArrowState, { passive: true });
   updateArrowState();
+}
+
+// ── Related work ──────────────────────────────────────────────
+
+const RELATED_LIMIT = 3;
+
+function getRelatedProjects(current, projects, limit = RELATED_LIMIT) {
+  const currentTags = new Set(current.tags ?? []);
+
+  return projects
+    .filter((p) => p.slug !== current.slug)
+    .map((p) => ({
+      project: p,
+      shared: (p.tags ?? []).filter((tag) => currentTags.has(tag)).length,
+      year: parseInt(p.year, 10) || 0,
+      tiebreak: Math.random(),
+    }))
+    .sort((a, b) =>
+      b.shared - a.shared ||
+      b.year - a.year ||
+      a.tiebreak - b.tiebreak
+    )
+    .slice(0, limit)
+    .map(({ project }) => project);
+}
+
+function renderRelatedWork(current, projects) {
+  const section = document.querySelector('.related-work');
+  if (!section) return;
+
+  const related = getRelatedProjects(current, projects);
+  if (related.length === 0) return;
+
+  section.innerHTML = `
+    <div class="related-work__aside">
+      <h2 class="related-work__label" id="related-work-title">Related work</h2>
+      <div class="related-work__info" aria-hidden="true">
+        <p class="related-work__title">${related[0].title}</p>
+        <p class="related-work__claim">${related[0].claim ?? ''}</p>
+      </div>
+    </div>
+    <ul class="related-work__list" role="list">
+      ${related.map((p, i) => `
+        <li>
+          <a class="related-work__link" href="/project/${p.slug}/" data-index="${i}">
+            <figure class="related-work__figure">
+              <img src="${p.thumbnail ?? p.hero}" alt="" loading="lazy" decoding="async">
+            </figure>
+            <span class="related-work__caption">
+              <span class="related-work__caption-title">${p.title}</span>
+              <span class="related-work__caption-claim">${p.claim ?? ''}</span>
+            </span>
+          </a>
+        </li>
+      `).join('')}
+    </ul>
+  `;
+
+  const title = section.querySelector('.related-work__title');
+  const claim = section.querySelector('.related-work__claim');
+
+  const showProject = (index) => {
+    const p = related[index];
+    title.textContent = p.title;
+    claim.textContent = p.claim ?? '';
+  };
+
+  section.querySelectorAll('.related-work__link').forEach((link) => {
+    const index = Number(link.dataset.index);
+    link.addEventListener('pointerenter', () => showProject(index));
+    link.addEventListener('focus', () => showProject(index));
+  });
+
+  section.hidden = false;
 }
 
 // ─── Vídeos en bucle ───────────────────────────────
@@ -358,6 +434,9 @@ async function renderProject(project, allProjects) {
 
   // Índice — después de envolver las secciones
   renderIndex();
+
+  // Related work — al final, para que un fallo aquí no afecte al Case Study
+  renderRelatedWork(project, allProjects);
 
   // Navegación prev / next
   const currentIndex = allProjects.findIndex(p => p.slug === project.slug);

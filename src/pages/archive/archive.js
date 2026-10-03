@@ -155,10 +155,23 @@ function initCursorPreview() {
   let y = 0;
   let frame = null;
 
+  /** Posiciona el preview y elige el cuadrante según la posición del cursor */
+  function positionPreview() {
+    previewEl.style.setProperty('--x', `${x}px`);
+    previewEl.style.setProperty('--y', `${y}px`);
+    previewEl.dataset.h = x > window.innerWidth / 2 ? 'left' : 'right';
+    previewEl.dataset.v = y > window.innerHeight / 2 ? 'top' : 'bottom';
+  }
+
   list.addEventListener('mouseover', (e) => {
     if (state.view !== 'list' || !canHover.matches) return;
     const row = e.target.closest('.archive-row');
     if (!row) return;
+
+    // Posiciona antes de mostrar, para que no aparezca en el cuadrante anterior
+    x = e.clientX;
+    y = e.clientY;
+    positionPreview();
 
     if (previewImg.getAttribute('src') !== row.dataset.thumbnail) {
       previewImg.src = row.dataset.thumbnail;
@@ -173,8 +186,7 @@ function initCursorPreview() {
 
     if (frame) return;
     frame = requestAnimationFrame(() => {
-      previewEl.style.setProperty('--x', `${x}px`);
-      previewEl.style.setProperty('--y', `${y}px`);
+      positionPreview();
       frame = null;
     });
   });

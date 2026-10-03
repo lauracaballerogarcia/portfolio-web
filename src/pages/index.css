@@ -38,7 +38,7 @@
   min-height: 41.5rem;
 }
 
-.featured-grid li a:hover figure {
+.featured-grid li:not(.card--coming-soon) a:hover figure {
   border-radius: var(--radius-card-border);
 }
 
@@ -53,7 +53,7 @@
   transition: transform 400ms ease;
 }
 
-.featured-grid li a:hover figure img {
+.featured-grid li:not(.card--coming-soon) a:hover figure img {
   transform: scale(1.02);
 }
 

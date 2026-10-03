@@ -166,6 +166,17 @@
 /* ── Preview en cursor ───────────────────────────── */
 
 .cursor-preview {
+  /* Distancia entre el cursor y la imagen */
+  --offset: 1.25rem;
+
+  /* Por defecto: imagen a la derecha y abajo del cursor */
+  --shift-x: 0%;
+  --shift-y: 0%;
+  --gap-x: var(--offset);
+  --gap-y: var(--offset);
+  --origin-x: left;
+  --origin-y: top;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -174,9 +185,26 @@
   aspect-ratio: 452 / 288;
   pointer-events: none;
   opacity: 0;
-  translate: calc(var(--x, 0px) + 1.25rem) calc(var(--y, 0px) + 1.25rem);
+  translate:
+    calc(var(--x, 0px) + var(--shift-x) + var(--gap-x))
+    calc(var(--y, 0px) + var(--shift-y) + var(--gap-y));
   scale: 0.8;
+  transform-origin: var(--origin-x) var(--origin-y);
   transition: opacity 300ms ease, scale 300ms ease;
+}
+
+/* Mitad derecha de la ventana: imagen a la izquierda del cursor */
+.cursor-preview[data-h="left"] {
+  --shift-x: -100%;
+  --gap-x: calc(var(--offset) * -1);
+  --origin-x: right;
+}
+
+/* Mitad inferior de la ventana: imagen encima del cursor */
+.cursor-preview[data-v="top"] {
+  --shift-y: -100%;
+  --gap-y: calc(var(--offset) * -1);
+  --origin-y: bottom;
 }
 
 .cursor-preview.is-visible {
@@ -199,7 +227,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: var(--grid-column-gap, 1.25rem);
-  row-gap: var(--grid-row-gap, 4rem);
+  row-gap: var(--spacing-16);
 }
 
 .archive-card {
