@@ -403,20 +403,14 @@
   background-color: rgba(18, 18, 18, 0.8);
 }
 
-.figure-lightbox__img {
-  display: block;
-  max-width: 90vw;
-  max-height: 90vh;
-  width: 80vw;
-  height: auto;
-  border-radius: var(--border-radius-2);
-}
-
+.figure-lightbox__img,
 .figure-lightbox__video {
   display: block;
-  width: 80vw;
+  width: auto;
   height: auto;
-  max-height: 95vh;
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
   border-radius: var(--border-radius-2);
 }
 

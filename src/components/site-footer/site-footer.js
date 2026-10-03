@@ -17,7 +17,7 @@ class SiteFooter extends HTMLElement {
           </div>
 
           <p class="site-footer__note">
-              Alojado en
+              Hosted on
               <a href="https://pages.cloudflare.com" rel="noopener noreferrer" target="_blank">Cloudflare Pages</a>
               — green hosting
           </p>
