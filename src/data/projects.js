@@ -26,17 +26,34 @@ renderer.heading = ({ text, depth }) => {
   return `<h${depth} id="${id}">${text}</h${depth}>`;
 };
 
-renderer.image = ({ href, title, text }) => {
-  const mod = title ?? 'default';
+// El título de la imagen en Markdown lleva el layout y las dimensiones
+// intrínsecas del archivo: ![alt](ruta "full 1440x960"). Con width y
+// height el navegador reserva el espacio antes de que cargue el archivo,
+// así el texto no salta al hacer scroll. En vídeos se puede añadir
+// poster=/media/<proyecto>/<video>-poster.webp: ![alt](ruta "full 1440x900 poster=…").
+function parseImageTitle(title) {
+  const parts  = (title ?? '').trim().split(/\s+/).filter(Boolean);
+  const size   = parts.find(p => /^\d+x\d+$/.test(p));
+  const poster = parts.find(p => p.startsWith('poster='))?.slice('poster='.length);
+  const mod    = parts.find(p => p !== size && !p.startsWith('poster=')) ?? 'default';
+  const [width, height] = size ? size.split('x') : [];
+  return { mod, poster, dims: size ? ` width="${width}" height="${height}"` : '' };
+}
 
-  // Vídeo en bucle sin barra de reproducción
+renderer.image = ({ href, title, text }) => {
+  const { mod, dims, poster } = parseImageTitle(title);
+
+  // Vídeo en bucle sin barra de reproducción. No descarga nada, ni el poster
+  // (va en data-poster), hasta que initLoopVideos() (project.js) lo acerca al
+  // área visible. El fragmento #t=0.001 hace que Safari/iOS pinten el primer
+  // fotograma cuando solo se cargan los metadatos (movimiento reducido).
   if (/\.(mp4|webm)$/i.test(href)) {
     const type = href.toLowerCase().endsWith('.webm') ? 'video/webm' : 'video/mp4';
     return `
       <figure class="cs-figure cs-figure--${mod} cs-figure--video">
         <div class="cs-figure__video">
-          <video autoplay muted loop playsinline aria-label="${text}">
-            <source src="${href}" type="${type}">
+          <video muted loop playsinline preload="none"${dims}${poster ? ` data-poster="${poster}"` : ''} aria-label="${text}">
+            <source src="${href}#t=0.001" type="${type}">
           </video>
         </div>
       </figure>
@@ -45,11 +62,11 @@ renderer.image = ({ href, title, text }) => {
 
   return `
     <figure class="cs-figure cs-figure--${mod}">
-      <picture>
-        <source type="image/webp" srcset="${href}">
+      <picture class="cs-figure__media">
         <img
+          class="cs-figure__image"
           src="${href}"
-          alt="${text}"
+          alt="${text}"${dims}
           loading="lazy"
           decoding="async">
       </picture>
@@ -75,11 +92,6 @@ export async function fetchProjectContent(slug) {
   return marked.parse(md);
 }
 
-export function filterByTag(projects, tag) {
-  if (tag === 'all') return projects;
-  return projects.filter(p => p.tags.includes(tag));
-}
-
 export function getUniqueTags(projects) {
   const all = projects.flatMap(p => p.tags);
   return [...new Set(all)].sort();
@@ -92,3 +104,9 @@ export function hasCaseStudy(slug) {
 export function getThumbnail(project) {
   return project.thumbnail ?? project.hero;
 }
+
+// Cuándo usar heroMobile (recorte vertical) en lugar del hero o la miniatura:
+// pantallas estrechas en vertical, donde la caja de la imagen también es
+// vertical. En tablets en vertical (p. ej. 768×1024) la caja es casi
+// cuadrada y el hero horizontal da más resolución, así que se queda.
+export const HERO_MOBILE_MEDIA = '(max-width: 768px) and (max-aspect-ratio: 2/3)';

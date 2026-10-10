@@ -14,6 +14,7 @@
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  row-gap: var(--spacing-2);
   align-items: center;
   justify-content: space-between;
 }
@@ -28,9 +29,13 @@
 
 .site-footer__copy,
 .site-footer__note {
-  font-size: var(--text-sm);
-  color: var(--color-ink-muted);
   display: inline-block;
+}
+
+/* Área táctil mínima de 24px sin alterar el layout
+   (el padding de un elemento inline no cambia la altura de línea) */
+.site-footer a:not(.site-footer__up) {
+  padding-block: var(--spacing-1);
 }
 
 /* Footer nav items */
@@ -58,11 +63,11 @@
 .site-footer__up::before {
   content: "";
   display: inline-block;
-  width: var(--size-icon-large);
-  height: var(--size-icon-large);
+  width: var(--size-icon-l);
+  height: var(--size-icon-l);
   align-self: center;
   margin-right: var(--spacing-2);
-  color: var(--color-neutral-950);
+  color: var(--color-text-primary);
 
   background-image: url("../../assets/icons/arrow-elbow-left-up.svg");
   background-size: contain;

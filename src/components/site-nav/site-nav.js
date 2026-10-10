@@ -11,9 +11,9 @@ class SiteNav extends HTMLElement {
 
   render() {
     this.innerHTML = `
-      <header class="site-nav" role="banner">
+      <header class="site-nav">
         <div class="container-full site-nav__inner">
-          <a href="/" class="site-nav__logo" aria-label="Inicio — Portfolio">
+          <a href="/" class="site-nav__logo">
             Laura Caballero García – Digital Product Designer
           </a>
 
@@ -21,12 +21,12 @@ class SiteNav extends HTMLElement {
             class="site-nav__toggle"
             aria-expanded="false"
             aria-controls="nav-menu"
-            aria-label="Abrir menú"
+            aria-label="Open menu"
           >
             <span class="site-nav__toggle-icon" aria-hidden="true"></span>
           </button>
 
-          <nav id="nav-menu" class="site-nav__menu" aria-label="Navegación principal">
+          <nav id="nav-menu" class="site-nav__menu" aria-label="Main">
             <ul class="site-nav__list" role="list">
               <li><a class="site-nav__link" href="/archive/" data-label="Archive">Archive</a></li>
               <li><a class="site-nav__link" href="/about/" data-label="About">About</a></li>
@@ -41,18 +41,26 @@ class SiteNav extends HTMLElement {
     const toggle = this.querySelector('.site-nav__toggle');
     const menu   = this.querySelector('.site-nav__menu');
 
-    toggle?.addEventListener('click', () => {
-      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!isOpen));
-      toggle.setAttribute('aria-label', isOpen ? 'Abrir menú' : 'Cerrar menú');
-      menu?.classList.toggle('is-open', !isOpen);
-    });
+    const setOpen = (open) => {
+      toggle?.setAttribute('aria-expanded', String(open));
+      toggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      menu?.classList.toggle('is-open', open);
+    };
+
+    const isOpen = () => toggle?.getAttribute('aria-expanded') === 'true';
+
+    toggle?.addEventListener('click', () => setOpen(!isOpen()));
 
     // Cierra el menú al hacer clic fuera
     document.addEventListener('click', e => {
-      if (!this.contains(e.target)) {
-        toggle?.setAttribute('aria-expanded', 'false');
-        menu?.classList.remove('is-open');
+      if (!this.contains(e.target)) setOpen(false);
+    });
+
+    // Cierra con Escape y devuelve el foco al botón
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        toggle.focus();
       }
     });
 

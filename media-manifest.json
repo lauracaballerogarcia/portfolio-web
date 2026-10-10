@@ -1,0 +1,274 @@
+{
+  "files": {
+    "bloq/bloq-00-thumbnail.webp": {
+      "action": "optimized",
+      "bytesIn": 53586,
+      "bytesOut": 19932,
+      "outputHash": "804d763323dc10569f04697db6381b816345b72e6d5e31ce79574319f76ea92f",
+      "reason": "q78, saving 62.8%, mean error 0.97",
+      "settingsHash": "d501aaa19a437fd4452526d344d59f6cb574dee1504f29d5a8e34439db17145a",
+      "source": "media-src/bloq/bloq-00-thumbnail.webp",
+      "sourceHash": "26cbace73b8a9c8f332d0a6b3828f578f6e8123d72fe36f7fdbc64e6aaf75bab"
+    },
+    "parc-central/parc-central-00-thumbnail.webp": {
+      "action": "optimized",
+      "bytesIn": 363930,
+      "bytesOut": 238304,
+      "outputHash": "ca84109caed212e57a90c0498ca7f480f405fb7bb28c25477d7442602f2786df",
+      "reason": "q78, saving 34.5%, mean error 3.48",
+      "settingsHash": "d501aaa19a437fd4452526d344d59f6cb574dee1504f29d5a8e34439db17145a",
+      "source": "media-src/parc-central/parc-central-00-thumbnail.webp",
+      "sourceHash": "8eade49afed74e57bc986d04c3e888450fd3af9ccb8c107dd7084bada6e55b18"
+    },
+    "parc-central/parc-central-01-hero.webp": {
+      "action": "optimized",
+      "bytesIn": 1315048,
+      "bytesOut": 841946,
+      "outputHash": "87c34b22e980e93c5439a38a2e889198ea1c04a1a1ed533e457e2e1987a1acc9",
+      "reason": "q78, saving 36.0%, mean error 3.48",
+      "settingsHash": "d36992f8e3610a988151822e1455c72554b5325c54cf0c7beb2de6e4ab3db8a3",
+      "source": "media-src/parc-central/parc-central-01-hero.webp",
+      "sourceHash": "c086be81b986e86b30cfa110e1521c5ad948dff2ae8c70bcc3aa64dc9f56485f"
+    },
+    "senda/senda-02-research-quotes.svg": {
+      "action": "copied",
+      "bytesIn": 3531078,
+      "bytesOut": 3531078,
+      "outputHash": "088ebe3afd4ba9f8b61373d97bd18320597ed50da87a8b81e90182d2ad8a9f4d",
+      "reason": "embeds raster image (data:image/), excluded from SVGO",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-02-research-quotes.svg",
+      "sourceHash": "088ebe3afd4ba9f8b61373d97bd18320597ed50da87a8b81e90182d2ad8a9f4d"
+    },
+    "senda/senda-03-strategic-shift.svg": {
+      "action": "optimized",
+      "bytesIn": 149557,
+      "bytesOut": 93770,
+      "outputHash": "05b6638b9d6ee9e0c9d989d86910da3ae6136c3ffc20675e1d9ca31c41a2c480",
+      "reason": "SVGO 4.1.0, saving 37.3%, render mean 0.000, differing 0.000%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-03-strategic-shift.svg",
+      "sourceHash": "4941018b6b6c69966b733ceb07cfdeabf8be4291e03048bb21f7a1c803ef7001"
+    },
+    "senda/senda-outcome-final-ui-physical-top-up.svg": {
+      "action": "copied",
+      "bytesIn": 7332977,
+      "bytesOut": 7332977,
+      "outputHash": "9b85c7865961341f37423afdd21764704cb461974dda859353fa7ab204ba4153",
+      "reason": "embeds raster image (data:image/), excluded from SVGO",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-outcome-final-ui-physical-top-up.svg",
+      "sourceHash": "9b85c7865961341f37423afdd21764704cb461974dda859353fa7ab204ba4153"
+    },
+    "senda/senda-outcome-prototype-flow-request-top-up.svg": {
+      "action": "optimized",
+      "bytesIn": 30240,
+      "bytesOut": 13387,
+      "outputHash": "9b12f230c2cd85fba9f653221bf7f236c87d512a66d27ec0959ced7438c62f25",
+      "reason": "SVGO 4.1.0, saving 55.7%, render mean 0.000, differing 0.000%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-outcome-prototype-flow-request-top-up.svg",
+      "sourceHash": "611556ea2841eee6dfd5973f7375397755416122da95537577028f3b07db2d8c"
+    },
+    "senda/senda-overview-timeline.svg": {
+      "action": "optimized",
+      "bytesIn": 254467,
+      "bytesOut": 107567,
+      "outputHash": "bbe8c70c1ad128ae1f046fe1f222db825f61959f43f2b36720bbad53532d6193",
+      "reason": "SVGO 4.1.0, saving 57.7%, render mean 0.000, differing 0.000%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-overview-timeline.svg",
+      "sourceHash": "c3f6a29afeb6e907271895a15f7feb1b63598aa01fe10dea33250289428e4774"
+    },
+    "senda/senda-research-percentage-76.svg": {
+      "action": "copied",
+      "bytesIn": 695,
+      "bytesOut": 695,
+      "outputHash": "ff2fdccf517daafcfb27b15f90e95670edb93592a50fd4737295e57647d7695e",
+      "reason": "saving 7.6% < 15%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-research-percentage-76.svg",
+      "sourceHash": "ff2fdccf517daafcfb27b15f90e95670edb93592a50fd4737295e57647d7695e"
+    },
+    "senda/senda-research-percentage-78.svg": {
+      "action": "copied",
+      "bytesIn": 284,
+      "bytesOut": 284,
+      "outputHash": "dfabbfd1292b4db31d3e0f8d54ce2123464ea67f46663e8e82c3c6d7a974c9ed",
+      "reason": "saving 3.2% < 15%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-research-percentage-78.svg",
+      "sourceHash": "dfabbfd1292b4db31d3e0f8d54ce2123464ea67f46663e8e82c3c6d7a974c9ed"
+    },
+    "senda/senda-research-percentage-82.svg": {
+      "action": "copied",
+      "bytesIn": 289,
+      "bytesOut": 289,
+      "outputHash": "611b07842955fe66c18a4fe720c1e2a42cc828d31116547229a5c939e184c018",
+      "reason": "saving 1.4% < 15%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-research-percentage-82.svg",
+      "sourceHash": "611b07842955fe66c18a4fe720c1e2a42cc828d31116547229a5c939e184c018"
+    },
+    "senda/senda-research-percentage-90.svg": {
+      "action": "copied",
+      "bytesIn": 1361,
+      "bytesOut": 1361,
+      "outputHash": "8b6243801d98379182091b034369417f0f9b13b8b79311133bcb4ab74c2dc570",
+      "reason": "saving 1.6% < 15%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-research-percentage-90.svg",
+      "sourceHash": "8b6243801d98379182091b034369417f0f9b13b8b79311133bcb4ab74c2dc570"
+    },
+    "senda/senda-solution-key-features.svg": {
+      "action": "optimized",
+      "bytesIn": 501488,
+      "bytesOut": 274821,
+      "outputHash": "f34ba3f8ddb1e5cc62c5c01297dcac0da6a02aac7bdd120c6fd8a6d0f1988d3f",
+      "reason": "SVGO 4.1.0, saving 45.2%, render mean 0.000, differing 0.000%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-solution-key-features.svg",
+      "sourceHash": "1d1cadd96858a937a427c293c885ae235227553fa75ab5bed58c4fbe3b9e5195"
+    },
+    "senda/senda-solution-sitemap.svg": {
+      "action": "optimized",
+      "bytesIn": 286252,
+      "bytesOut": 121620,
+      "outputHash": "0a268f47619d68614b5225ef3dd2e8ea21baba2d2e2f95ddcf95118e71a6ca1e",
+      "reason": "SVGO 4.1.0, saving 57.5%, render mean 0.000, differing 0.000%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-solution-sitemap.svg",
+      "sourceHash": "2d7f4b76ecbec29fc326135ca8f29c44f34911a4c2a8d46c104fe9a6fda740bf"
+    },
+    "senda/senda-solution-user-role-primary.svg": {
+      "action": "optimized",
+      "bytesIn": 68284,
+      "bytesOut": 39323,
+      "outputHash": "43bb92fd5b4c1a47baf2146cfc7e9ef4e1bb249be2d833e6f907760515e6afd7",
+      "reason": "SVGO 4.1.0, saving 42.4%, render mean 0.000, differing 0.000%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-solution-user-role-primary.svg",
+      "sourceHash": "4dcba98e8671ba0d7552794b0977ba3b186e5369ca4556fbda9d31abf99feb16"
+    },
+    "senda/senda-solution-user-role-secondary.svg": {
+      "action": "optimized",
+      "bytesIn": 91286,
+      "bytesOut": 52707,
+      "outputHash": "e1cdd14209a5f9a263980bc88b0c6c9e1e84e7b055d94e3b79018cb425be24da",
+      "reason": "SVGO 4.1.0, saving 42.3%, render mean 0.000, differing 0.000%",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-solution-user-role-secondary.svg",
+      "sourceHash": "d2064e356d1daf750d039a9b30595d1e7ba86ca2cc830ef8f5806823e09da960"
+    },
+    "senda/senda-testing-final-flow-1.svg": {
+      "action": "copied",
+      "bytesIn": 2021961,
+      "bytesOut": 2021961,
+      "outputHash": "688b782b24bf136947283268df3b7ca8aaa30ea2dc3dcc3f3b49773f46b8ad6d",
+      "reason": "embeds raster image (data:image/), excluded from SVGO",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-testing-final-flow-1.svg",
+      "sourceHash": "688b782b24bf136947283268df3b7ca8aaa30ea2dc3dcc3f3b49773f46b8ad6d"
+    },
+    "senda/senda-testing-maze.svg": {
+      "action": "copied",
+      "bytesIn": 644712,
+      "bytesOut": 644712,
+      "outputHash": "367364ef53ee66eba858c875e71c033a573c36ba18d03f90e1c4c5c2e77c59d0",
+      "reason": "embeds raster image (data:image/), excluded from SVGO",
+      "settingsHash": "18440d168af03df9969ae20565b82418d574ce1a6b63fda61494eec0f1df14f5",
+      "source": "media-src/senda/senda-testing-maze.svg",
+      "sourceHash": "367364ef53ee66eba858c875e71c033a573c36ba18d03f90e1c4c5c2e77c59d0"
+    },
+    "xana/xana-00-thumbnail.webp": {
+      "action": "optimized",
+      "bytesIn": 89868,
+      "bytesOut": 16524,
+      "outputHash": "785985272635f05294f6c4c0129c74583a90b8f495dd670d2641678631584fe3",
+      "reason": "q80, saving 81.6%, mean error 1.57",
+      "settingsHash": "91cb6dd562e4b056d6ede084c03dc7349b26f7a5dd5c4e2d28fbebf3f2761654",
+      "source": "media-src/xana/xana-00-thumbnail.webp",
+      "sourceHash": "2740e69e694fc65361d9fe6650402330948f98be2a1350bff28d158203f4c0a4"
+    },
+    "xana/xana-01-hero.webp": {
+      "action": "optimized",
+      "bytesIn": 734582,
+      "bytesOut": 247664,
+      "outputHash": "07351ef600aca7797edd1522a81f0f513486ba7a87a745e6f32bbc50beb53e1a",
+      "reason": "q80, saving 66.3%, mean error 2.66",
+      "settingsHash": "bb6a6f5d7a30ccc401ecb2cafd5dffeb59ebdfb67595b867324e770a6edd9e88",
+      "source": "media-src/xana/xana-01-hero.webp",
+      "sourceHash": "8bed0001adfb4471dc99d8e3ee8359d79e846113b4783c8b3e6cb1b05641a8da"
+    },
+    "xana/xana-02.webp": {
+      "action": "optimized",
+      "bytesIn": 44996,
+      "bytesOut": 14374,
+      "outputHash": "ab0d32482d28b28edadfa444dc5e0ad568f46e0f25311b1e4bca858c1e4bbd43",
+      "reason": "resized 2000→1600px, q80, saving 68.1%, mean error 0.34",
+      "settingsHash": "04c19b468e4d037b6c842f002678ff792fb0cbfc5f2be0c64f15894c852ae24a",
+      "source": "media-src/xana/xana-02.webp",
+      "sourceHash": "41e602e747bf27087650ee610e9f4188057946748ad98ccf4f7a57027189fc3c"
+    },
+    "xana/xana-03.webp": {
+      "action": "optimized",
+      "bytesIn": 383736,
+      "bytesOut": 108622,
+      "outputHash": "b082db204143450716e70da3a66f982dd0373a63bd496c58a12dada46ad51d97",
+      "reason": "q80, saving 71.7%, mean error 2.96",
+      "settingsHash": "04c19b468e4d037b6c842f002678ff792fb0cbfc5f2be0c64f15894c852ae24a",
+      "source": "media-src/xana/xana-03.webp",
+      "sourceHash": "e8e610082ad23199a857af998bc176bf95f6f5721ca63403b16350b8576abb79"
+    },
+    "xana/xana-04.webp": {
+      "action": "optimized",
+      "bytesIn": 220898,
+      "bytesOut": 77510,
+      "outputHash": "51a35106a964ec7b3508acfab330737ad20b7938472075297562486490642f9d",
+      "reason": "q80, saving 64.9%, mean error 2.14",
+      "settingsHash": "04c19b468e4d037b6c842f002678ff792fb0cbfc5f2be0c64f15894c852ae24a",
+      "source": "media-src/xana/xana-04.webp",
+      "sourceHash": "19ee218f7f0a1761d29ad857029f0a85c716fca39b6bb1a4689914b89af8f4f7"
+    },
+    "xana/xana-05.webp": {
+      "action": "optimized",
+      "bytesIn": 280618,
+      "bytesOut": 93794,
+      "outputHash": "95785fe372d4e45c9dccaacf226673c2cd731524c7bf40fd37d38f56074f0434",
+      "reason": "q80, saving 66.6%, mean error 2.27",
+      "settingsHash": "04c19b468e4d037b6c842f002678ff792fb0cbfc5f2be0c64f15894c852ae24a",
+      "source": "media-src/xana/xana-05.webp",
+      "sourceHash": "082ebe1a439486460fde59e33d7c42b525f3883243916acf0fa3b0ec220d2a69"
+    },
+    "xana/xana-06.webp": {
+      "action": "optimized",
+      "bytesIn": 228686,
+      "bytesOut": 65958,
+      "outputHash": "d56b2d06aa36b910088f02d22861ba08df547dae716e1079f127ede5ded0c9ae",
+      "reason": "q80, saving 71.2%, mean error 1.76",
+      "settingsHash": "04c19b468e4d037b6c842f002678ff792fb0cbfc5f2be0c64f15894c852ae24a",
+      "source": "media-src/xana/xana-06.webp",
+      "sourceHash": "2a810ee82e0be929d8d3394a46577c3ea927d9d6c1309e1d894e27ac16f127d8"
+    },
+    "xana/xana-07.webp": {
+      "action": "optimized",
+      "bytesIn": 66776,
+      "bytesOut": 21992,
+      "outputHash": "3399f521194bd65c52039931bdc7e8d4106e04bb936dcc1aed74c5f8595db268",
+      "reason": "resized 2000→1600px, q80, saving 67.1%, mean error 0.30",
+      "settingsHash": "04c19b468e4d037b6c842f002678ff792fb0cbfc5f2be0c64f15894c852ae24a",
+      "source": "media-src/xana/xana-07.webp",
+      "sourceHash": "7c0d02d342afccad0dbfa96b9bf5e69aed5c989c2ec345ee9bd7847433ff541b"
+    },
+    "xana/xana-08.webp": {
+      "action": "optimized",
+      "bytesIn": 545594,
+      "bytesOut": 44332,
+      "outputHash": "e6ccb434237e3a1028134a52a8ed15ddefd8d59a006ddb855d56808f06aae84f",
+      "reason": "resized 2000→1600px, q80, saving 91.9%, mean error 2.11",
+      "settingsHash": "04c19b468e4d037b6c842f002678ff792fb0cbfc5f2be0c64f15894c852ae24a",
+      "source": "media-src/xana/xana-08.webp",
+      "sourceHash": "2e683d59e079a1d923373daa08977f9e0ad0c56d3f1a71d91f48b853d5231902"
+    }
+  }
+}

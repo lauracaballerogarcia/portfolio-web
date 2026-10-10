@@ -2,14 +2,11 @@
    ABOUT PAGE
    ============================================================ */
 
-.about-page {
-  padding-block: var(--spacing-16);
-}
-
 /* ── Toggle ──────────────────────────────────────── */
 
 .about-toggle {
-  margin-bottom: var(--spacing-12);
+  /* Mismo arranque que la barra de Archive */
+  margin-block: var(--spacing-16) var(--spacing-12);
 }
 
 .about-toggle__buttons {
@@ -21,14 +18,14 @@
   font-family: var(--font-family-sans);
   font-size: var(--font-size-s);
   padding: var(--spacing-2) var(--spacing-4);
-  border: 1px solid var(--color-neutral-200);
-  border-radius: var(--border-radius-full);
+  border: 1px solid var(--color-outline-primary);
+  border-radius: var(--radius-full);
   background-color: transparent;
   color: var(--color-text-secondary);
   cursor: pointer;
-  transition: background-color var(--duration) var(--ease-out),
-              color var(--duration) var(--ease-out),
-              border-color var(--duration) var(--ease-out);
+  transition: background-color var(--duration-base) var(--easing-out),
+              color var(--duration-base) var(--easing-out),
+              border-color var(--duration-base) var(--easing-out);
 }
 
 .about-toggle__btn:hover {
@@ -36,10 +33,10 @@
   color: var(--color-text-primary);
 }
 
-.about-toggle__btn.is-active {
-  background-color: var(--color-neutral-950);
-  border-color: var(--color-neutral-950);
-  color: var(--color-neutral-0);
+.about-toggle__btn[aria-pressed="true"] {
+  background-color: var(--color-background-inverse);
+  border-color: var(--color-background-inverse);
+  color: var(--color-text-inverse);
 }
 
 /* ── Content ─────────────────────────────────────── */
@@ -49,7 +46,7 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-16);
   align-items: start;
-  margin-bottom: var(--spacing-24);
+  margin-block: var(--spacing-16) var(--spacing-24);
 }
 
 .about-content__text {
@@ -64,6 +61,11 @@
   gap: var(--spacing-6);
 }
 
+/* display: flex anularía el atributo hidden y se verían los dos modos */
+.about-mode[hidden] {
+  display: none;
+}
+
 .about-mode p {
   font-size: var(--font-size-l);
   line-height: 1.6;
@@ -73,27 +75,22 @@
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: var(--border-radius-2);
+  border-radius: var(--radius-2);
 }
 
 /* ── CV Grid ─────────────────────────────────────── */
 
-.about-cv.container {
+.about-cv {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--spacing-8);
   padding-top: var(--spacing-12);
-  border-top: 1px solid var(--color-neutral-200);
+  border-top: 1px solid var(--color-outline-primary);
   margin-top: var(--spacing-2);
 }
 
-/* .about-cv__col h2 {
+.about-cv__title {
   font-size: var(--font-size-m);
-  font-weight: 500;
-  margin-bottom: var(--spacing-6);
-} */
-
-.about-cv h3 {
   margin-bottom: var(--spacing-6);
 }
 
@@ -103,29 +100,35 @@
   gap: var(--spacing-6);
 }
 
-.about-cv__list li {
+.about-cv__item {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-1);
 }
 
-.about-cv__list strong {
+.about-cv__role {
   font-size: var(--font-size-s);
-  font-weight: 400; 
+  font-weight: var(--font-weight-regular);
   margin-bottom: var(--spacing-1);
 }
 
-.about-cv__list span {
+.about-cv__detail {
   font-size: var(--font-size-s);
   color: var(--color-text-secondary);
   margin-bottom: var(--spacing-2);
 }
 
-.about-cv__list span.about-cv__date {
+.about-cv__detail a {
+  text-decoration-line: underline;
+  text-underline-offset: 0.2em;
+}
+
+.about-cv__date {
   font-family: var(--font-family-mono);
   text-transform: uppercase;
   font-size: var(--font-size-xs);
   color: var(--color-text-tertiary);
+  margin-bottom: var(--spacing-2);
 }
 
 /* ── Responsive ──────────────────────────────────── */

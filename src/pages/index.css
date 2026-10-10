@@ -1,156 +1,80 @@
-/* ── Lista ───────────────────────────────────────── */
+/* ============================================================
+   HOME — tarjetas de proyectos destacados
+   ============================================================ */
+
+/* ── Rejilla ─────────────────────────────────────── */
 
 .featured-grid {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: var(--grid-column-gap);
-  row-gap: var(--grid-row-gap);
+  column-gap: var(--spacing-grid-column);
+  row-gap: var(--spacing-grid-row);
 }
 
-.featured-grid li:first-child {
+/* Mensajes de carga / error: ocupan toda la fila */
+.featured-grid__status {
   grid-column: 1 / -1;
 }
 
-.featured-grid li:not(:first-child) {
+
+/* ── Tarjeta ─────────────────────────────────────── */
+
+.featured-card {
   grid-column: span 1;
 }
 
-
-/* ── Cards ───────────────────────────────────────── */
-
-.featured-grid li a {
-  cursor: pointer;
+/* Bloque, para que el anillo de foco rodee la tarjeta entera */
+.featured-card__link,
+.featured-card__inner {
+  display: block;
 }
 
+/* Primera tarjeta: ancho completo y más alta */
+.featured-card--lead {
+  grid-column: 1 / -1;
+}
 
-/* ── Figure ──────────────────────────────────────── */
-
-.featured-grid figure {
+.featured-card__figure {
   position: relative;
   overflow: hidden;
   width: 100%;
   height: 27.5rem;
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-background-placeholder);
 }
 
-.featured-grid li:first-child figure {
+.featured-card--lead .featured-card__figure {
   min-height: 41.5rem;
 }
 
-.featured-grid li:not(.card--coming-soon) a:hover figure {
-  border-radius: var(--radius-card-border);
-}
-
-
-
-/* ── Image ──────────────────────────────────────── */
-
-.featured-grid figure img {
+.featured-card__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 400ms ease;
+  transition: transform var(--duration-slow) ease;
 }
 
-.featured-grid li:not(.card--coming-soon) a:hover figure img {
+/* Solo las tarjetas con enlace (con case study) reaccionan, con ratón o teclado */
+.featured-card__link:is(:hover, :focus-visible) .featured-card__figure {
+  border-radius: var(--radius-card-l);
+}
+
+.featured-card__link:is(:hover, :focus-visible) .featured-card__image {
   transform: scale(1.02);
 }
-
-/* ── Chip ────────────────────────────────────────── */
-
-.chip {
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-width: 2.5rem;
-  min-height: 2.5rem;
-
-  background-color: var(--color-text-primary-inverse);
-  padding: var(--spacing-2);
-  border-radius: var(--radius-chip-border);
-
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.featured-grid li a:hover .chip {
-  gap: var(--spacing-1); 
-  padding: 0.5rem 1rem 0.5rem 1.25rem;
-}
-
-.chip::after {
-    content: "";
-
-    display: inline-block;
-    vertical-align: middle;
-    transition: all 0.3s ease;
-
-    width: var(--size-icon-medium);
-    height: var(--size-icon-medium);
-
-    background-image: url("../../src/assets/icons/arrow-up-right.svg");
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
- .featured-grid a:hover .chip::after {
-    transform: rotate(45deg);
-  } 
-
-  /* Coming soon: sin flecha y con el texto siempre visible */
-  .chip--coming-soon {
-    padding: 0.5rem 1rem 0.5rem 1.25rem;
-  }
-
-  .chip--coming-soon::after {
-    display: none;
-  }
-
-  .chip--coming-soon .chip-text {
-    max-width: 20ch;
-    opacity: 1;
-    margin-left: 0.25rem;
-    margin-right: 0.5rem;
-  }
-
-
-  /* Chip Text */
-
-.chip-text {
-  max-width: 0;
-  opacity: 0;
-  white-space: nowrap;
-  transition: all 0.3s ease;
-}
-
-.featured-grid a:hover .chip-text {
-    max-width: 20ch; 
-    opacity: 1;
-    margin-left: var(--spacing-1);
-    display: inline-flex;
-    align-items: center;
-  }
-
 
 
 /* ── Texto ───────────────────────────────────────── */
 
-.card-info {
-  padding-top: 0.75rem;
-  padding-bottom: 2rem;
+.featured-card__info {
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-8);
 }
 
-.featured-grid h2 {
+.featured-card__title {
   margin-top: var(--spacing-4);
 }
 
-.featured-grid p {
+.featured-card__claim {
   color: var(--color-text-tertiary);
 }

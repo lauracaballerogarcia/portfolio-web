@@ -1,38 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="About Laura Caballero — Digital Product Designer based in Asturias, Spain.">
-  <meta property="og:title" content="About — Laura Caballero">
-  <meta property="og:type" content="website">
+<!--
+  Plantilla de about.html: solo se usa el contenido del elemento main.
+  main.js la importa con bundle-text: y copia ese contenido en el main
+  de index.html, que es el único documento real. El título de la página
+  lo pone el JS de la página; los metadatos comunes están en index.html.
+-->
+<main>
 
-  <link rel="stylesheet" href="./about.css">
-  <title>About — Laura Caballero</title>
-  <!-- <script type="module" src="./about.js"></script> -->
-</head>
-<body id="top">
-
-  <a href="#main-content" class="visually-hidden">Skip to main content</a>
-
-  <site-nav></site-nav>
-
-  <main id="main-content" class="about-page">
+    <h1 class="visually-hidden">About</h1>
 
     <!-- Toggle -->
-    <section class="about-toggle container">
+    <section class="about-toggle">
       <div class="about-toggle__buttons">
-        <button class="about-toggle__btn is-active" data-mode="professional">
+        <button type="button" class="about-toggle__btn" data-mode="professional" aria-pressed="true">
           Professional
         </button>
-        <button class="about-toggle__btn" data-mode="personal">
+        <button type="button" class="about-toggle__btn" data-mode="personal" aria-pressed="false">
           Personal
         </button>
       </div>
     </section>
 
     <!-- Content -->
-    <section class="about-content container">
+    <section class="about-content">
 
       <!-- Left: text -->
       <div class="about-content__text">
@@ -53,82 +42,87 @@
       </div>
 
       <!-- Right: image -->
+      <!-- Foto (pendiente de exportar). Cuando exista:
+           1. Descomentar el <img> con la ruta /media/… de la foto profesional
+              y su texto alternativo.
+           2. Añadir a cada botón del toggle data-image="/media/…" y
+              data-image-alt="…" con la foto de ese modo; about.js la cambia
+              al pulsar. -->
       <div class="about-content__image">
-        <!-- <img id="about-image" src="/images/about-professional.jpg" alt="Laura Caballero" loading="eager" decoding="async"> -->
+        <!-- <img id="about-image" src="" alt="" loading="eager" decoding="async"> -->
       </div>
 
     </section>
 
     <!-- CV Grid -->
-    <section class="about-cv container">
+    <section class="about-cv">
 
       <div class="about-cv__col">
-        <h3>Work Experience</h3>
+        <h2 class="about-cv__title">Experience</h2>
         <ul class="about-cv__list">
-          <li>
-            <strong>Design Internship</strong>
-            <span><a href="https://www.uv.es/iupr" target="_blank" rel="noopener noreferrer">Instituto Universitario de Restauración del Patrimonio</a> (Valencia, Spain)</span>
-            <span class="about-cv__date">May 2025 – May 2026</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Graphic Design & Web Content Intern</strong>
+            <span class="about-cv__detail"><a href="https://www.uv.es/iupr" target="_blank" rel="noopener noreferrer">Instituto Universitario de Restauración del Patrimonio</a> · Valencia, Spain · Part-time · On-site</span>
+            <span class="about-cv__date">May 2025 – Apr 2026</span>
           </li>
-          <li>
-            <strong>Visual Identity Commission</strong>
-            <span>ANDERSEN UPV University Chair (Valencia, Spain)</span>
-            <span class="about-cv__date">January 2025</span>
-          </li>
-          <li>
-            <strong>Design Internship</strong>
-            <span>End of Work (Sydney, Australia)</span>
-            <span class="about-cv__date">August 2024 – November 2024</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Graphic Design Intern</strong>
+            <span class="about-cv__detail"><a href="https://www.endofwork.com.au/" target="_blank" rel="noopener noreferrer">End of Work</a> · Sydney, Australia · On-site · Part-time</span>
+            <span class="about-cv__date">Aug 2024 – Nov 2024</span>
           </li>
         </ul>
       </div>
 
       <div class="about-cv__col">
-        <h3>Education</h3>
+        <h2 class="about-cv__title">Education</h2>
         <ul class="about-cv__list">
-          <li>
-            <strong>Bachelor's Degree of Design and Creative Technologies</strong>
-            <span>Polytechnic University of Valencia</span>
-            <span class="about-cv__date">(September 2021 – Currently studying)</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Postgraduate Expert Diploma in User Interface Design (24 ECTS)</strong>
+            <span class="about-cv__detail">Universitat Politècnica de València (UPV)</span>
+            <span class="about-cv__date">Sep 2025 – Jul 2026</span>
           </li>
-          <li>
-            <strong>Bachelor's Degree in Visual Communication</strong>
-            <span>University of Technology of Sydney</span>
-            <span class="about-cv__date">July 2024 – December 2024</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Bachelor's Degree in Design and Creative Technologies</strong>
+            <span class="about-cv__detail">Universitat Politècnica de València (UPV)</span>
+            <span class="about-cv__date">Sep 2021 – Jul 2025</span>
           </li>
         </ul>
       </div>
 
       <div class="about-cv__col">
-        <h3>Merits</h3>
+        <h2 class="about-cv__title">Merits</h2>
         <ul class="about-cv__list">
-          <li>
-            <strong>Bachelor's Degree of Design and Creative Technologies</strong>
-            <span>Polytechnic University of Valencia</span>
-            <span class="about-cv__date">September 2021 – Currently studying</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Erasmus+ KA131 Scholarship</strong>
+            <span class="about-cv__detail">Awarded for an exchange semester in the Bachelor of Design in Visual Communication at the University of Technology Sydney (UTS), Australia</span>
+            <span class="about-cv__date">Jul 2024 – Jan 2025</span>
           </li>
-          <li>
-            <strong>Bachelor's Degree in Visual Communication</strong>
-            <span>University of Technology of Sydney</span>
-            <span class="about-cv__date">July 2024 – December 2024</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Erasmus+ Blended Intensive Programme (BIP)</strong>
+            <span class="about-cv__detail">Participated in the European Creative Futures Programme, held at HU University of Applied Sciences Utrecht, Netherlands</span>
+            <span class="about-cv__date">Jan 2024 – Feb 2024</span>
+          </li>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Amancio Ortega Foundation (FAO) Scholarship</strong>
+            <span class="about-cv__detail">Awarded for a year of secondary study abroad (Grade 11) at Earl of March Secondary School, Ottawa, Canada</span>
+            <span class="about-cv__date">Sep 2019 – Jun 2020</span>
           </li>
         </ul>
       </div>
 
       <div class="about-cv__col">
-        <h3>Languages</h3>
+        <h2 class="about-cv__title">Languages</h2>
         <ul class="about-cv__list">
-          <li>
-            <strong>Spanish</strong>
-            <span>Native</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">Spanish — Native</strong>
           </li>
-          <li>
-            <strong>English</strong>
-            <span>C1 / C2</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">English — Proficient (C2)</strong>
+            <span class="about-cv__detail">Cambridge C1 Advanced, awarded at C2 level</span>
           </li>
-          <li>
-            <strong>German</strong>
-            <span>A2 / B1</span>
+          <li class="about-cv__item">
+            <strong class="about-cv__role">German — Elementary (A2)</strong>
+            <span class="about-cv__detail">Official Language School (EOI)</span>
           </li>
         </ul>
       </div>
@@ -136,8 +130,3 @@
     </section>
 
   </main>
-
-  <site-footer></site-footer>
-
-</body>
-</html>

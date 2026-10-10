@@ -14,7 +14,9 @@
     "build": "rimraf dist .parcel-cache && parcel build src/pages/index.html && cp public/_redirects dist/_redirects",
     "parcel:dev": "parcel src/pages/index.html src/pages/project/project.html src/pages/about/about.html",
     "parcel:build": "parcel build src/pages/index.html src/pages/project/project.html src/pages/about/about.html",
-    "clean": "rimraf dist .parcel-cache"
+    "clean": "rimraf dist .parcel-cache",
+    "media": "node scripts/optimize-media.mjs",
+    "media:check": "node scripts/optimize-media.mjs --check"
   },
   "devDependencies": {
     "@parcel/transformer-inline-string": "^2.16.4",
@@ -23,14 +25,15 @@
     "parcel-reporter-static-files-copy": "^1.5.3",
     "posthtml-include": "^2.0.1",
     "rimraf": "^6.1.3",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "svgo": "4.1.0"
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.8",
     "gsap": "^3.14.2",
     "marked": "^18.0.5"
-  }, 
-    "staticFiles": {
+  },
+  "staticFiles": {
     "staticPath": "public"
   }
 }

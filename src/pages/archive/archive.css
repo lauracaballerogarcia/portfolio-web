@@ -9,8 +9,8 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  margin-block: 4rem 3rem;
+  gap: var(--spacing-4);
+  margin-block: var(--spacing-16) var(--spacing-12);
 }
 
 .archive-filters {
@@ -23,32 +23,9 @@
 .archive-views {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--spacing-3);
 }
 
-
-/* ── Button primary ──────────────────────────────── */
-/* Mismas dimensiones que .project-tag del Case Study  */
-
-.button-primary {
-  font: inherit;
-  padding: var(--spacing-2) var(--spacing-3);
-  border: none;
-  border-radius: var(--radius-button-primary);
-  background-color: var(--color-button-primary-background-default);
-  color: var(--color-button-primary-text-default);
-  cursor: pointer;
-  transition: background-color 200ms ease, color 200ms ease;
-}
-
-.button-primary:hover {
-  background-color: var(--color-button-primary-background-hover);
-}
-
-.button-primary[aria-pressed="true"] {
-  background-color: var(--color-button-primary-background-active);
-  color: var(--color-button-primary-text-active);
-}
 
 /* Separa All del resto de tags */
 .archive-filters__all {
@@ -67,7 +44,7 @@
   background: none;
   color: var(--color-text-secondary);
   cursor: pointer;
-  transition: color 200ms ease;
+  transition: color var(--duration-base) ease;
 }
 
 .view-toggle:hover,
@@ -77,8 +54,8 @@
 
 .view-toggle::before {
   content: "";
-  width: var(--size-icon-medium, 1.5rem);
-  height: var(--size-icon-medium, 1.5rem);
+  width: var(--size-icon-m);
+  height: var(--size-icon-m);
   background-color: currentColor;
   mask-size: contain;
   mask-repeat: no-repeat;
@@ -96,12 +73,8 @@
 
 /* ── Lista de proyectos ──────────────────────────── */
 
-.archive-projects {
-  list-style: none;
-}
-
 .archive-empty {
-  padding-block: 4rem;
+  padding-block: var(--spacing-16);
   color: var(--color-text-secondary);
 }
 
@@ -116,49 +89,51 @@
 .archive-row {
   display: flex;
   align-items: baseline;
-  gap: 1.25rem;
-  padding-block: 2.5rem;
-  border-bottom: 1px solid var(--color-neutral-200);
+  gap: var(--spacing-5);
+  padding-block: var(--spacing-10);
+  border-bottom: 1px solid var(--color-outline-primary);
   color: inherit;
   text-decoration: none;
 }
 
-.archive-row h2 {
+.archive-row__title {
   display: flex;
   align-items: center;
   margin: 0;
-  font-weight: normal;
+  font-weight: var(--font-weight-regular);
 }
 
 /* Marcador cuadrado que aparece en hover */
-.archive-row h2::before {
+.archive-row__title::before {
   content: "";
   width: 0;
   height: 1rem;
   margin-right: 0;
-  background-color: var(--color-neutral-950);
-  border-radius: var(--radius-xs, 0.25rem);
-  transition: width 250ms ease, margin-right 250ms ease;
+  background-color: var(--color-text-primary);
+  border-radius: var(--radius-1);
+  transition: width var(--duration-base) ease, margin-right var(--duration-base) ease;
 }
 
-.archive-row p {
+.archive-row__claim {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: var(--font-size-l);
   color: var(--color-text-secondary);
   opacity: 0;
-  transition: opacity 250ms ease;
+  transition: opacity var(--duration-base) ease;
 }
 
-.archive-row time {
+.archive-row__year {
   margin-left: auto;
 }
 
-.archive-row:is(:hover, :focus-visible) h2::before {
+a.archive-row:is(:hover, :focus-visible) .archive-row__title::before {
   width: 1rem;
-  margin-right: 0.75rem;
+  margin-right: var(--spacing-3);
 }
 
-.archive-row:is(:hover, :focus-visible) p {
+/* Sin enlace: no hay hover ni foco que lo revele, así que el claim se ve siempre */
+.archive-row--coming-soon .archive-row__claim,
+.archive-row:is(:hover, :focus-visible) .archive-row__claim {
   opacity: 1;
 }
 
@@ -166,17 +141,6 @@
 /* ── Preview en cursor ───────────────────────────── */
 
 .cursor-preview {
-  /* Distancia entre el cursor y la imagen */
-  --offset: 1.25rem;
-
-  /* Por defecto: imagen a la derecha y abajo del cursor */
-  --shift-x: 0%;
-  --shift-y: 0%;
-  --gap-x: var(--offset);
-  --gap-y: var(--offset);
-  --origin-x: left;
-  --origin-y: top;
-
   position: fixed;
   top: 0;
   left: 0;
@@ -186,25 +150,10 @@
   pointer-events: none;
   opacity: 0;
   translate:
-    calc(var(--x, 0px) + var(--shift-x) + var(--gap-x))
-    calc(var(--y, 0px) + var(--shift-y) + var(--gap-y));
+    calc(var(--x, 0px) + var(--spacing-5))
+    calc(var(--y, 0px) - 100% - var(--spacing-5));
   scale: 0.8;
-  transform-origin: var(--origin-x) var(--origin-y);
-  transition: opacity 300ms ease, scale 300ms ease;
-}
-
-/* Mitad derecha de la ventana: imagen a la izquierda del cursor */
-.cursor-preview[data-h="left"] {
-  --shift-x: -100%;
-  --gap-x: calc(var(--offset) * -1);
-  --origin-x: right;
-}
-
-/* Mitad inferior de la ventana: imagen encima del cursor */
-.cursor-preview[data-v="top"] {
-  --shift-y: -100%;
-  --gap-y: calc(var(--offset) * -1);
-  --origin-y: bottom;
+  transition: opacity var(--duration-medium) ease, scale var(--duration-medium) ease;
 }
 
 .cursor-preview.is-visible {
@@ -213,11 +162,10 @@
 }
 
 .cursor-preview img {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: var(--card-border-radius, 1rem);
+  border-radius: var(--radius-card-s);
 }
 
 
@@ -226,7 +174,7 @@
 .archive-projects[data-view="grid"] {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  column-gap: var(--grid-column-gap, 1.25rem);
+  column-gap: var(--spacing-grid-column);
   row-gap: var(--spacing-16);
 }
 
@@ -236,64 +184,46 @@
   text-decoration: none;
 }
 
-.archive-card figure {
+.archive-card__figure {
   position: relative;
   margin: 0;
   aspect-ratio: 11 / 7;
   overflow: hidden;
   border-radius: 0;
-  background-color: var(--color-neutral-100);
-  transition: border-radius var(--duration) var(--ease-out);
+  background-color: var(--color-background-placeholder);
+  transition: border-radius var(--duration-base) var(--easing-out);
 }
 
-.archive-card:hover figure {
-  border-radius: var(--radius-card-border);
+a.archive-card:is(:hover, :focus-visible) .archive-card__figure {
+  border-radius: var(--radius-card-s);
 }
 
-.archive-card img {
-  display: block;
+.archive-card__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 400ms ease;
+  transition: transform var(--duration-slow) ease;
 }
 
-.archive-card:hover img {
+a.archive-card:is(:hover, :focus-visible) .archive-card__image {
   transform: scale(1.02);
 }
 
-.archive-card h2 {
-  margin: 1rem 0 0.25rem;
-  font-weight: normal;
+.archive-card__title {
+  margin: var(--spacing-4) 0 var(--spacing-1);
+  font-weight: var(--font-weight-regular);
 }
 
-.archive-card p {
+.archive-card__tags {
   margin: 0;
-  font-size: 1.125rem;
+  font-size: var(--font-size-m);
   color: var(--color-text-secondary);
 }
-
-/* Chip: reutiliza .chip y .chip-text de index.css, solo añade el hover */
-.archive-card:hover .chip {
-  gap: 0.25rem;
-  padding: 0.5rem 1rem 0.5rem 1.25rem;
-}
-
-.archive-card:hover .chip::after {
-  transform: rotate(45deg);
-}
-
-.archive-card:hover .chip-text {
-  max-width: 20ch;
-  opacity: 1;
-  margin-left: 0.25rem;
-}
-
 
 /* ── Accesibilidad / preferencias ────────────────── */
 
 @media (hover: none) {
-  .archive-row p {
+  .archive-row__claim {
     opacity: 1;
   }
 }
@@ -301,6 +231,7 @@
 @media (prefers-reduced-motion: reduce) {
   .cursor-preview {
     scale: 1;
+    /* Valor único: fundido mínimo, sin escala, para movimiento reducido */
     transition: opacity 150ms linear;
   }
 }
@@ -321,10 +252,10 @@
 
   .archive-row {
     flex-wrap: wrap;
-    row-gap: 0.5rem;
+    row-gap: var(--spacing-2);
   }
 
-  .archive-row p {
+  .archive-row__claim {
     order: 1;
     width: 100%;
   }

@@ -22,6 +22,13 @@
 }
 
 
+/* ── Botón de menú (solo móvil) ──────────────────── */
+
+.site-nav__toggle {
+  display: none;
+}
+
+
 /* ── Lista de enlaces ────────────────────────────── */
 
 .site-nav__list {
@@ -41,14 +48,14 @@
   flex-direction: column;
   align-items: center;
   padding: var(--spacing-2) var(--spacing-3);
-  border-radius: var(--border-radius-2);
-  font-weight: var(--font-weight-regular, 400);
+  border-radius: var(--radius-2);
+  font-weight: var(--font-weight-regular);
   color: var(--color-text-secondary);
   background-color: transparent;
   text-decoration: none;
   transition:
-    color var(--duration) var(--ease-out),
-    background-color var(--duration) var(--ease-out);
+    color var(--duration-base) var(--easing-out),
+    background-color var(--duration-base) var(--easing-out);
 }
 
 /* Reserva el ancho del peso medium para que el activo no desplace el resto */
@@ -57,7 +64,7 @@
   height: 0;
   overflow: hidden;
   visibility: hidden;
-  font-weight: var(--font-weight-medium, 500);
+  font-weight: var(--font-weight-medium);
   pointer-events: none;
   user-select: none;
 }
@@ -73,7 +80,7 @@
 .site-nav__link[aria-current="page"]:hover {
   color: var(--color-text-primary);
   background-color: transparent;
-  font-weight: var(--font-weight-medium, 500);
+  font-weight: var(--font-weight-medium);
 }
 
 /* Foco de teclado visible */
@@ -92,6 +99,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    width: var(--size-button-icon);
+    height: var(--size-button-icon);
+    border: none;
+    background: none;
+    color: inherit;
+    cursor: pointer;
   }
 
   .site-nav__toggle-icon,
@@ -101,7 +115,7 @@
     width: 22px;
     height: 2px;
     background-color: currentColor;
-    transition: transform var(--duration) var(--ease-out);
+    transition: transform var(--duration-base) var(--easing-out);
     position: relative;
   }
 
@@ -117,12 +131,12 @@
   .site-nav__menu {
     display: none;
     position: absolute;
-    top: 4rem;
+    top: var(--size-header-height);
     left: 0;
     right: 0;
-    background-color: var(--color-ground);
-    border-bottom: 1px solid var(--color-border);
-    padding: var(--space-4) var(--space-6);
+    background-color: var(--color-background-primary);
+    border-bottom: 1px solid var(--color-outline-primary);
+    padding: var(--spacing-4) var(--spacing-6);
   }
 
   .site-nav__menu.is-open {
@@ -132,6 +146,6 @@
   .site-nav__list {
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--space-4);
+    gap: var(--spacing-4);
   }
 }

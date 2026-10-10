@@ -1,0 +1,43 @@
+/* ============================================================
+   MAIN.CSS — único punto de entrada de estilos (ITCSS)
+
+   El orden de los @import es el orden de la cascada: de lo más
+   genérico y de menor especificidad a lo más concreto.
+
+   1. Settings   tokens.css (custom properties; ver /TOKENS.md)
+   2. Tools      — (no se necesitan: sin preprocesador)
+   3. Generic    @font-face, reset, preferencias globales
+   4. Elements   estilos base de etiquetas HTML
+   5. Objects    patrones de layout sin aspecto visual
+   6. Components componentes compartidos y de cada página
+   7. Utilities  ayudas de un solo propósito
+   ============================================================ */
+
+/* 1. Settings */
+@import './tokens.css';
+
+/* 3. Generic */
+@import './generic.css';
+
+/* 4. Elements */
+@import './elements.css';
+
+/* 5. Objects */
+@import './objects.css';
+
+/* 6. Components — compartidos */
+@import '../components/skip-link/skip-link.css';
+@import '../components/site-nav/site-nav.css';
+@import '../components/site-footer/site-footer.css';
+@import '../components/button/button.css';
+@import '../components/icon-button/icon-button.css';
+@import '../components/chip/chip.css';
+
+/* 6. Components — de cada página */
+@import '../pages/index.css';
+@import '../pages/archive/archive.css';
+@import '../pages/about/about.css';
+@import '../pages/project/project.css';
+
+/* 7. Utilities */
+@import './utilities.css';

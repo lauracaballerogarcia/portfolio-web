@@ -20,7 +20,7 @@ export function initFigureLightbox(root = document) {
     dialog.id = 'figure-lightbox';
     dialog.className = 'figure-lightbox';
     dialog.innerHTML = `
-      <button type="button" class="figure-lightbox__close" aria-label="Close enlarged view"></button>
+      <button type="button" class="icon-button figure-lightbox__close" aria-label="Close enlarged view"></button>
       <img class="figure-lightbox__img" src="" alt="" hidden>
       <video class="figure-lightbox__video" controls loop muted playsinline hidden></video>
     `;
@@ -41,6 +41,7 @@ export function initFigureLightbox(root = document) {
     dialogImg.hidden = false;
     dialogImg.src = img.currentSrc || img.src;
     dialogImg.alt = img.alt;
+    dialog.setAttribute('aria-label', 'Enlarged image');
     dialog.showModal();
   }
 
@@ -52,8 +53,10 @@ export function initFigureLightbox(root = document) {
 
     dialogImg.hidden = true;
     dialogVideo.hidden = false;
-    dialogVideo.src = video.currentSrc;
+    // Con preload="none" el vídeo puede no haber cargado aún: usa el <source>
+    dialogVideo.src = video.currentSrc || video.querySelector('source')?.src || '';
     dialogVideo.setAttribute('aria-label', video.getAttribute('aria-label') ?? '');
+    dialog.setAttribute('aria-label', 'Enlarged video');
     dialog.showModal();
 
     if (!reduceMotion.matches) dialogVideo.play().catch(() => {});
@@ -94,7 +97,7 @@ export function initFigureLightbox(root = document) {
 
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'cs-figure__expand';
+    button.className = 'icon-button cs-figure__expand';
     button.setAttribute('aria-label', video ? 'Enlarge video' : 'Enlarge image');
 
     if (video) {

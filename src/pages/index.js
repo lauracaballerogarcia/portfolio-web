@@ -6,43 +6,33 @@
  */
 
 import store from '../state/store.js';
-import { fetchProjects, filterByTag, getUniqueTags, hasCaseStudy, getThumbnail } from '../data/projects.js';
+import { fetchProjects, hasCaseStudy, getThumbnail, HERO_MOBILE_MEDIA } from '../data/projects.js';
 
 // Componentes
 import '../components/site-nav/site-nav.js';
 import '../components/site-footer/site-footer.js';
-import '../components/project-card/project-card.js';
-import '../components/tag-filter/tag-filter.js';
-
-// Estilos
-import '../styles/tokens.css';
-import '../components/site-nav/site-nav.css';
-import '../components/site-footer/site-footer.css';
-import '../components/project-card/project-card.css';
-import '../components/tag-filter/tag-filter.css';
-import './index.css';
 
 /** Renderiza la cuadrícula de proyectos según el estado actual */
 function renderProjects(state) {
   const list = document.querySelector('#featured-projects');
   if (!list) return;
 
-  const visible = filterByTag(state.projects, state.activeTag);
+  const visible = state.projects;
 
   list.setAttribute('aria-busy', state.loading ? 'true' : 'false');
 
   if (state.loading) {
-    list.innerHTML = `<li class="projects-status">Cargando proyectos…</li>`;
+    list.innerHTML = `<li class="featured-grid__status">Loading projects…</li>`;
     return;
   }
 
   if (state.error) {
-    list.innerHTML = `<li class="projects-status" role="alert">No se pudieron cargar los proyectos.</li>`;
+    list.innerHTML = `<li class="featured-grid__status" role="alert">Projects couldn’t be loaded.</li>`;
     return;
   }
 
   if (visible.length === 0) {
-    list.innerHTML = `<li class="projects-status">No hay proyectos.</li>`;
+    list.innerHTML = `<li class="featured-grid__status">No projects yet.</li>`;
     return;
   }
 
@@ -53,56 +43,42 @@ function renderProjects(state) {
     const chipText  = !available ? 'Coming soon!'
                     : isFeatured ? 'See case study'
                     : 'See work';
-    const sizes      = isFeatured
-      ? 'calc(100vw - 2rem)'
-      : '(max-width: 768px) calc(100vw - 2rem), calc(50vw - 1.5rem)';
+    // Sin case study: tarjeta sin enlace; el chip "Coming soon!" se
+    // anuncia porque es la única pista del estado del proyecto
+    const wrapperStart = available
+      ? `<a class="featured-card__link" href="/project/${project.slug}/">`
+      : '<div class="featured-card__inner">';
+    const wrapperEnd   = available ? '</a>' : '</div>';
 
     return `
-        <li class="${isFeatured ? 'card--1col' : 'card--2col'}${available ? '' : ' card--coming-soon'}">
-        <a href="/project/${project.slug}/" aria-label="View ${project.title} project: ${project.claim ?? project.summary}${available ? '' : ' (case study coming soon)'}">
-          <figure>
-                        <picture>
-              <source
-                type="image/webp"
-                srcset="${thumb}?width=400 400w,
-                        ${thumb}?width=768 768w,
-                        ${thumb}?width=1024 1024w,
-                        ${thumb}?width=1440 1440w"
-                sizes="${sizes}">
+        <li class="featured-card${isFeatured ? ' featured-card--lead' : ''}${available ? '' : ' featured-card--coming-soon'}">
+        ${wrapperStart}
+          <figure class="featured-card__figure">
+            <picture>${isFeatured && project.heroMobile ? `
+              <source media="${HERO_MOBILE_MEDIA}" srcset="${project.heroMobile}">` : ''}
               <img
+                class="featured-card__image"
                 src="${thumb}"
-                srcset="${thumb}?width=400 400w,
-                        ${thumb}?width=768 768w,
-                        ${thumb}?width=1024 1024w,
-                        ${thumb}?width=1440 1440w"
-                sizes="${sizes}"
                 width="2880"
                 height="1800"
                 ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}
                 decoding="async"
                 alt="">
             </picture>
-            <div class="chip${available ? '' : ' chip--coming-soon'}" aria-hidden="true">              
-            <span class="chip-text">${chipText}</span>
+            <div class="chip${available ? '' : ' chip--coming-soon'}"${available ? ' aria-hidden="true"' : ''}>
+              <span class="chip__label">${chipText}</span>
             </div>
           </figure>
-          <div class="card-info">
-            <h2>${project.title}</h2>
-            <p>${project.claim ?? project.summary}</p>
+          <div class="featured-card__info">
+            <h2 class="featured-card__title">${project.title}</h2>
+            <p class="featured-card__claim">${project.claim ?? project.summary}</p>
           </div>
-        </a>
+        ${wrapperEnd}
       </li>
     `;
   }).join('');
 }
 
-/** Inicializa el filtro de tags */
-function initTagFilter(projects) {
-  const filter = document.querySelector('tag-filter');
-  if (!filter) return;
-  const tags = getUniqueTags(projects);
-  filter.setAttribute('tags', JSON.stringify(tags));
-}
 
 /** Bootstrap */
 async function init() {
@@ -115,7 +91,6 @@ async function init() {
     const featured = projects.filter(p => p.featured === true);
 
     store.setState({ projects: featured, loading: false });
-    initTagFilter(featured);
   } catch (err) {
     console.error(err);
     store.setState({ loading: false, error: err.message });

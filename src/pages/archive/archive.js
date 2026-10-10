@@ -6,7 +6,6 @@
  */
 
 import { fetchProjects, getUniqueTags, hasCaseStudy, getThumbnail } from '../../data/projects.js';
-import './archive.css';
 
 const DEFAULT_VIEW = 'list';
 
@@ -41,7 +40,7 @@ function renderFilters(tags) {
   ].join('');
 
   container.addEventListener('click', (e) => {
-    const btn = e.target.closest('.button-primary');
+    const btn = e.target.closest('[data-tag]');
     if (!btn) return;
 
     const { tag } = btn.dataset;
@@ -56,7 +55,7 @@ function renderFilters(tags) {
 }
 
 function syncFilterButtons() {
-  document.querySelectorAll('#archive-filters .button-primary').forEach(btn => {
+  document.querySelectorAll('#archive-filters [data-tag]').forEach(btn => {
     const { tag } = btn.dataset;
     const pressed = tag === 'all'
       ? state.activeTags.size === 0
@@ -68,7 +67,7 @@ function syncFilterButtons() {
 // ─── Cambio de vista ──────────────────────────────
 
 function initViewToggle() {
-  const buttons = document.querySelectorAll('.view-toggle');
+  const buttons = document.querySelectorAll('button[data-view]');
 
   buttons.forEach(btn => {
     btn.setAttribute('aria-pressed', String(btn.dataset.view === state.view));
@@ -85,14 +84,18 @@ function initViewToggle() {
 
 // ─── Render ───────────────────────────────────────
 
+// Proyectos sin case study: misma fila/tarjeta pero sin enlace
 function listItem(p) {
+  const available = hasCaseStudy(p.slug);
+  const tag = available ? 'a' : 'div';
+  const href = available ? ` href="/project/${p.slug}/"` : '';
   return `
     <li>
-        <a class="archive-row" href="/project/${p.slug}/" data-thumbnail="${getThumbnail(p)}">
-        <h2>${p.title}</h2>
-        <p>${p.claim ?? p.summary}</p>
-        <time datetime="${p.year}">${p.year}</time>
-      </a>
+      <${tag} class="archive-row${available ? '' : ' archive-row--coming-soon'}"${href} data-thumbnail="${getThumbnail(p)}">
+        <h2 class="archive-row__title">${p.title}</h2>
+        <p class="archive-row__claim">${p.claim ?? p.summary}${available ? '' : '<span class="visually-hidden"> (case study coming soon)</span>'}</p>
+        <time class="archive-row__year" datetime="${p.year}">${p.year}</time>
+      </${tag}>
     </li>
   `;
 }
@@ -101,19 +104,21 @@ function gridItem(p) {
   const available = hasCaseStudy(p.slug);
   const chipText  = available ? 'See work' : 'Coming soon!';
 
+  const tag = available ? 'a' : 'div';
+  const href = available ? ` href="/project/${p.slug}/"` : '';
+
   return `
     <li>
-      <a class="archive-card" href="/project/${p.slug}/">
-        <figure>
-          <img src="${getThumbnail(p)}" alt="" loading="lazy" decoding="async">
-            <span class="chip${available ? '' : ' chip--coming-soon'}" aria-hidden="true">
-            <span class="chip-text">${chipText}</span>
+      <${tag} class="archive-card${available ? '' : ' archive-card--coming-soon'}"${href}>
+        <figure class="archive-card__figure">
+          <img class="archive-card__image" src="${getThumbnail(p)}" alt="" loading="lazy" decoding="async">
+          <span class="chip${available ? '' : ' chip--coming-soon'}"${available ? ' aria-hidden="true"' : ''}>
+            <span class="chip__label">${chipText}</span>
           </span>
         </figure>
-        <h2>${p.title}</h2>
-        <p>${p.tags.join(', ')}</p>
-        ${available ? '' : '<span class="visually-hidden">Case study coming soon</span>'}
-      </a>
+        <h2 class="archive-card__title">${p.title}</h2>
+        <p class="archive-card__tags">${p.tags.join(', ')}</p>
+      </${tag}>
     </li>
   `;
 }
@@ -137,6 +142,8 @@ function renderProjects() {
 }
 
 // ─── Preview en cursor (vista lista) ──────────────
+// Las coordenadas van en custom properties (--x, --y): es el único estilo
+// que se escribe desde JS, porque depende de la posición del puntero.
 
 let previewEl = null;
 let previewImg = null;
@@ -155,17 +162,15 @@ function initCursorPreview() {
   let y = 0;
   let frame = null;
 
-  /** Posiciona el preview y elige el cuadrante según la posición del cursor */
+  /** Posiciona el preview junto al cursor (la posición la lee archive.css) */
   function positionPreview() {
     previewEl.style.setProperty('--x', `${x}px`);
     previewEl.style.setProperty('--y', `${y}px`);
-    previewEl.dataset.h = x > window.innerWidth / 2 ? 'left' : 'right';
-    previewEl.dataset.v = y > window.innerHeight / 2 ? 'top' : 'bottom';
   }
 
   list.addEventListener('mouseover', (e) => {
     if (state.view !== 'list' || !canHover.matches) return;
-    const row = e.target.closest('.archive-row');
+    const row = e.target.closest('[data-thumbnail]');
     if (!row) return;
 
     // Posiciona antes de mostrar, para que no aparezca en el cuadrante anterior

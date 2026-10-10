@@ -10,7 +10,6 @@
 const store = {
   _state: {
     projects:   [],   // array de objetos proyecto
-    activeTag:  'all', // filtro activo
     loading:    false,
     error:      null,
   },

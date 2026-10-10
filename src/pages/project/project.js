@@ -5,15 +5,8 @@
  * carga el Markdown del case study y rellena el DOM.
  */
 
-import { fetchProjects, fetchProjectContent } from '../../data/projects.js';
+import { fetchProjects, fetchProjectContent, hasCaseStudy, getThumbnail, HERO_MOBILE_MEDIA } from '../../data/projects.js';
 import { initFigureLightbox } from './figure-lightbox.js';
-
-
-// Estilos
-import '../../styles/tokens.css';
-import '../../components/site-nav/site-nav.css';
-import '../../components/site-footer/site-footer.css';
-import './project.css';
 
 
 // ─── Utilidades DOM ────────────────────────────────
@@ -46,9 +39,8 @@ function getSlugFromURL() {
 
 // ─── Ceja (eyebrow) que precede a cada h2 ──────────
 //
-// El renderer de marked (ver markdown-eyebrow-renderer.js) marca con
-// class="eyebrow" cualquier párrafo en mayúsculas que preceda a un h2
-// — p. ej. "Research" antes de "## We assumed the problem...". No es
+// En el Markdown, la ceja es un <p class="eyebrow"> escrito justo antes
+// de un h2 — p. ej. "Research" antes de "## We assumed the problem...". No es
 // <strong>: la ceja es una etiqueta de categoría, no énfasis textual,
 // así que aquí solo comprobamos la clase, nada de estructura.
 
@@ -92,24 +84,9 @@ function renderIndex() {
     </ul>
   `;
 
-  // Scroll suave con offset del header al hacer click.
-  indexNav.querySelectorAll('.project-index__link').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const id = link.getAttribute('href').slice(1);
-      const section = document.getElementById(id);
-      // El destino del scroll es la ceja, no el h2 — si apuntamos al
-      // h2, la ceja (que va justo encima) queda tapada por el header
-      // fijo. Si la sección no tiene ceja, cae de vuelta al h2.
-      const target = section?.querySelector(':scope > .project-eyebrow') ?? section?.querySelector(':scope > h2') ?? section;
-      if (!target) return;
-      const headerEl = document.querySelector('.site-nav');
-      const headerHeight = headerEl ? headerEl.getBoundingClientRect().height : 64;
-      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
-      const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - rem;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
-  });
+  // Los enlaces son anclas nativas: el navegador mueve el foco a la
+  // sección, actualiza la URL y respeta prefers-reduced-motion. El
+  // offset del header fijo lo aplica scroll-margin-top (project.css).
 
   // Marca el enlace activo al hacer scroll (se sigue midiendo por la
   // posición del h2, ya que la ceja vive justo encima de él).
@@ -139,7 +116,8 @@ function renderIndex() {
     });
 
     links.forEach(link => {
-      link.classList.toggle('is-active', link.getAttribute('href') === `#${current}`);
+      if (link.getAttribute('href') === `#${current}`) link.setAttribute('aria-current', 'true');
+      else link.removeAttribute('aria-current');
     });
   }
 
@@ -154,8 +132,6 @@ function initInsightsCarousel(root = document) {
   const track = root.querySelector('.insights__track');
   const prevButton = root.querySelector('[data-scroll="prev"]');
   const nextButton = root.querySelector('[data-scroll="next"]');
-
-  console.log('initInsightsCarousel', { track, prevButton, nextButton });
 
   if (!track || !prevButton || !nextButton) return;
 
@@ -191,7 +167,7 @@ function getRelatedProjects(current, projects, limit = RELATED_LIMIT) {
   const currentTags = new Set(current.tags ?? []);
 
   return projects
-    .filter((p) => p.slug !== current.slug)
+    .filter((p) => p.slug !== current.slug && hasCaseStudy(p.slug))
     .map((p) => ({
       project: p,
       shared: (p.tags ?? []).filter((tag) => currentTags.has(tag)).length,
@@ -227,7 +203,7 @@ function renderRelatedWork(current, projects) {
         <li>
           <a class="related-work__link" href="/project/${p.slug}/" data-index="${i}">
             <figure class="related-work__figure">
-              <img src="${p.thumbnail ?? p.hero}" alt="" loading="lazy" decoding="async">
+              <img src="${getThumbnail(p)}" alt="" loading="lazy" decoding="async">
             </figure>
             <span class="related-work__caption">
               <span class="related-work__caption-title">${p.title}</span>
@@ -265,13 +241,57 @@ function initLoopVideos(root = document) {
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
+  // El poster (data-poster) se asigna al acercarse, igual que el vídeo, para
+  // no descargar todos al entrar. Mientras no hay poster ni fotograma se ve
+  // el fondo de .cs-figure__video, con el tamaño ya reservado.
+  const showPoster = (video) => {
+    if (video.dataset.poster && !video.getAttribute('poster')) video.poster = video.dataset.poster;
+  };
+
+  // Carga el vídeo la primera vez que se acerca a la pantalla. Con
+  // movimiento reducido solo pide los metadatos: el navegador muestra el
+  // primer fotograma como imagen fija y se reproduce solo a demanda. Si hay
+  // poster, con movimiento reducido basta con él: el vídeo espera al botón.
+  const approach = (video) => {
+    showPoster(video);
+    if (!(reduceMotion.matches && video.dataset.poster)) load(video);
+  };
+
+  const load = (video) => {
+    if (video.dataset.loaded) return;
+    video.dataset.loaded = 'true';
+    video.preload = reduceMotion.matches ? 'metadata' : 'auto';
+    video.load();
+  };
+
+  const autoplay = (video) => {
+    if (reduceMotion.matches || video.dataset.userPaused === 'true') return;
+    video.play().catch(() => {});
+  };
+
+  // Dos observadores: uno anticipa la descarga (300px antes de entrar) y
+  // otro reproduce solo mientras el vídeo es visible y pausa al salir.
+  const supportsIO = 'IntersectionObserver' in window;
+  const loadObserver = supportsIO && new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) { approach(target); loadObserver.unobserve(target); }
+    });
+  }, { rootMargin: '300px 0px' });
+
+  const playObserver = supportsIO && new IntersectionObserver((entries) => {
+    entries.forEach(({ target, isIntersecting }) => {
+      if (isIntersecting) autoplay(target);
+      else if (!target.paused) target.pause();
+    });
+  });
+
   videos.forEach((video) => {
     const wrapper = video.parentElement;
     if (wrapper.querySelector('.cs-figure__toggle')) return;
 
     const button = document.createElement('button');
     button.type = 'button';
-    button.className = 'cs-figure__toggle';
+    button.className = 'icon-button cs-figure__toggle';
 
     const sync = () => {
       const paused = video.paused;
@@ -279,27 +299,80 @@ function initLoopVideos(root = document) {
       button.setAttribute('aria-label', paused ? 'Play video' : 'Pause video');
     };
 
+    // El botón manda: si la usuaria pausa, el vídeo no se reanuda solo
     button.addEventListener('click', () => {
-      if (video.paused) video.play().catch(() => {});
-      else video.pause();
+      if (video.paused) {
+        video.dataset.userPaused = 'false';
+        showPoster(video);
+        load(video);
+        video.play().catch(() => {});
+      } else {
+        video.dataset.userPaused = 'true';
+        video.pause();
+      }
     });
 
     video.addEventListener('play', sync);
     video.addEventListener('pause', sync);
 
-    // Con movimiento reducido, el vídeo no arranca solo
-    if (reduceMotion.matches) video.pause();
-
     wrapper.appendChild(button);
     sync();
+
+    if (supportsIO) {
+      loadObserver.observe(video);
+      playObserver.observe(video);
+    } else {
+      // Navegadores sin IntersectionObserver: comportamiento anterior
+      approach(video);
+      autoplay(video);
+    }
   });
+}
+
+// ─── Volver arriba (solo < 1024px, ver project.css) ──
+// Aparece cuando el índice del case study ya ha salido por arriba (antes
+// taparía la primera etiqueta) y se oculta al llegar a Related work y al
+// footer, que tiene su propio enlace "Up" en la misma esquina.
+// Se calcula en scroll (una vez por frame) y no con IntersectionObserver:
+// un salto de scroll (enlace del índice, recarga a media página) puede pasar
+// el índice sin que llegue a cortar el viewport, y el observador no avisaría.
+
+let stopBackToTop = () => {};
+
+function initBackToTop() {
+  stopBackToTop();
+
+  const button = document.querySelector('.back-to-top');
+  const index  = document.querySelector('.project-index');
+  if (!button || !index) return;
+
+  let frame = 0;
+  const update = () => {
+    frame = 0;
+    if (!button.isConnected) return stopBackToTop(); // se salió de la página (SPA)
+    const pastIndex = index.getBoundingClientRect().bottom < 0;
+    const atEnd = [...document.querySelectorAll('.related-work:not([hidden]), site-footer')]
+      .some(el => el.getBoundingClientRect().top < window.innerHeight);
+    button.dataset.visible = String(pastIndex && !atEnd);
+  };
+  const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  update();
+
+  stopBackToTop = () => {
+    window.removeEventListener('scroll', schedule);
+    window.removeEventListener('resize', schedule);
+    cancelAnimationFrame(frame);
+  };
 }
 
 // ─── Renderizado ───────────────────────────────────
 
 async function renderProject(project, allProjects) {
   // Meta del documento
-  document.title = `${project.title} — Portfolio`;
+  document.title = `${project.title} — Laura Caballero García`;
   document.querySelector('meta[name="description"]')
     ?.setAttribute('content', project.summary ?? '');
   document.querySelector('meta[property="og:title"]')
@@ -307,16 +380,26 @@ async function renderProject(project, allProjects) {
   document.querySelector('meta[property="og:description"]')
     ?.setAttribute('content', project.summary ?? '');
 
-  // Hero
+  // Hero. Si el proyecto declara heroMobile (recorte vertical), <picture>
+  // lo sirve en móvil en vertical; si no, todas las pantallas usan el hero.
   const hero = document.querySelector('.project-hero');
   if (hero && project.hero) {
+    const picture = document.createElement('picture');
+    if (project.heroMobile) {
+      const source = document.createElement('source');
+      source.media  = HERO_MOBILE_MEDIA;
+      source.srcset = project.heroMobile;
+      picture.appendChild(source);
+    }
     const img = document.createElement('img');
     img.src      = project.hero;
     img.alt      = '';
     img.loading  = 'eager';
+    img.fetchPriority = 'high';
     img.decoding = 'async';
     img.classList.add('project-hero__img');
-    hero.appendChild(img);
+    picture.appendChild(img);
+    hero.appendChild(picture);
   }
 
   // Sidebar — título, cliente, tags
@@ -374,19 +457,6 @@ async function renderProject(project, allProjects) {
       initFigureLightbox(body);
       initLoopVideos(body);
 
-   
-
-
-      // const overviewSection = document.createElement('section');
-      // overviewSection.id = 'overview';
-
-      // const overviewEyebrow = document.createElement('p');
-      // overviewEyebrow.className = 'project-eyebrow visually-hidden';
-      // overviewEyebrow.textContent = 'Overview';
-
-      // overviewSection.appendChild(overviewEyebrow);
-      // body.prepend(overviewSection);
-
       // Envuelve cada h2 (y su ceja, si tiene) junto con su contenido en
       // una <section>. El id de la sección sale de la ceja cuando existe
       // — es la etiqueta corta pensada para navegación — y si no, del
@@ -434,25 +504,10 @@ async function renderProject(project, allProjects) {
 
   // Índice — después de envolver las secciones
   renderIndex();
+  initBackToTop();
 
   // Related work — al final, para que un fallo aquí no afecte al Case Study
   renderRelatedWork(project, allProjects);
-
-  // Navegación prev / next
-  const currentIndex = allProjects.findIndex(p => p.slug === project.slug);
-  const prev = allProjects[currentIndex - 1];
-  const next = allProjects[currentIndex + 1];
-
-  if (prev) {
-    const el = $('project-nav-prev');
-    if (el) { el.href = `/project/${prev.slug}/`; el.hidden = false; }
-    setText('project-nav-prev-title', prev.title ?? '');
-  }
-  if (next) {
-    const el = $('project-nav-next');
-    if (el) { el.href = `/project/${next.slug}/`; el.hidden = false; }
-    setText('project-nav-next-title', next.title ?? '');
-  }
 
   hide('project-loading');
   show('project-content');

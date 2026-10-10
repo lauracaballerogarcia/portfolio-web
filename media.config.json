@@ -1,0 +1,21 @@
+{
+  "sourceDir": "media-src",
+  "outputDir": "public/media",
+  "publicPrefix": "/media",
+  "manifest": "media-manifest.json",
+  "minSaving": 0.15,
+  "webp": {
+    "quality": 78,
+    "qualityByProject": { "xana": 80 },
+    "effort": 6,
+    "maxWidth": { "content": 1600, "hero": 2560, "heroMobile": null, "thumbnail": 1280 },
+    "maxMeanError": 4
+  },
+  "svg": {
+    "renderWidth": 1200,
+    "pixelTolerance": 32,
+    "maxDifferentPixels": 0.001,
+    "maxMeanError": 0.5
+  },
+  "content": ["src/data/projects.json", "src/data/content"]
+}

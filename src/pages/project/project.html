@@ -1,23 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="">
-  <meta property="og:title" content="">
-  <meta property="og:description" content="">
-  <meta property="og:type" content="article">
-
-  <title>Project — Portfolio</title>
-  <!-- <script type="module" src="./project.js"></script> -->
-</head>
-<body id="top">
-
-  <a href="#main-content" class="visually-hidden">Skip to main content</a>
-
-  <site-nav></site-nav>
-
-  <main id="main-content">
+<!--
+  Plantilla de project.html: solo se usa el contenido del elemento main.
+  main.js la importa con bundle-text: y copia ese contenido en el main
+  de index.html, que es el único documento real. El título de la página
+  lo pone el JS de la página; los metadatos comunes están en index.html.
+-->
+<main>
 
     <!-- Loading -->
     <div id="project-loading" aria-live="polite" aria-busy="true">
@@ -65,20 +52,20 @@
             <!-- metadata -->
             <dl class="project-meta">
               <div class="project-meta__item">
-                <dt>Timeline</dt>
-                <dd id="project-timeline"></dd>
+                <dt class="project-meta__label">Timeline</dt>
+                <dd id="project-timeline" class="project-meta__value"></dd>
               </div>
               <div class="project-meta__item">
-                <dt>Roles</dt>
-                <dd><ul id="project-role"></ul></dd>
+                <dt class="project-meta__label">Roles</dt>
+                <dd class="project-meta__value"><ul class="project-meta__list" id="project-role"></ul></dd>
               </div>
               <div class="project-meta__item">
-                <dt>Team</dt>
-                <dd><ul id="project-team"></ul></dd>
+                <dt class="project-meta__label">Team</dt>
+                <dd class="project-meta__value"><ul class="project-meta__list" id="project-team"></ul></dd>
               </div>
               <div class="project-meta__item">
-                <dt>Tools</dt>
-                <dd><ul id="project-tools"></ul></dd>
+                <dt class="project-meta__label">Tools</dt>
+                <dd class="project-meta__value"><ul class="project-meta__list" id="project-tools"></ul></dd>
               </div>
             </dl>
           </section>
@@ -91,24 +78,8 @@
 
       <aside class="related-work" aria-labelledby="related-work-title" hidden></aside>
 
-      <!-- Navegación prev / next -->
-      <!-- <nav class="project-nav container" aria-label="More projects">
-        <a id="project-nav-prev" href="#" hidden>
-          <span aria-hidden="true">←</span>
-          <span class="project-nav__label">Previous</span>
-          <span id="project-nav-prev-title" class="project-nav__title"></span>
-        </a>
-        <a id="project-nav-next" href="#" hidden>
-          <span class="project-nav__label">Next</span>
-          <span id="project-nav-next-title" class="project-nav__title"></span>
-          <span aria-hidden="true">→</span>
-        </a>
-      </nav> -->
+      <!-- Volver arriba: por debajo de 1024px, tras pasar el índice (project.css, initBackToTop) -->
+      <a href="#top" class="icon-button icon-button--outlined back-to-top"><span class="visually-hidden">Back to top</span></a>
     </div>
 
   </main>
-
-  <site-footer></site-footer>
-
-</body>
-</html>

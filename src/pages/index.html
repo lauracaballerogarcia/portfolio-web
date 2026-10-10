@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio de diseño de producto digital — tecnología, personas y entorno.">
+  <meta name="description" content="Digital product design portfolio — technology, people and environment.">
   <meta name="color-scheme" content="light">
 
   <!-- Open Graph básico -->
   <meta property="og:title"       content="Portfolio — Digital Product Design">
-  <meta property="og:description" content="Proyectos centrados en accesibilidad, sostenibilidad y diseño responsable.">
+  <meta property="og:description" content="Projects focused on accessibility, sustainability and responsible design.">
   <meta property="og:type"        content="website">
 
-  <!-- Tipografía (Google Fonts — self-host en producción para mayor privacidad) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+  <!-- Tipografía principal: se precarga para evitar el cambio de fuente tardío -->
+  <link rel="preload" href="../assets/fonts/geist/Geist-VariableFont_wght.woff2" as="font" type="font/woff2" crossorigin>
 
-  <title>Laura Caballero Garcia | Digital Product Portfolio</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <title>Laura Caballero García — Digital Product Designer</title>
   <script type="module" src="./main.js"></script>
 </head>
 
 <body id="top">
 
   <!-- Enlace de salto para accesibilidad de teclado -->
-  <a href="#main-content" class="visually-hidden">Saltar al contenido principal</a>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- HEADER -->
   <site-nav></site-nav>

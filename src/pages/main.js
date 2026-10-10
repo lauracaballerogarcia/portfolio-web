@@ -5,11 +5,11 @@
  * Punto de entrada único para toda la aplicación.
  */
 
-import '../styles/tokens.css';
+// Todos los estilos entran por un único archivo, en orden ITCSS
+import '../styles/main.css';
+
 import '../components/site-nav/site-nav.js';
 import '../components/site-footer/site-footer.js';
-import '../components/site-nav/site-nav.css';
-import '../components/site-footer/site-footer.css';
 
 import { initHome }    from './index.js';
 import { initProject } from './project/project.js';
@@ -40,11 +40,13 @@ if (path.startsWith('/project/')) {
   main.classList.remove('container');
   loadPage(projectHTML, initProject);
 
-  } else if (path.startsWith('/archive')) {
+} else if (path.startsWith('/archive')) {
+  document.title = 'Archive — Laura Caballero García';
   main.classList.add('container');
   loadPage(archiveHTML, initArchive);
 
 } else if (path.startsWith('/about')) {
+  document.title = 'About — Laura Caballero García';
   main.classList.add('container');
   loadPage(aboutHTML, initAbout);
 
