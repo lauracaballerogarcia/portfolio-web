@@ -1,154 +1,231 @@
 /* ============================================================
    ABOUT PAGE
+   El contenido lo pinta about.js desde src/data/about.json.
    ============================================================ */
 
-/* ── Toggle ──────────────────────────────────────── */
+/* ── Selector de perfil ──────────────────────────── */
 
-.about-toggle {
-  /* Mismo arranque que la barra de Archive */
-  margin-block: var(--spacing-16) var(--spacing-12);
-}
-
-.about-toggle__buttons {
+/* Los botones son .button-primary (components/button) */
+.about-profiles {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-2);
+  /* Mismo arranque que la barra de Archive */
+  margin-top: var(--spacing-16);
 }
 
-.about-toggle__btn {
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-s);
-  padding: var(--spacing-2) var(--spacing-4);
-  border: 1px solid var(--color-outline-primary);
-  border-radius: var(--radius-full);
-  background-color: transparent;
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: background-color var(--duration-base) var(--easing-out),
-              color var(--duration-base) var(--easing-out),
-              border-color var(--duration-base) var(--easing-out);
-}
-
-.about-toggle__btn:hover {
-  border-color: var(--color-text-primary);
-  color: var(--color-text-primary);
-}
-
-.about-toggle__btn[aria-pressed="true"] {
-  background-color: var(--color-background-inverse);
-  border-color: var(--color-background-inverse);
-  color: var(--color-text-inverse);
-}
-
-/* ── Content ─────────────────────────────────────── */
-
-.about-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-16);
-  align-items: start;
-  margin-block: var(--spacing-16) var(--spacing-24);
-}
-
-.about-content__text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
-}
-
-.about-mode {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
-}
-
-/* display: flex anularía el atributo hidden y se verían los dos modos */
-.about-mode[hidden] {
+/* display: flex anularía el atributo hidden (un solo perfil) */
+.about-profiles[hidden] {
   display: none;
 }
 
-.about-mode p {
-  font-size: var(--font-size-l);
-  line-height: 1.6;
+/* ── Layout — misma rejilla que el case study ────── */
+
+.about-layout {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: var(--spacing-grid-column);
+  margin-block: var(--spacing-12) var(--spacing-24);
 }
 
-.about-content__image img {
+/* Sidebar — columnas 1 a 3 */
+.about-sidebar {
+  grid-column: 1 / span 3;
+}
+
+.about-sidebar__media img {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border-radius: var(--radius-2);
+  background-color: var(--color-background-placeholder);
+  margin-bottom: var(--spacing-12);
 }
 
-/* ── CV Grid ─────────────────────────────────────── */
+.about-sidebar__sticky {
+  position: sticky;
+  top: calc(var(--size-header-height) + var(--spacing-8));
+}
 
-.about-cv {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-8);
-  padding-top: var(--spacing-12);
+/* Contenido — columnas 5 a 11 (libres la 4 y la 12) */
+.about-main {
+  grid-column: 5 / span 7;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+/* ── Intro ───────────────────────────────────────── */
+
+.about-intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-paragraph);
+}
+
+.about-intro p {
+  font-size: var(--font-size-l);
+  line-height: 1.6;
+}
+
+/* ── Secciones ───────────────────────────────────── */
+
+.about-sections {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+/* Destino de los enlaces del índice: deja libre el header fijo */
+.about-section {
+  scroll-margin-top: calc(var(--size-header-height) + var(--spacing-4));
+}
+
+.about-section__title {
+  margin-bottom: var(--spacing-4);
+}
+
+/* Filas de todas las secciones: separadas por una línea */
+.about-section__list > li {
   border-top: 1px solid var(--color-outline-primary);
-  margin-top: var(--spacing-2);
 }
 
-.about-cv__title {
-  font-size: var(--font-size-m);
-  margin-bottom: var(--spacing-6);
+.about-section__list > li:last-child {
+  border-bottom: 1px solid var(--color-outline-primary);
 }
 
-.about-cv__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
+/* ── Timeline (Experience, Education, Merits) ────── */
+
+/* Cargo | fechas | icono. En móvil las fechas bajan bajo el cargo */
+.about-item summary {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: baseline;
+  column-gap: var(--spacing-4);
+  row-gap: var(--spacing-1);
+  padding-block: var(--spacing-4);
+  cursor: pointer;
+  list-style: none;
 }
 
-.about-cv__item {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-1);
+/* Safari no aplica list-style: none al marcador del summary */
+.about-item summary::-webkit-details-marker {
+  display: none;
 }
 
-.about-cv__role {
-  font-size: var(--font-size-s);
-  font-weight: var(--font-weight-regular);
-  margin-bottom: var(--spacing-1);
+.about-item__dates {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
 }
 
-.about-cv__detail {
-  font-size: var(--font-size-s);
+/* Icono plus: al abrir gira 45° y se convierte en × */
+.about-item__icon {
+  align-self: center;
+  width: var(--size-icon-s);
+  height: var(--size-icon-s);
+  background-color: currentColor;
+  mask-image: url('../../assets/icons/plus.svg');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  transition: transform var(--duration-base) var(--easing-out);
+}
+
+.about-item[open] .about-item__icon {
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-item__icon {
+    transition: none;
+  }
+}
+
+.about-item__organization,
+.about-item__description {
   color: var(--color-text-secondary);
-  margin-bottom: var(--spacing-2);
+  line-height: 1.4;
+  /* Deja libre el hueco del icono para que el texto no lo cruce */
+  padding-right: calc(var(--size-icon-s) + var(--spacing-4));
 }
 
-.about-cv__detail a {
+.about-item__organization a {
   text-decoration-line: underline;
   text-underline-offset: 0.2em;
 }
 
-.about-cv__date {
-  font-family: var(--font-family-mono);
-  text-transform: uppercase;
-  font-size: var(--font-size-xs);
+.about-item__description {
+  margin-top: var(--spacing-2);
+}
+
+.about-item > :last-child {
+  padding-bottom: var(--spacing-4);
+}
+
+/* ── List (Tools and Skills) y Languages ─────────── */
+
+.about-entry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--spacing-4);
+  row-gap: var(--spacing-1);
+  padding-block: var(--spacing-4);
+}
+
+.about-entry__name {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.about-entry__level {
+  color: var(--color-text-secondary);
+}
+
+.about-entry__note {
+  flex-basis: 100%;
   color: var(--color-text-tertiary);
-  margin-bottom: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
 }
 
 /* ── Responsive ──────────────────────────────────── */
 
-@media (max-width: 768px) {
-  .about-content {
-    grid-template-columns: 1fr;
+@media (max-width: 1024px) {
+  /* Sidebar (foto e índice) encima del contenido, como en el case study */
+  .about-sidebar,
+  .about-main {
+    grid-column: 1 / -1;
   }
 
-  .about-content__image {
-    order: -1;
+  .about-sidebar {
+    margin-bottom: var(--spacing-12);
   }
 
-  .about-cv {
-    grid-template-columns: 1fr 1fr;
+  .about-sidebar__sticky {
+    position: static;
+  }
+
+  /* En columna, la foto a media anchura para no ocupar toda la pantalla */
+  .about-sidebar__media img {
+    max-width: 50%;
   }
 }
 
-@media (max-width: 480px) {
-  .about-cv {
-    grid-template-columns: 1fr;
+@media (max-width: 640px) {
+  .about-item summary {
+    grid-template-columns: 1fr auto;
+  }
+
+  .about-item__dates {
+    grid-row: 2;
+  }
+
+  .about-item__icon {
+    grid-column: 2;
+    grid-row: 1 / span 2;
   }
 }

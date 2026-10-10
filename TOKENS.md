@@ -75,7 +75,7 @@ Custom properties don't work inside `@media`, so breakpoints stay literal: **480
 | `--radius-2` | 8px | figures, case-study blocks, nav links, tags, lightbox |
 | `--radius-4` | 16px | `--radius-card-s` |
 | `--radius-8` | 32px | `--radius-card-l` |
-| `--radius-full` | 9999px | `--radius-chip`, About toggle, tag-filter |
+| `--radius-full` | 9999px | `--radius-chip`, tag-filter |
 | `--font-family-serif / sans / mono` | Sentient / Geist / Geist Mono | captions & quotes / body / labels |
 | `--font-size-xs … 3xl` | 14, 16, 18, 20, 24, 32, 56px | everywhere |
 | `--font-weight-regular / medium` | 400 / 500 | headings, body / active nav, index, strong |
@@ -95,7 +95,7 @@ Custom properties don't work inside `@media`, so breakpoints stay literal: **480
 | `--color-background-primary` | neutral-0 | page, header, round buttons, chip |
 | `--color-background-secondary` | neutral-50 | nav hover, insight cards |
 | `--color-background-placeholder` | neutral-100 | media while loading |
-| `--color-background-inverse` | neutral-950 | selected About toggle / tag-filter |
+| `--color-background-inverse` | neutral-950 | selected tag-filter |
 | `--color-outline-primary` | neutral-200 | dividers and borders |
 | `--color-text-primary / secondary / tertiary` | neutral-950 / 700 / 600 | text hierarchy, focus ring, markers |
 | `--color-text-inverse` | neutral-0 | text on inverse backgrounds |

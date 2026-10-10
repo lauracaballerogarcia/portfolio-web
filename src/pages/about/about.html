@@ -3,130 +3,34 @@
   main.js la importa con bundle-text: y copia ese contenido en el main
   de index.html, que es el único documento real. El título de la página
   lo pone el JS de la página; los metadatos comunes están en index.html.
+
+  Esta plantilla solo tiene la estructura. El contenido (perfiles, foto,
+  intro y secciones) vive en src/data/about.json y lo pinta about.js.
 -->
 <main>
 
     <h1 class="visually-hidden">About</h1>
 
-    <!-- Toggle -->
-    <section class="about-toggle">
-      <div class="about-toggle__buttons">
-        <button type="button" class="about-toggle__btn" data-mode="professional" aria-pressed="true">
-          Professional
-        </button>
-        <button type="button" class="about-toggle__btn" data-mode="personal" aria-pressed="false">
-          Personal
-        </button>
-      </div>
-    </section>
+    <!-- Selector de perfil: about.js lo rellena y lo muestra solo si
+         hay más de un perfil con contenido -->
+    <div class="about-profiles" id="about-profiles" role="group" aria-label="View profile" hidden></div>
 
-    <!-- Content -->
-    <section class="about-content">
+    <div class="about-layout">
 
-      <!-- Left: text -->
-      <div class="about-content__text">
-
-        <!-- Professional -->
-        <div class="about-mode" id="mode-professional">
-          <p>Hello, I'm Laura, a digital Product Designer currently based in Asturias, Spain.</p>
-          <p>With a background in graphic design, I specialize in digital products and web experiences. My work sits at the intersection of <strong>technology</strong>, <strong>behaviour</strong> and <strong>impact</strong>, from user research and UX strategy to crafting scalable design systems that bring consistency across products and platforms.</p>
-          <p>I'm well aware that the best solutions often lie beyond my own perspective. That's why I'm a <strong>team player</strong> (quite literally). I enjoy working with others to challenge ideas, test hypotheses, and build better products together.</p>
+      <!-- Sidebar: foto e índice de secciones -->
+      <div class="about-sidebar">
+        <div class="about-sidebar__media" id="about-image"></div>
+        <div class="about-sidebar__sticky">
+          <nav class="section-index" id="about-index" aria-label="About sections"></nav>
         </div>
-
-        <!-- Personal -->
-        <div class="about-mode" id="mode-personal" hidden>
-          <p>Outside of work, I'm curious about the relationship between people and the spaces they inhabit — both physical and digital.</p>
-          <p>I spend time hiking, reading, and thinking about how design shapes everyday life in ways we rarely notice.</p>
-        </div>
-
       </div>
 
-      <!-- Right: image -->
-      <!-- Foto (pendiente de exportar). Cuando exista:
-           1. Descomentar el <img> con la ruta /media/… de la foto profesional
-              y su texto alternativo.
-           2. Añadir a cada botón del toggle data-image="/media/…" y
-              data-image-alt="…" con la foto de ese modo; about.js la cambia
-              al pulsar. -->
-      <div class="about-content__image">
-        <!-- <img id="about-image" src="" alt="" loading="eager" decoding="async"> -->
+      <!-- Contenido: intro y secciones -->
+      <div class="about-main">
+        <div class="about-intro" id="about-intro"></div>
+        <div class="about-sections" id="about-sections"></div>
       </div>
 
-    </section>
-
-    <!-- CV Grid -->
-    <section class="about-cv">
-
-      <div class="about-cv__col">
-        <h2 class="about-cv__title">Experience</h2>
-        <ul class="about-cv__list">
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Graphic Design & Web Content Intern</strong>
-            <span class="about-cv__detail"><a href="https://www.uv.es/iupr" target="_blank" rel="noopener noreferrer">Instituto Universitario de Restauración del Patrimonio</a> · Valencia, Spain · Part-time · On-site</span>
-            <span class="about-cv__date">May 2025 – Apr 2026</span>
-          </li>
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Graphic Design Intern</strong>
-            <span class="about-cv__detail"><a href="https://www.endofwork.com.au/" target="_blank" rel="noopener noreferrer">End of Work</a> · Sydney, Australia · On-site · Part-time</span>
-            <span class="about-cv__date">Aug 2024 – Nov 2024</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="about-cv__col">
-        <h2 class="about-cv__title">Education</h2>
-        <ul class="about-cv__list">
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Postgraduate Expert Diploma in User Interface Design (24 ECTS)</strong>
-            <span class="about-cv__detail">Universitat Politècnica de València (UPV)</span>
-            <span class="about-cv__date">Sep 2025 – Jul 2026</span>
-          </li>
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Bachelor's Degree in Design and Creative Technologies</strong>
-            <span class="about-cv__detail">Universitat Politècnica de València (UPV)</span>
-            <span class="about-cv__date">Sep 2021 – Jul 2025</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="about-cv__col">
-        <h2 class="about-cv__title">Merits</h2>
-        <ul class="about-cv__list">
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Erasmus+ KA131 Scholarship</strong>
-            <span class="about-cv__detail">Awarded for an exchange semester in the Bachelor of Design in Visual Communication at the University of Technology Sydney (UTS), Australia</span>
-            <span class="about-cv__date">Jul 2024 – Jan 2025</span>
-          </li>
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Erasmus+ Blended Intensive Programme (BIP)</strong>
-            <span class="about-cv__detail">Participated in the European Creative Futures Programme, held at HU University of Applied Sciences Utrecht, Netherlands</span>
-            <span class="about-cv__date">Jan 2024 – Feb 2024</span>
-          </li>
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Amancio Ortega Foundation (FAO) Scholarship</strong>
-            <span class="about-cv__detail">Awarded for a year of secondary study abroad (Grade 11) at Earl of March Secondary School, Ottawa, Canada</span>
-            <span class="about-cv__date">Sep 2019 – Jun 2020</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="about-cv__col">
-        <h2 class="about-cv__title">Languages</h2>
-        <ul class="about-cv__list">
-          <li class="about-cv__item">
-            <strong class="about-cv__role">Spanish — Native</strong>
-          </li>
-          <li class="about-cv__item">
-            <strong class="about-cv__role">English — Proficient (C2)</strong>
-            <span class="about-cv__detail">Cambridge C1 Advanced, awarded at C2 level</span>
-          </li>
-          <li class="about-cv__item">
-            <strong class="about-cv__role">German — Elementary (A2)</strong>
-            <span class="about-cv__detail">Official Language School (EOI)</span>
-          </li>
-        </ul>
-      </div>
-
-    </section>
+    </div>
 
   </main>

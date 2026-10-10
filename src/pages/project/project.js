@@ -52,7 +52,7 @@ function getEyebrowFor(h2) {
 // ─── Índice de navegación interna ──────────────────
 
 function renderIndex() {
-  const indexNav = document.querySelector('.project-index');
+  const indexNav = document.querySelector('.section-index');
   if (!indexNav) return;
 
  // Overview vive fuera del case study (en .project-main, antes del
@@ -75,10 +75,10 @@ function renderIndex() {
   });
 
   indexNav.innerHTML = `
-    <ul class="project-index__list">
+    <ul class="section-index__list">
       ${items.map(s => `
-        <li class="project-index__item">
-          <a href="#${s.id}" class="project-index__link">${s.label}</a>
+        <li class="section-index__item">
+          <a href="#${s.id}" class="section-index__link">${s.label}</a>
         </li>
       `).join('')}
     </ul>
@@ -90,7 +90,7 @@ function renderIndex() {
 
   // Marca el enlace activo al hacer scroll (se sigue midiendo por la
   // posición del h2, ya que la ceja vive justo encima de él).
-  const links    = indexNav.querySelectorAll('.project-index__link');
+  const links    = indexNav.querySelectorAll('.section-index__link');
   const headings = sections
     .map(section => section.querySelector(':scope > h2'))
     .filter(Boolean);
@@ -343,7 +343,7 @@ function initBackToTop() {
   stopBackToTop();
 
   const button = document.querySelector('.back-to-top');
-  const index  = document.querySelector('.project-index');
+  const index  = document.querySelector('.section-index');
   if (!button || !index) return;
 
   let frame = 0;

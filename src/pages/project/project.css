@@ -89,47 +89,6 @@
   margin-bottom: var(--spacing-12);
 }
 
-/* ── Índice ──────────────────────────────────────── */
-
-.project-index__list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-3);
-}
-
-.project-index__item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
-}
-
-.project-index__item::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: transparent;
-  transition: background-color var(--duration-base) var(--easing-out);
-  flex-shrink: 0;
-}
-
-.project-index__item:has([aria-current="true"])::before {
-  background-color: var(--color-text-primary);
-}
-
-.project-index__link {
-  font-size: var(--font-size-s);
-  color: var(--color-text-tertiary);
-  text-decoration: none;
-  transition: color var(--duration-base) var(--easing-out);
-}
-
-.project-index__link:hover,
-.project-index__link[aria-current="true"] {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-medium);
-}
-
 /* Destino de los enlaces del índice: deja libre el header fijo */
 #overview,
 .project-body > section {

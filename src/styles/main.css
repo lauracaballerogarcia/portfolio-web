@@ -32,6 +32,7 @@
 @import '../components/button/button.css';
 @import '../components/icon-button/icon-button.css';
 @import '../components/chip/chip.css';
+@import '../components/section-index/section-index.css';
 
 /* 6. Components — de cada página */
 @import '../pages/index.css';

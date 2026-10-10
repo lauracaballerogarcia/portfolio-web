@@ -1,0 +1,13 @@
+{
+  "projectId": "10bb168b-3403-49fa-968d-36d021d71489",
+  "shape": "package",
+  "pkg": "portfolio",
+  "globalName": "Portfolio",
+  "entry": ".design-sync/entry.js",
+  "buildCmd": "node .design-sync/build-css.mjs",
+  "cssEntry": ".design-sync/.cache/ds.css",
+  "extraFonts": [
+    ".design-sync/.cache/fonts.css"
+  ],
+  "readmeHeader": ".design-sync/conventions.md"
+}

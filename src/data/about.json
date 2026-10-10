@@ -1,0 +1,115 @@
+{
+  "professional": {
+    "label": "Professional",
+    "image": {
+      "src": "/media/about/profile.webp",
+      "alt": "Portrait of Laura Caballero"
+    },
+    "intro": [
+      "👋 Hello! I'm Laura Caballero, a digital designer currently based in Asturias, Spain, and open to relocating. ",
+      "I trained in Design and Creative Technologies at the Universitat Politècnica de València, and then specialised in User Interface Design.",
+      "I work between product design and digital branding: from research and structure through to interfaces, and the design systems that keep a product and its brand consistent, yet adaptable, across platforms and media."
+    ],
+    "sections": [
+      {
+        "id": "experience",
+        "title": "Experience",
+        "type": "timeline",
+        "items": [
+          {
+            "role": "Graphic Design & Web Content Intern",
+            "start": "2025-05",
+            "end": "2026-04",
+            "organization": {
+              "name": "Instituto Universitario de Restauración del Patrimonio",
+              "url": "https://www.uv.es/iupr"
+            },
+            "location": "Valencia, Spain · Part-time · On-site"
+          },
+          {
+            "role": "Graphic Design Intern",
+            "start": "2024-08",
+            "end": "2024-11",
+            "organization": {
+              "name": "End of Work",
+              "url": "https://www.endofwork.com.au/"
+            },
+            "location": "Sydney, Australia · On-site · Part-time"
+          }
+        ]
+      },
+      {
+        "id": "tools-and-skills",
+        "title": "Tools and Skills",
+        "type": "list",
+        "items": [
+          "[PLACEHOLDER] Tool 1",
+          "[PLACEHOLDER] Tool 2",
+          "[PLACEHOLDER] Skill 1",
+          "[PLACEHOLDER] Skill 2"
+        ]
+      },
+      {
+        "id": "education",
+        "title": "Education",
+        "type": "timeline",
+        "items": [
+          {
+            "role": "Postgraduate Expert Diploma in User Interface Design (24 ECTS)",
+            "start": "2025-09",
+            "end": "2026-07",
+            "organization": { "name": "Universitat Politècnica de València (UPV)" }
+          },
+          {
+            "role": "Bachelor's Degree in Design and Creative Technologies",
+            "start": "2021-09",
+            "end": "2025-07",
+            "organization": { "name": "Universitat Politècnica de València (UPV)" }
+          }
+        ]
+      },
+      {
+        "id": "merits",
+        "title": "Merits",
+        "type": "timeline",
+        "items": [
+          {
+            "role": "Erasmus+ KA131 Scholarship",
+            "start": "2024-07",
+            "end": "2025-01",
+            "organization": { "name": "University of Technology Sydney (UTS)" },
+            "location": "Sydney, Australia",
+            "description": "Awarded for an exchange semester in the Bachelor of Design in Visual Communication."
+          },
+          {
+            "role": "Erasmus+ Blended Intensive Programme (BIP)",
+            "start": "2024-01",
+            "end": "2024-02",
+            "organization": { "name": "HU University of Applied Sciences Utrecht" },
+            "location": "Utrecht, Netherlands",
+            "description": "Participated in the European Creative Futures Programme."
+          },
+          {
+            "role": "Amancio Ortega Foundation (FAO) Scholarship",
+            "start": "2019-09",
+            "end": "2020-06",
+            "organization": { "name": "Earl of March Secondary School" },
+            "location": "Ottawa, Canada",
+            "description": "Awarded for a year of secondary study abroad (Grade 11)."
+          }
+        ]
+      },
+      {
+        "id": "languages",
+        "title": "Languages",
+        "type": "languages",
+        "items": [
+          { "language": "Spanish", "level": "Native" },
+          { "language": "English", "level": "Proficient (C2)", "note": "Cambridge C1 Advanced, awarded at C2 level" },
+          { "language": "German", "level": "Elementary (A2)", "note": "Official Language School (EOI)" }
+        ]
+      }
+    ]
+  },
+  "personal": null
+}
