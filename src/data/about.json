@@ -39,15 +39,7 @@
         ]
       },
       {
-        "id": "tools-and-skills",
-        "title": "Tools and Skills",
-        "type": "list",
-        "items": [
-          "[PLACEHOLDER] Tool 1",
-          "[PLACEHOLDER] Tool 2",
-          "[PLACEHOLDER] Skill 1",
-          "[PLACEHOLDER] Skill 2"
-        ]
+    
       },
       {
         "id": "education",

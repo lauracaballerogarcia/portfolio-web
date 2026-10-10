@@ -64,7 +64,7 @@
 }
 
 .about-intro p {
-  font-size: var(--font-size-l);
+  font-size: var(--font-size-xl);
   line-height: 1.6;
 }
 
@@ -188,8 +188,9 @@
 .about-entry__note {
   flex-basis: 100%;
   color: var(--color-text-tertiary);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-s);
   line-height: 1.4;
+  visibility:collapse;
 }
 
 /* ── Responsive ──────────────────────────────────── */
