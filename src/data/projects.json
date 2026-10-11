@@ -151,7 +151,7 @@
     "year": "2024",
     "hero": "/media/xana/xana-01-hero.webp", 
     "thumbnail": "/media/xana/xana-00-thumbnail.webp", 
-    "featured": false,
+    "featured": true,
     "type": "work",
     "timeline": "Sep 2024 – Jan 2025",
     "roles": ["", ""],
