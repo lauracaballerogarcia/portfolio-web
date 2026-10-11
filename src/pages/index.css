@@ -62,7 +62,7 @@
 
 /* Solo las tarjetas con enlace (con case study) reaccionan, con ratón o teclado */
 .featured-card__link:is(:hover, :focus-visible) .featured-card__figure {
-  border-radius: var(--radius-card-l);
+  border-radius: var(--radius-card-s);
 }
 
 .featured-card__link:is(:hover, :focus-visible) .featured-card__image {
@@ -78,7 +78,7 @@
 }
 
 .featured-card__title {
-  margin-top: var(--spacing-4);
+  margin-top: var(--spacing-2);
 }
 
 .featured-card__claim {

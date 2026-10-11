@@ -15,22 +15,14 @@
          hay más de un perfil con contenido -->
     <div class="about-profiles" id="about-profiles" role="group" aria-label="View profile" hidden></div>
 
+    <!-- Rejilla de dos filas: foto e intro arriba; índice y secciones
+         abajo, así el índice y la primera sección empiezan a la misma
+         altura. El orden del DOM es el de lectura y el de móvil -->
     <div class="about-layout">
-
-      <!-- Sidebar: foto e índice de secciones -->
-      <div class="about-sidebar">
-        <div class="about-sidebar__media" id="about-image"></div>
-        <div class="about-sidebar__sticky">
-          <nav class="section-index" id="about-index" aria-label="About sections"></nav>
-        </div>
-      </div>
-
-      <!-- Contenido: intro y secciones -->
-      <div class="about-main">
-        <div class="about-intro" id="about-intro"></div>
-        <div class="about-sections" id="about-sections"></div>
-      </div>
-
+      <div class="about-media" id="about-image"></div>
+      <div class="about-intro" id="about-intro"></div>
+      <nav class="section-index about-index" id="about-index" aria-label="About sections"></nav>
+      <div class="about-sections" id="about-sections"></div>
     </div>
 
   </main>

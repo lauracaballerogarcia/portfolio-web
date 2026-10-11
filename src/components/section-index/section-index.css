@@ -10,9 +10,11 @@
   gap: var(--spacing-3);
 }
 
+/* baseline: la línea base del item es la del enlace (no la del punto),
+   así About puede alinear el índice con el título de la primera sección */
 .section-index__item {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--spacing-2);
 }
 
@@ -24,6 +26,7 @@
   background-color: transparent;
   transition: background-color var(--duration-base) var(--easing-out);
   flex-shrink: 0;
+  align-self: center;
 }
 
 .section-index__item:has([aria-current="true"])::before {

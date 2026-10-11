@@ -215,7 +215,7 @@
 .cs-figure__media {
   display: block;
   overflow: hidden;
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-card-s); 
 }
 
 .cs-figure__image {
@@ -532,11 +532,11 @@
 }
 
 .related-work__aside {
-    grid-column: 1 / span 3;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 /* display: grid anularía el atributo hidden */
 .related-work[hidden] {
@@ -619,11 +619,41 @@
   color: var(--color-text-tertiary);
 }
 
+/* Móvil, tablet y pantallas táctiles: carrusel horizontal */
+@media (max-width: 1023px), (hover: none) {
+  .related-work__list {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(75%, 20rem); /* deja asomar la siguiente tarjeta */
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+
+    /* A sangre hasta el borde, pero la primera tarjeta alineada con el margen */
+    margin-inline: calc(-1 * var(--spacing-container-inline));
+    padding-inline: var(--spacing-container-inline);
+    scroll-padding-inline: var(--spacing-container-inline);
+  }
+
+  .related-work__list::-webkit-scrollbar {
+    display: none; /* Chrome y Safari */
+  }
+
+  .related-work__list > li {
+    scroll-snap-align: start;
+  }
+}
+
 /* Escritorio con puntero: texto en la columna izquierda */
 @media (min-width: 1024px) and (hover: hover) {
   .related-work {
     grid-template-columns: repeat(12, 1fr);
     column-gap: var(--spacing-grid-column);
+  }
+
+  .related-work__aside {
+    grid-column: 1 / span 3;
   }
 
   .related-work__info {
@@ -680,6 +710,7 @@
   .project-sidebar,
   .project-main {
     grid-column: 1 / -1;
+    padding-inline: var(--spacing-container-inline);
   }
 
   .project-sidebar {

@@ -88,7 +88,7 @@
   --size-icon-l: 2rem;             /* 32px */
   --size-button-icon: 2.25rem;     /* 36px — round icon-only buttons */
   --size-header-height: 4rem;      /* 64px */
-  --size-content-max: 90rem;       /* 1440px — content width, gutters excluded */
+  /*--size-content-max: 95rem;       /* 1440px — content width, gutters excluded */
 
   /* Motion */
   --duration-base: 220ms;
@@ -126,7 +126,7 @@
   --color-tag-background: var(--color-neutral-100);
 
   /* Spacing — layout */
-  --spacing-container-inline: var(--spacing-10);
+  --spacing-container-inline: var(--spacing-6);
   --spacing-container-block:  var(--spacing-6);
   --spacing-grid-column:      var(--spacing-4);
   --spacing-grid-row:         var(--spacing-6);
@@ -134,7 +134,7 @@
 
   /* Radius — components */
   --radius-card-l:         var(--radius-8);     /* large cards: half grid width or wider */
-  --radius-card-s:         var(--radius-4);     /* small cards: a third of the grid or narrower */
+  --radius-card-s:         var(--radius-2);     /* small cards: a third of the grid or narrower */
   --radius-chip:           var(--radius-full);
   --radius-button-primary: var(--radius-2);
 }

@@ -21,43 +21,51 @@
 
 /* ── Layout — misma rejilla que el case study ────── */
 
+/* Dos filas: foto | intro, índice | secciones. La fila 2 empieza a la
+   misma altura en las dos columnas, sea cual sea la altura de la foto
+   o de la intro. Columnas 1 a 3 y 5 a 11 (libres la 4 y la 12) */
 .about-layout {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
+  grid-template-areas:
+    "photo photo photo . intro    intro    intro    intro    intro    intro    intro    ."
+    "index index index . sections sections sections sections sections sections sections .";
   column-gap: var(--spacing-grid-column);
+  row-gap: var(--spacing-16);
   margin-block: var(--spacing-12) var(--spacing-24);
 }
 
-/* Sidebar — columnas 1 a 3 */
-.about-sidebar {
-  grid-column: 1 / span 3;
+.about-media {
+  grid-area: photo;
 }
 
-.about-sidebar__media img {
+/* Perfil sin foto: sin celda vacía ni hueco de más en móvil */
+.about-media:empty {
+  display: none;
+}
+
+.about-media img {
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: var(--radius-2);
+  border-radius: var(--radius-card-s); 
   background-color: var(--color-background-placeholder);
-  margin-bottom: var(--spacing-12);
 }
 
-.about-sidebar__sticky {
+/* baseline (y no stretch): el índice no ocupa toda la celda, así puede
+   ser sticky, y su primer enlace comparte línea base con el título de
+   la primera sección */
+.about-index {
+  grid-area: index;
+  align-self: baseline;
   position: sticky;
   top: calc(var(--size-header-height) + var(--spacing-8));
-}
-
-/* Contenido — columnas 5 a 11 (libres la 4 y la 12) */
-.about-main {
-  grid-column: 5 / span 7;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-16);
 }
 
 /* ── Intro ───────────────────────────────────────── */
 
 .about-intro {
+  grid-area: intro;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-paragraph);
@@ -71,6 +79,8 @@
 /* ── Secciones ───────────────────────────────────── */
 
 .about-sections {
+  grid-area: sections;
+  align-self: baseline;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
@@ -85,14 +95,11 @@
   margin-bottom: var(--spacing-4);
 }
 
-/* Filas de todas las secciones: separadas por una línea */
+/* Items de cada sección: separados por una línea inferior */
 .about-section__list > li {
-  border-top: 1px solid var(--color-outline-primary);
-}
-
-.about-section__list > li:last-child {
   border-bottom: 1px solid var(--color-outline-primary);
 }
+
 
 /* ── Timeline (Experience, Education, Merits) ────── */
 
@@ -121,32 +128,68 @@
   white-space: nowrap;
 }
 
-/* Icono plus: al abrir gira 45° y se convierte en × */
+/* Icono plus:  */
 .about-item__icon {
+  position: relative;
+  flex-shrink: 0;
   align-self: center;
-  width: var(--size-icon-s);
-  height: var(--size-icon-s);
-  background-color: currentColor;
-  mask-image: url('../../assets/icons/plus.svg');
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  transition: transform var(--duration-base) var(--easing-out);
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  margin-inline-start: var(--spacing-6);
+  /* La caja de 2.5rem no altera la fila: el "+" se alinea con el texto y el borde */
+  margin-inline-end: calc((var(--size-icon-m) - 2.5rem) / 2);
+  margin-block: calc((var(--size-icon-m) - 2.5rem) / 2);
+  border-radius: var(--radius-2);
+  color: var(--color-text-secondary);
+  transition:
+    color var(--duration-base) ease,
+    background-color var(--duration-base) ease;
 }
 
+/* Dos barras centradas: horizontal (::before) y vertical (::after) */
+.about-item__icon::before,
+.about-item__icon::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: calc(var(--size-icon-s) * 0.75);
+  block-size: 1.5px;
+  border-radius: var(--radius-full);
+  background-color: currentColor;
+  translate: -50% -50%;
+}
+
+/* Hover y foco, como .view-toggle */
+.about-item summary:is(:hover, :focus-visible) .about-item__icon {
+  background-color: var(--color-background-secondary);
+  color: var(--color-text-primary);
+}
+
+/* Abierto: equivale a aria-pressed="true" en .view-toggle */
 .about-item[open] .about-item__icon {
-  transform: rotate(45deg);
+  color: var(--color-text-primary);
+}
+
+.about-item__icon::after {
+  rotate: 90deg;
+  transition: rotate var(--duration-base) var(--easing-out);
+}
+
+/* Abierto: la barra vertical se tumba y forma un "−" */
+.about-item[open] .about-item__icon::after {
+  rotate: 0deg;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .about-item__icon {
+  .about-item__icon::after {
     transition: none;
   }
 }
 
 .about-item__organization,
 .about-item__description {
-  color: var(--color-text-secondary);
+  color: var(--color-text-tertiary);
   line-height: 1.4;
   /* Deja libre el hueco del icono para que el texto no lo cruce */
   padding-right: calc(var(--size-icon-s) + var(--spacing-4));
@@ -196,22 +239,23 @@
 /* ── Responsive ──────────────────────────────────── */
 
 @media (max-width: 1024px) {
-  /* Sidebar (foto e índice) encima del contenido, como en el case study */
-  .about-sidebar,
-  .about-main {
-    grid-column: 1 / -1;
+  /* Una columna en el orden del DOM: foto, intro, índice, secciones */
+  .about-layout {
+    grid-template-areas:
+      "photo"
+      "intro"
+      "index"
+      "sections";
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--spacing-12);
   }
 
-  .about-sidebar {
-    margin-bottom: var(--spacing-12);
-  }
-
-  .about-sidebar__sticky {
+  .about-index {
     position: static;
   }
 
   /* En columna, la foto a media anchura para no ocupar toda la pantalla */
-  .about-sidebar__media img {
+  .about-media img {
     max-width: 50%;
   }
 }

@@ -76,3 +76,14 @@ button {
   font-size: var(--font-size-xs);
   line-height: 1;
 }
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%; /* 75% = 12px with the default 16px; 87.5% = 14px */
+  }
+}
