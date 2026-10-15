@@ -32,6 +32,7 @@
 
   /* Color — neutral */
   --color-neutral-0:   #FFFFFF;
+  --color-neutral-10:  #FDFDFD;
   --color-neutral-50:  #F7F7F7;
   --color-neutral-100: #EBEBEB;
   --color-neutral-200: #DEDEDE;
@@ -88,7 +89,7 @@
   --size-icon-l: 2rem;             /* 32px */
   --size-button-icon: 2.25rem;     /* 36px — round icon-only buttons */
   --size-header-height: 4rem;      /* 64px */
-  /*--size-content-max: 95rem;       /* 1440px — content width, gutters excluded */
+  --size-content-max: 95rem;       /* 1440px — content width, gutters excluded */
 
   /* Motion */
   --duration-base: 220ms;
@@ -102,7 +103,7 @@
      ============================================================ */
 
   /* Color — background */
-  --color-background-primary:     var(--color-neutral-0);
+  --color-background-primary:     var(--color-neutral-10);
   --color-background-secondary:   var(--color-neutral-50);
   --color-background-placeholder: var(--color-neutral-100);  /* media while loading */
   --color-background-inverse:     var(--color-neutral-950);

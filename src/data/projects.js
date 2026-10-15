@@ -4,6 +4,7 @@ import { marked } from 'marked';
 import sendaMd from 'bundle-text:./content/senda.md';
 import parcCentralMd from 'bundle-text:./content/parc-central.md';
 import xanaMd from 'bundle-text:./content/xana.md';
+import blinkMd from 'bundle-text:./content/blink.md';
 
 
 // ─── Mapa de contenidos ───────────────────────────
@@ -11,7 +12,8 @@ import xanaMd from 'bundle-text:./content/xana.md';
 const contentMap = {
   'senda': sendaMd,
   'parc-central': parcCentralMd, 
-  'xana': xanaMd
+  'xana': xanaMd,
+  'blink': blinkMd
 };
 
 // ─── Renderer personalizado ───────────────────────
